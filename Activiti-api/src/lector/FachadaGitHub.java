@@ -39,7 +39,7 @@ public class FachadaGitHub implements FachadaLector
 		URLConnection conexion;
 		try 
 		{
-			conexion = new URL("https://api.github.com/dba0010/repos").openConnection();
+			conexion = new URL("https://api.github.com/users/" + usuario + "/repos").openConnection();
 			conexion.connect();
 			
 			JsonReader lector = new JsonReader(new InputStreamReader(conexion.getInputStream()));
@@ -63,12 +63,41 @@ public class FachadaGitHub implements FachadaLector
 		{
 			e.printStackTrace();
 		}
-		return null;
-		
+		return null;		
 	}
 
-	public <T> ArrayList<T> obtenerIssues(String nombre) 
+	@SuppressWarnings("unchecked")
+	public ArrayList<IssueGitHub> obtenerIssues(String usuario, String repositorio) 
 	{
+		URLConnection conexion;
+		try 
+		{
+			conexion = new URL("https://api.github.com/repos/" + usuario + "/" + repositorio + "/issues").openConnection();
+			conexion.connect();
+			
+			JsonReader lector = new JsonReader(new InputStreamReader(conexion.getInputStream()));
+	    	
+	    	JsonParser parseador = new JsonParser();
+	    	JsonElement raiz = parseador.parse(lector);
+	    	
+	    	Gson json = new Gson();
+	    	JsonArray lista = raiz.getAsJsonArray();
+	    	
+	    	ArrayList<IssueGitHub> issues = new ArrayList<IssueGitHub>();
+	    	
+	    	for(JsonElement elemento : lista)
+	    	{
+	    		issues.add(json.fromJson(elemento, IssueGitHub.class));  		
+	    	}
+	    	
+	    	return issues;
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
 		return null;
 	}
+
+	
 }

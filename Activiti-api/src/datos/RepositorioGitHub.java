@@ -4,7 +4,7 @@ package datos;
 import java.io.Serializable;
 
 
-public class RepositorioGitHub implements Serializable 
+public class RepositorioGitHub implements Serializable, Repositorio
 {
 	 
 	/**
@@ -27,27 +27,27 @@ public class RepositorioGitHub implements Serializable
 		return id;
 	}
 	
-	public String getState() 
+	public String getName() 
 	{
 		return name;
 	}
 	
-	public String getTitle()
+	public String getFullName()
 	{
 		return full_name;
 	}
 	
-	public int getDescription() 
+	public int getNumIssues() 
 	{
 		return open_issues_count;
 	}
 	
-	public boolean getComments() 
+	public boolean getHasIssues() 
 	{
 		return has_issues;
 	}
 	
-	public String getClosedAt() 
+	public String getPushedAt() 
 	{
 		return pushed_at;
 	}
@@ -64,7 +64,7 @@ public class RepositorioGitHub implements Serializable
 	
 	public String toString() 
 	{
-		return "issue \n id: " + this.id + 
+		return "Repositorio \n id: " + this.id + 
 				"\n Title: " + this.full_name +
 				"\n State: " + this.name +
 				"\n Description: " + this.open_issues_count +

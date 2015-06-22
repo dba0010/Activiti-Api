@@ -1,16 +1,18 @@
 package datos;
 
-public class Repositorio
+public interface Repositorio
 {
-	private String name;
+	String name = "";
 	
-	public String getName()
-	{
-		return name;
-	}
+	String full_name = "";
 	
-	public String toString() 
-	{
-		return "Repositorio \n name: " + this.name ;
-	}
+	boolean has_issues = true;
+	
+	public String getName();
+	
+	public String getFullName();
+	
+	public boolean getHasIssues();
+	
+	public String toString();
 }

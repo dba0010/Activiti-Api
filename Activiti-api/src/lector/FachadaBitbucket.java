@@ -1,9 +1,11 @@
 package lector;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -19,6 +21,18 @@ public class FachadaBitbucket implements FachadaLector
 {
 	private static FachadaBitbucket instancia;
 	
+	private ArrayList<RepositorioBitbucket> repositorios = new ArrayList<RepositorioBitbucket>();
+	
+	private ArrayList<IssueBitbucket> issues = new ArrayList<IssueBitbucket>();
+	
+	private String[] nombres;
+	
+	private double porcentajeIssuesCerradas;
+	
+	private Date ultimaModificacion;
+	
+	private long tiempoMedioCierre;
+	
 	/*Constructor privado*/
 	private FachadaBitbucket(){}
 	
@@ -33,72 +47,85 @@ public class FachadaBitbucket implements FachadaLector
 		return instancia;
 	}
 
-	@SuppressWarnings("unchecked")
-	public ArrayList<RepositorioBitbucket> obtenerRepositorios(String usuario) 
+	public void obtenerRepositorios(String usuario) throws IOException 
 	{
 		URLConnection conexion;
-		try 
+		conexion = new URL("https://api.bitbucket.org/2.0/repositories/" + usuario ).openConnection();
+    	conexion.connect();
+    	
+    	JsonReader lector = new JsonReader(new InputStreamReader(conexion.getInputStream()));
+    	
+    	JsonParser parseador = new JsonParser();
+    	JsonElement raiz = parseador.parse(lector);
+    	
+    	Gson json = new Gson();
+    	JsonArray lista = (JsonArray) raiz.getAsJsonObject().get("values");
+    	
+    	for(JsonElement elemento : lista)
+    	{
+    		repositorios.add(json.fromJson(elemento, RepositorioBitbucket.class));  		
+    	}		
+    	
+    	nombres = new String[repositorios.size()];
+    	int contador = 0;
+		for(Object x : repositorios)
 		{
-			conexion = new URL("https://api.bitbucket.org/2.0/repositories/dba0010").openConnection();
-	    	conexion.connect();
-	    	
-	    	JsonReader lector = new JsonReader(new InputStreamReader(conexion.getInputStream()));
-	    	
-	    	JsonParser parseador = new JsonParser();
-	    	JsonElement raiz = parseador.parse(lector);
-	    	
-	    	Gson json = new Gson();
-	    	JsonArray lista = (JsonArray) raiz.getAsJsonObject().get("values");
-	    	
-	    	ArrayList<RepositorioBitbucket> repos = new ArrayList<RepositorioBitbucket>();
-	    	
-	    	for(JsonElement elemento : lista)
-	    	{
-	    		repos.add(json.fromJson(elemento, RepositorioBitbucket.class));  		
-	    	}
-	    	
-	    	return repos;
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
+			nombres[contador] = ((Repositorio) x).getName();
+			contador++;
 		}
-		return null;
-		
 	}
 
-	@SuppressWarnings("unchecked")
-	public ArrayList<IssueBitbucket> obtenerIssues(String usuario, String repositorio) 
+	public void obtenerIssues(String usuario, String repositorio) throws MalformedURLException, IOException 
 	{
 		URLConnection conexion;
-		try
-		{
-			conexion = new URL("https://bitbucket.org/api/1.0/repositories/dba0010/activiti-api/issues").openConnection();
+		conexion = new URL("https://bitbucket.org/api/1.0/repositories/" + usuario + "/" + repositorio + "/issues").openConnection();
+	
+    	conexion.connect();
     	
-	    	conexion.connect();
-	    	
-	    	JsonReader lector = new JsonReader(new InputStreamReader(conexion.getInputStream()));
-	    	
-	    	JsonParser parseador = new JsonParser();
-	    	JsonElement raiz = parseador.parse(lector);
-	    	
-	    	
-	    	Gson json = new Gson();
-	    	JsonArray lista = (JsonArray) raiz.getAsJsonObject().get("issues");
-	    	
-	    	ArrayList<IssueBitbucket> issues = new ArrayList<IssueBitbucket>();
-	    	
-	    	for(JsonElement elemento : lista)
-	    	{
-	    		IssueBitbucket issue = json.fromJson(elemento, IssueBitbucket.class);
-	    		issues.add(issue);
-	    	}
-	    	return issues;
-		}
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
-		return null;
+    	JsonReader lector = new JsonReader(new InputStreamReader(conexion.getInputStream()));
+    	
+    	JsonParser parseador = new JsonParser();
+    	JsonElement raiz = parseador.parse(lector);
+    	
+    	
+    	Gson json = new Gson();
+    	JsonArray lista = (JsonArray) raiz.getAsJsonObject().get("issues");
+    	
+    	int cerradas = 0;
+    	
+    	for(JsonElement elemento : lista)
+    	{
+    		IssueBitbucket issue = json.fromJson(elemento, IssueBitbucket.class);
+    		if(issue.getStatus().equals("close"))
+    		{
+    			cerradas++;
+    			tiempoMedioCierre += issue.getUtc_last_updated().getTime() - issue.getUtc_created_on().getTime();
+    		}
+    		issues.add(issue);
+    	}
+    	
+    	this.porcentajeIssuesCerradas = cerradas * 100 / issues.size();
+    	
+    	
+	}
+	
+	public String[] getNombres()
+	{
+		return this.nombres;
+	}
+	
+	public double getPorcentajeIssuesCerradas()
+	{
+		return this.porcentajeIssuesCerradas;
+	}
+	
+	public Date getUltimaModificacion()
+	{
+		return this.ultimaModificacion;
+	}
+	
+	public long getTiempoMedioCierre()
+	{
+		return this.tiempoMedioCierre;
 	}
 }

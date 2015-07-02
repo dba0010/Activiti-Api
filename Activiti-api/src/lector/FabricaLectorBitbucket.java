@@ -11,7 +11,6 @@ public class FabricaLectorBitbucket implements FabricaLector
 	private FabricaLectorBitbucket(){}
 	
 	/*Creacion de instancia y return de la misma*/
-	
 	public static FabricaLectorBitbucket getInstance()
 	{
 		if (instancia == null)

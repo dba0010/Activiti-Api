@@ -2,6 +2,7 @@ package datos;
 
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 public class IssueGitHub implements Serializable 
@@ -17,9 +18,9 @@ public class IssueGitHub implements Serializable
 	private String title;
 	private String description;
 	private String comments;
-	private String closed_at;
-	private String created_at;
-	private String updated_at;
+	private Date closed_at;
+	private Date created_at;
+	private Date updated_at;
 	
 	
 	
@@ -53,17 +54,17 @@ public class IssueGitHub implements Serializable
 		return comments;
 	}
 	
-	public String getClosedAt() 
+	public Date getClosedAt() 
 	{
 		return closed_at;
 	}
 	
-	public String getCreatedAt() 
+	public Date getCreatedAt() 
 	{
 		return created_at;
 	}
 	
-	public String getUpdatedAt() 
+	public Date getUpdatedAt() 
 	{
 		return updated_at;
 	}

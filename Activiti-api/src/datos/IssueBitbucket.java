@@ -2,6 +2,7 @@ package datos;
 
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 public class IssueBitbucket implements Serializable 
@@ -15,13 +16,13 @@ public class IssueBitbucket implements Serializable
 	private String status;
 	private String priority;	
 	private String title;	
-	private String utc_last_updated;	
+	private Date utc_last_updated;	
 	private int comment_count;	
 	private Metadata metadata;	
 	private String content;	
 	private int local_id;	
 	private int follower_count;	
-	private String utc_created_on;	
+	private Date utc_created_on;	
 	private String resource_uri;	
 	private boolean is_spam;
 	
@@ -55,12 +56,12 @@ public class IssueBitbucket implements Serializable
 		this.title = title;
 	}
 
-	public String getUtc_last_updated() 
+	public Date getUtc_last_updated() 
 	{
 		return utc_last_updated;
 	}
 
-	public void setUtc_last_updated(String utc_last_updated) 
+	public void setUtc_last_updated(Date utc_last_updated) 
 	{
 		this.utc_last_updated = utc_last_updated;
 	}
@@ -115,12 +116,12 @@ public class IssueBitbucket implements Serializable
 		this.follower_count = follower_count;
 	}
 
-	public String getUtc_created_on() 
+	public Date getUtc_created_on() 
 	{
 		return utc_created_on;
 	}
 
-	public void setUtc_created_on(String utc_created_on) 
+	public void setUtc_created_on(Date utc_created_on) 
 	{
 		this.utc_created_on = utc_created_on;
 	}

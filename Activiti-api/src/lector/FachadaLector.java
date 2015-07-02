@@ -1,10 +1,20 @@
 package lector;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.Date;
 
 
 public interface FachadaLector
 {
-	public <T> ArrayList<T> obtenerRepositorios(String usuario);
+	public void obtenerRepositorios(String usuario) throws IOException;
 	
-	public <T> ArrayList<T> obtenerIssues(String usuario, String repositorio);
+	public void obtenerIssues(String usuario, String repositorio) throws MalformedURLException, IOException;
+	
+	public String[] getNombres();
+	
+	public double getPorcentajeIssuesCerradas();
+	
+	public Date getUltimaModificacion();
+	
+	public long getTiempoMedioCierre();
 }

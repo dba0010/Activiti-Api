@@ -1,6 +1,5 @@
 package gui;
 import lector.*; 
-import datos.*;
 
 import java.awt.EventQueue;
 
@@ -8,19 +7,17 @@ import javax.swing.JFrame;
 
 import java.awt.BorderLayout;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
-import java.util.ArrayList;
-
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import javax.swing.JTextArea;
 
 
@@ -29,7 +26,7 @@ public class Principal {
 	/**
 	 * Frame principal.
 	 */
-	private JFrame frame;
+	private JFrame frmFormulario;
 	
 	/**
 	 * Panel pricipal.
@@ -92,16 +89,6 @@ public class Principal {
 	private FachadaLector lector;
 	
 	/**
-	 * ArayList con los repositorios.
-	 */
-	ArrayList<?> repositorios;
-	
-	/**
-	 * ArayList con las issues.
-	 */
-	ArrayList<?> issues;
-	
-	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
@@ -109,7 +96,7 @@ public class Principal {
 			public void run() {
 				try {
 					Principal window = new Principal();
-					window.frame.setVisible(true);
+					window.frmFormulario.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -129,13 +116,13 @@ public class Principal {
 	 */
 	private void initialize() 
 	{
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		frmFormulario = new JFrame();
+		frmFormulario.setBounds(100, 100, 365, 430);
+		frmFormulario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmFormulario.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		pnlPrincipal = new JPanel();
-		frame.getContentPane().add(pnlPrincipal, BorderLayout.CENTER);
+		frmFormulario.getContentPane().add(pnlPrincipal, BorderLayout.CENTER);
 		pnlPrincipal.setLayout(null);
 		
 		lblSitiosWeb = new JLabel("Sitio web");
@@ -180,26 +167,26 @@ public class Principal {
 				{
 					fabricaLector = FabricaLectorGitHub.getInstance();
 					lector = fabricaLector.crearFachadaLector();
-					repositorios = new ArrayList<RepositorioGitHub>();
-					issues = new ArrayList<IssueGitHub>();
 				}
 				else if(cmbSitiosWeb.getSelectedItem().equals("Bitbucket"))
 				{
 					fabricaLector = FabricaLectorBitbucket.getInstance();
 					lector = fabricaLector.crearFachadaLector();
-					repositorios = new ArrayList<RepositorioBitbucket>();
-					issues = new ArrayList<IssueBitbucket>();
 				}
-				repositorios = lector.obtenerRepositorios(txtUsuario.getText());
-				String[] nombres = new String[repositorios.size()];
-				int contador = 0;
-				for(Object x : repositorios)
-		    	{
-					nombres[contador] = ((Repositorio) x).getName();
-					contador++;
-		    	}
-				cmbRepositorio.setModel(new DefaultComboBoxModel<String>(nombres));
-				btnBuscarIssues.setEnabled(true);
+				try
+				{
+					lector.obtenerRepositorios(txtUsuario.getText());
+					cmbRepositorio.setModel(new DefaultComboBoxModel<String>(lector.getNombres()));
+					btnBuscarIssues.setEnabled(true);
+				}
+				catch(IOException e)
+				{
+					JOptionPane.showMessageDialog(frmFormulario,"Debes introducir un nombre de ususario valido.");
+				}
+				catch(NullPointerException e)
+				{
+					JOptionPane.showMessageDialog(frmFormulario,"Debes introducir un nombre de ususario valido.");
+				}
 			}
 		});
 		btnBuscarRepositorios.setBounds(198, 51, 128, 23);
@@ -210,20 +197,26 @@ public class Principal {
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				issues = lector.obtenerIssues(txtUsuario.getText(), cmbRepositorio.getSelectedItem().toString());
-				String texto = "";
-				for(Object x : issues)
-		    	{
-					texto += x.toString();
-		    	}
-				txtaIssues.setText(texto);
+				try
+				{
+					lector.obtenerIssues(txtUsuario.getText(), cmbRepositorio.getSelectedItem().toString());
+					txtaIssues.setText(lector.getUltimaModificacion().toString() + "\n" + lector.getTiempoMedioCierre() + "\n" + lector.getPorcentajeIssuesCerradas() + "%");
+				}
+				catch(IOException e)
+				{
+					JOptionPane.showMessageDialog(frmFormulario,"Debes introducir un nombre de ususario valido.");
+				}
+				catch(NullPointerException e)
+				{
+					JOptionPane.showMessageDialog(frmFormulario,"Debes introducir un nombre de ususario valido.");
+				}
 			}
 		});
 		btnBuscarIssues.setBounds(197, 79, 128, 23);
 		pnlPrincipal.add(btnBuscarIssues);
 		
 		txtaIssues = new JTextArea();
-		txtaIssues.setBounds(26, 108, 300, 143);
+		txtaIssues.setBounds(26, 108, 300, 273);
 		pnlPrincipal.add(txtaIssues);
 	}
 }

@@ -1,4 +1,6 @@
 package lector;
+
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -10,6 +12,7 @@ import java.util.Date;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
@@ -25,7 +28,9 @@ public class FachadaGitHub implements FachadaLector
 	
 	private ArrayList<IssueGitHub> issues = new ArrayList<IssueGitHub>();
 	
-	private String[] nombres;
+	private ArrayList<CommitGitHub> commits = new ArrayList<CommitGitHub>();
+	
+	private String[] nombresRepositorio;
 	
 	private double porcentajeIssuesCerradas = 0;
 	
@@ -68,11 +73,11 @@ public class FachadaGitHub implements FachadaLector
     		repositorios.add(json.fromJson(elemento, RepositorioGitHub.class));  		
     	}
     	
-    	nombres = new String[repositorios.size()];
+    	nombresRepositorio = new String[repositorios.size()];
     	int contador = 0;
 		for(Object x : repositorios)
 		{
-			nombres[contador] = ((Repositorio) x).getName();
+			nombresRepositorio[contador] = ((Repositorio) x).getName();
 			contador++;
 		}
 	}
@@ -117,10 +122,55 @@ public class FachadaGitHub implements FachadaLector
     	}
     	
 	}
+	
+	public void obtenerCommits(String usuario, String repositorio) throws MalformedURLException, IOException 
+	{
+		URLConnection conexion = new URL("https://api.github.com/repos/" + usuario +"/" + repositorio + "/commits").openConnection();
+    	
+    	conexion.connect();
+    	
+    	JsonReader lector = new JsonReader(new InputStreamReader(conexion.getInputStream()));
+    	
+    	JsonParser parseador = new JsonParser();
+    	JsonElement raiz = parseador.parse(lector);
+    	
+    	
+    	Gson json = new Gson();
+    	JsonArray lista = raiz.getAsJsonArray();
+    	
+    	ArrayList<InfoCommit> info_commits = new ArrayList<InfoCommit>();
+    	
+    	for(JsonElement elemento : lista)
+    	{
+    		InfoCommit inf_commmit = json.fromJson(elemento, InfoCommit.class);
+    		info_commits.add(inf_commmit);
+    	}
+    	
+    	texto = "";
+    	for(InfoCommit x : info_commits)
+    	{
+    		conexion = new URL(x.getUrl()).openConnection();
+    		conexion.connect();
+    		lector = new JsonReader(new InputStreamReader(conexion.getInputStream()));
+    		parseador = new JsonParser();
+    		raiz = parseador.parse(lector);
+    		json = new Gson();
+    		JsonObject objeto;
+    		objeto = raiz.getAsJsonObject();
+    		CommitGitHub commit = json.fromJson(objeto, CommitGitHub.class);
+    		texto += commit.toString();
+        	commits.add(commit);
+    	}
+	}
+	
+	public String getTexto()
+	{
+		return texto;
+	}
 
 	public String[] getNombres()
 	{
-		return this.nombres;
+		return this.nombresRepositorio;
 	}
 	
 	public double getPorcentajeIssuesCerradas()
@@ -136,5 +186,27 @@ public class FachadaGitHub implements FachadaLector
 	public long getTiempoMedioCierre()
 	{
 		return this.tiempoMedioCierre;
+	}
+	
+	class InfoCommit
+	{
+		String sha;
+		String url;
+		
+		public String getSha() 
+		{
+			return sha;
+		}
+		public String getUrl() 
+		{
+			return url;
+		}
+		
+		public String toString()
+		{
+			return "Info-commit:" + 
+					"\n\tid: " + this.sha + 
+					"\n\turl: " + this.url;
+		}
 	}
 }

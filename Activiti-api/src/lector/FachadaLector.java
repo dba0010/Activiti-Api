@@ -10,6 +10,8 @@ public interface FachadaLector
 	
 	public void obtenerIssues(String usuario, String repositorio) throws MalformedURLException, IOException;
 	
+	public void obtenerCommits(String usuario, String repositorio) throws MalformedURLException, IOException;
+	
 	public String[] getNombres();
 	
 	public double getPorcentajeIssuesCerradas();
@@ -17,4 +19,6 @@ public interface FachadaLector
 	public Date getUltimaModificacion();
 	
 	public long getTiempoMedioCierre();
+
+	public String getTexto();
 }

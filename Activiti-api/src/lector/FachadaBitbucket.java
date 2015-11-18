@@ -1,4 +1,5 @@
 package lector;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -25,13 +26,15 @@ public class FachadaBitbucket implements FachadaLector
 	
 	private ArrayList<IssueBitbucket> issues = new ArrayList<IssueBitbucket>();
 	
-	private String[] nombres;
+	private String[] nombresRepositorio;
 	
 	private double porcentajeIssuesCerradas;
 	
 	private Date ultimaModificacion;
 	
 	private long tiempoMedioCierre;
+	
+	private String texto;
 	
 	/*Constructor privado*/
 	private FachadaBitbucket(){}
@@ -66,11 +69,11 @@ public class FachadaBitbucket implements FachadaLector
     		repositorios.add(json.fromJson(elemento, RepositorioBitbucket.class));  		
     	}		
     	
-    	nombres = new String[repositorios.size()];
+    	nombresRepositorio = new String[repositorios.size()];
     	int contador = 0;
 		for(Object x : repositorios)
 		{
-			nombres[contador] = ((Repositorio) x).getName();
+			nombresRepositorio[contador] = ((Repositorio) x).getName();
 			contador++;
 		}
 	}
@@ -105,13 +108,45 @@ public class FachadaBitbucket implements FachadaLector
     	}
     	
     	this.porcentajeIssuesCerradas = cerradas * 100 / issues.size();
-    	
-    	
 	}
 	
+	public void obtenerCommits(String usuario, String repositorio) throws MalformedURLException, IOException 
+	{
+		URLConnection conexion = new URL("https://bitbucket.org/api/2.0/repositories/" + usuario + "/" + repositorio + "/commits").openConnection();
+    	
+    	conexion.connect();
+    	
+    	JsonReader lector = new JsonReader(new InputStreamReader(conexion.getInputStream()));
+    	
+    	JsonParser parseador = new JsonParser();
+    	JsonElement raiz = parseador.parse(lector);
+    	
+    	
+    	Gson json = new Gson();
+    	JsonArray lista = (JsonArray) raiz.getAsJsonObject().get("values");
+    	
+    	ArrayList<CommitGitHub> commits = new ArrayList<CommitGitHub>();
+
+    	    	for(JsonElement elemento : lista)
+    	{
+    		CommitGitHub commmit = json.fromJson(elemento, CommitGitHub.class);
+    		commits.add(commmit);
+    	}
+    	    	
+    	texto = "";
+    	for(CommitGitHub x : commits)
+    	{
+    		texto += x.toString();
+    	}
+	}
+	
+	public String getTexto() 
+	{
+		return texto;
+	}
 	public String[] getNombres()
 	{
-		return this.nombres;
+		return this.nombresRepositorio;
 	}
 	
 	public double getPorcentajeIssuesCerradas()
@@ -128,4 +163,6 @@ public class FachadaBitbucket implements FachadaLector
 	{
 		return this.tiempoMedioCierre;
 	}
+
+	
 }

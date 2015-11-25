@@ -1,4 +1,5 @@
 package gui;
+
 import lector.*; 
 
 import java.awt.EventQueue;
@@ -10,7 +11,6 @@ import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -21,7 +21,6 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 import javax.swing.JTextArea;
-import javax.swing.JTabbedPane;
 
 
 public class Principal {
@@ -52,7 +51,7 @@ public class Principal {
 	private JLabel lblUsuario;
 	
 	/**
-	 * CAmpo de texto para introducir el usuraio.
+	 * Campo de texto para introducir el usuraio.
 	 */
 	private JTextField txtUsuario;
 	
@@ -77,29 +76,9 @@ public class Principal {
 	private JButton btnObtenerDatos;
 	
 	/**
-	 * Panel con pestañas para mostrar la informacion de los commits y de las issues
-	 */	
-	private JTabbedPane tpnlInfo;
-	
-	/**
-	 * Panel con el textarea que muestra la informacion de las issues.
+	 * Area de texto donde se muestra la informacion.
 	 */
-	private JScrollPane pnlIssues;
-		
-	/**
-	 * Area de texto donde se muestran las issues leidas.
-	 */
-	private JTextArea txtaIssues;
-	
-	/**
-	 * Panel con el textarea que muestra la informacion de los commits.
-	 */
-	private JScrollPane pnlCommits;
-	
-	/**
-	 * Area de texto donde se muestran los commits leidas.
-	 */
-	private JTextArea txtaCommits;
+	private JTextArea txtaInfo;
 	
 	/**
 	 * Fabrica asbstracta.
@@ -215,6 +194,10 @@ public class Principal {
 		btnBuscarRepositorios.setBounds(198, 51, 151, 23);
 		pnlPrincipal.add(btnBuscarRepositorios);
 		
+		txtaInfo = new JTextArea();
+		txtaInfo.setBounds(26, 122, 323, 259);
+		pnlPrincipal.add(txtaInfo);
+		
 		btnObtenerDatos = new JButton("Obtener datos");
 		btnObtenerDatos.addActionListener(new ActionListener() 
 		{
@@ -223,9 +206,9 @@ public class Principal {
 				try
 				{
 					lector.obtenerIssues(txtUsuario.getText(), cmbRepositorio.getSelectedItem().toString());
-					txtaIssues.setText("Ultima modificacion: " + lector.getUltimaModificacion().toString() + "\nTiempo medio de cierre: " + lector.getTiempoMedioCierre() + "\nPorcentaje de issues cerradas: " + lector.getPorcentajeIssuesCerradas() + "%");
 					lector.obtenerCommits(txtUsuario.getText(), cmbRepositorio.getSelectedItem().toString());
-					txtaCommits.setText(lector.getTexto());
+					lector.obtenerMetricas();
+					txtaInfo.setText(lector.getMetricas().toString());
 				}
 				catch(IOException e)
 				{
@@ -239,25 +222,5 @@ public class Principal {
 		});
 		btnObtenerDatos.setBounds(197, 79, 152, 23);
 		pnlPrincipal.add(btnObtenerDatos);
-		
-		tpnlInfo = new JTabbedPane(JTabbedPane.TOP);
-		tpnlInfo.setBounds(26, 108, 323, 273);
-		pnlPrincipal.add(tpnlInfo);
-		
-		pnlIssues = new JScrollPane();
-		tpnlInfo.addTab("Issues", null, pnlIssues, null);
-		pnlIssues.setLayout(null);
-		
-		txtaIssues = new JTextArea();
-		txtaIssues.setBounds(0, 0, 318, 245);
-		pnlIssues.add(txtaIssues);
-		
-		pnlCommits = new JScrollPane();
-		tpnlInfo.addTab("Commits", null, pnlCommits, null);
-		pnlCommits.setLayout(null);
-		
-		txtaCommits = new JTextArea();
-		txtaCommits.setBounds(0, 0, 318, 245);
-		pnlCommits.add(txtaCommits);
 	}
 }

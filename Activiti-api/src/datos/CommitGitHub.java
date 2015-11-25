@@ -39,7 +39,7 @@ public class CommitGitHub implements Serializable
 				"\nstats: " + this.stats;
 	}
     
-    class Commit
+    public class Commit
     {
     	private String url;
     	private String message;
@@ -81,7 +81,7 @@ public class CommitGitHub implements Serializable
 					"\ncomment_count: " + this.comment_count;
 		}
 		
-		class Author
+		public class Author
 		{
 			
 			private String name;
@@ -114,7 +114,7 @@ public class CommitGitHub implements Serializable
 		}		
     }
     
-    class Stats
+    public class Stats
     {
     	private int total;
     	private int additions;

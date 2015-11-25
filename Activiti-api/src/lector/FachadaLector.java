@@ -1,8 +1,6 @@
 package lector;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.Date;
-
 
 public interface FachadaLector
 {
@@ -12,13 +10,9 @@ public interface FachadaLector
 	
 	public void obtenerCommits(String usuario, String repositorio) throws MalformedURLException, IOException;
 	
+	public void obtenerMetricas();
+	
+	public MetricasGitHub<?> getMetricas();
+	
 	public String[] getNombres();
-	
-	public double getPorcentajeIssuesCerradas();
-	
-	public Date getUltimaModificacion();
-	
-	public long getTiempoMedioCierre();
-
-	public String getTexto();
 }

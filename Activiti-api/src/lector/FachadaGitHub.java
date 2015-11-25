@@ -7,7 +7,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Date;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -17,8 +16,6 @@ import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
 import datos.*;
-
-
 
 public class FachadaGitHub implements FachadaLector
 {
@@ -32,14 +29,8 @@ public class FachadaGitHub implements FachadaLector
 	
 	private String[] nombresRepositorio;
 	
-	private double porcentajeIssuesCerradas = 0;
-	
-	private Date ultimaModificacion = null;
-	
-	private long tiempoMedioCierre = 0;
-	
-	private String texto;
-	
+	MetricasGitHub<?> metricas;
+		
 	/*Constructor privado*/
 	private FachadaGitHub(){}
 	
@@ -95,32 +86,12 @@ public class FachadaGitHub implements FachadaLector
     	
     	Gson json = new Gson();
     	JsonArray lista = raiz.getAsJsonArray();
-    	
-    	int cerradas = 0;
-    	
+    	    	
     	for(JsonElement elemento : lista)
     	{
     		IssueGitHub issue = json.fromJson(elemento, IssueGitHub.class);
-    		if(issue.getState().equals("close"))
-    		{
-    			cerradas++;
-    			tiempoMedioCierre += issue.getClosedAt().getTime() - issue.getCreatedAt().getTime();
-    		}
-    		texto += issue.toString() + "\n";
-    		
-    		if(ultimaModificacion == null || issue.getUpdatedAt().after(ultimaModificacion))
-    		{
-    			ultimaModificacion = issue.getUpdatedAt();
-    		}
     		issues.add(issue); 		
     	}
-    	
-    	if(cerradas > 0)
-    	{
-    		tiempoMedioCierre /= cerradas;
-    		this.porcentajeIssuesCerradas = cerradas * 100 / issues.size();
-    	}
-    	
 	}
 	
 	public void obtenerCommits(String usuario, String repositorio) throws MalformedURLException, IOException 
@@ -146,7 +117,6 @@ public class FachadaGitHub implements FachadaLector
     		info_commits.add(inf_commmit);
     	}
     	
-    	texto = "";
     	for(InfoCommit x : info_commits)
     	{
     		conexion = new URL(x.getUrl()).openConnection();
@@ -158,34 +128,23 @@ public class FachadaGitHub implements FachadaLector
     		JsonObject objeto;
     		objeto = raiz.getAsJsonObject();
     		CommitGitHub commit = json.fromJson(objeto, CommitGitHub.class);
-    		texto += commit.toString();
         	commits.add(commit);
     	}
 	}
-	
-	public String getTexto()
+		
+	public void obtenerMetricas()
 	{
-		return texto;
+		metricas = new MetricasGitHub<Object>(issues, commits);
 	}
-
-	public String[] getNombres()
+	
+	public MetricasGitHub<?> getMetricas()
+	{
+		return this.metricas;
+	}
+	
+	public String[] getNombres() 
 	{
 		return this.nombresRepositorio;
-	}
-	
-	public double getPorcentajeIssuesCerradas()
-	{
-		return this.porcentajeIssuesCerradas;
-	}
-	
-	public Date getUltimaModificacion()
-	{
-		return this.ultimaModificacion;
-	}
-	
-	public long getTiempoMedioCierre()
-	{
-		return this.tiempoMedioCierre;
 	}
 	
 	class InfoCommit
@@ -209,4 +168,5 @@ public class FachadaGitHub implements FachadaLector
 					"\n\turl: " + this.url;
 		}
 	}
+
 }

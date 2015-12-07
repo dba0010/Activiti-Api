@@ -21,43 +21,76 @@ public class FachadaGitHub implements FachadaLector
 {
 	private static FachadaGitHub instancia;
 	
+	private static String usuario= "";
+	
+	private static String repositorio = "";
+	
 	private ArrayList<RepositorioGitHub> repositorios = new ArrayList<RepositorioGitHub>();
 	
-	private ArrayList<IssueGitHub> issues = new ArrayList<IssueGitHub>();
+	private static ArrayList<IssueGitHub> issues = new ArrayList<IssueGitHub>();
 	
-	private ArrayList<CommitGitHub> commits = new ArrayList<CommitGitHub>();
+	private static ArrayList<CommitGitHub> commits = new ArrayList<CommitGitHub>();
 	
 	private String[] nombresRepositorio;
 	
 	MetricasGitHub<?> metricas;
 		
 	/*Constructor privado*/
-	private FachadaGitHub(){}
+	private FachadaGitHub(String usuario) throws IOException
+	{
+		FachadaGitHub.usuario = usuario;
+		this.obtenerRepositorios(usuario);
+	}
+	
+	private FachadaGitHub(String usuario, String repositorio) throws IOException
+	{
+		this.obtenerRepositorios(usuario);
+		this.obtenerIssues(usuario, repositorio);
+		this.obtenerCommits(usuario, repositorio);
+		this.obtenerMetricas();
+	}
 	
 	/*Creacion de instancia y return de la misma*/
 	
-	public static FachadaGitHub getInstance()
+	public static FachadaGitHub getInstance(String usuario) throws IOException
 	{
-		if (instancia == null)
+		if(FachadaGitHub.usuario != usuario)
 		{
-			instancia = new FachadaGitHub();
+			instancia = new FachadaGitHub(usuario);
+		}
+		return instancia;
+	}
+	
+	public static FachadaGitHub getInstance(String usuario, String repositorio) throws IOException
+	{
+		if (FachadaGitHub.usuario != usuario || FachadaGitHub.repositorio != repositorio)
+		{
+			instancia = new FachadaGitHub(usuario, repositorio);
 		}
 		return instancia;
 	}
 
-	public void obtenerRepositorios(String usuario) throws IOException 
+	private JsonElement consulta(String consulta) throws IOException 
 	{
 		URLConnection conexion;
-		conexion = new URL("https://api.github.com/users/" + usuario + "/repos").openConnection();
-		conexion.connect();
+		JsonElement raiz = null;
 		
+		conexion = new URL(consulta).openConnection();
+		conexion.connect();
+	
 		JsonReader lector = new JsonReader(new InputStreamReader(conexion.getInputStream()));
-    	
-    	JsonParser parseador = new JsonParser();
-    	JsonElement raiz = parseador.parse(lector);
-    	
+	
+		JsonParser parseador = new JsonParser();
+		raiz = parseador.parse(lector);
+		
+		return raiz;
+	}
+	
+	public void obtenerRepositorios(String usuario) throws IOException
+	{
+		JsonElement raiz = consulta("https://api.github.com/users/" + usuario + "/repos");
+		JsonArray lista = raiz.getAsJsonArray();
     	Gson json = new Gson();
-    	JsonArray lista = raiz.getAsJsonArray();
     	
     	for(JsonElement elemento : lista)
     	{
@@ -75,18 +108,12 @@ public class FachadaGitHub implements FachadaLector
 
 	public void obtenerIssues(String usuario, String repositorio) throws MalformedURLException, IOException 
 	{
-		URLConnection conexion;
-		conexion = new URL("https://api.github.com/repos/" + usuario + "/" + repositorio + "/issues").openConnection();
-		conexion.connect();
-		
-		JsonReader lector = new JsonReader(new InputStreamReader(conexion.getInputStream()));
-    	
-    	JsonParser parseador = new JsonParser();
-    	JsonElement raiz = parseador.parse(lector);
-    	
-    	Gson json = new Gson();
+		JsonElement raiz = consulta("https://api.github.com/repos/" + usuario + "/" + repositorio + "/issues");
     	JsonArray lista = raiz.getAsJsonArray();
-    	    	
+    	Gson json = new Gson();
+    	
+    	issues = new ArrayList<IssueGitHub>();
+    	
     	for(JsonElement elemento : lista)
     	{
     		IssueGitHub issue = json.fromJson(elemento, IssueGitHub.class);
@@ -96,34 +123,23 @@ public class FachadaGitHub implements FachadaLector
 	
 	public void obtenerCommits(String usuario, String repositorio) throws MalformedURLException, IOException 
 	{
-		URLConnection conexion = new URL("https://api.github.com/repos/" + usuario +"/" + repositorio + "/commits").openConnection();
-    	
-    	conexion.connect();
-    	
-    	JsonReader lector = new JsonReader(new InputStreamReader(conexion.getInputStream()));
-    	
-    	JsonParser parseador = new JsonParser();
-    	JsonElement raiz = parseador.parse(lector);
-    	
-    	
-    	Gson json = new Gson();
+    	JsonElement raiz = consulta("https://api.github.com/repos/" + usuario +"/" + repositorio + "/commits");
     	JsonArray lista = raiz.getAsJsonArray();
+    	Gson json = new Gson();
     	
-    	ArrayList<InfoCommit> info_commits = new ArrayList<InfoCommit>();
+    	ArrayList<InfoCommit> infoCommits = new ArrayList<InfoCommit>();
     	
     	for(JsonElement elemento : lista)
     	{
-    		InfoCommit inf_commmit = json.fromJson(elemento, InfoCommit.class);
-    		info_commits.add(inf_commmit);
+    		InfoCommit infCommit = json.fromJson(elemento, InfoCommit.class);
+    		infoCommits.add(infCommit);
     	}
     	
-    	for(InfoCommit x : info_commits)
+    	commits = new ArrayList<CommitGitHub>();
+    	
+    	for(InfoCommit x : infoCommits)
     	{
-    		conexion = new URL(x.getUrl()).openConnection();
-    		conexion.connect();
-    		lector = new JsonReader(new InputStreamReader(conexion.getInputStream()));
-    		parseador = new JsonParser();
-    		raiz = parseador.parse(lector);
+    		raiz = consulta(x.getUrl());
     		json = new Gson();
     		JsonObject objeto;
     		objeto = raiz.getAsJsonObject();

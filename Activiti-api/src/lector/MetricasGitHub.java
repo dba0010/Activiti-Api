@@ -7,31 +7,39 @@ import java.util.Date;
 import datos.*;
 
 public class MetricasGitHub<IssueGithub> implements FachadaMetricas
-{
-	private int num_Cambios;
-	private int num_Issues;
-	private int num_Issues_Cerradas;
-	private double media_Dias_Cambios;
-	private double media_Dias_Cierre;
-	private double media_Dias_Linea;
-	private Date ultima_Modificacion;
-	private double porcentaje_Issues_Cerradas;
+{	
+	private int numCambios = 0;
+	private int numIssues = 0;
+	private int numIssuesCerradas = 0;
+	private double mediaDiasCambios = 0;
+	private double mediaDiasCierre = 0;
+	private double mediaDiasLinea = 0;
+	private Date ultimaModificacion = null;
+	private double porcentajeIssuesCerradas = 0;
 	
 	private DecimalFormat formateador = new DecimalFormat("###0.00"); 
 	
 	public MetricasGitHub(ArrayList<IssueGitHub> issues, ArrayList<CommitGitHub> commits)
 	{
-		calcularNumIssues(issues);
-		calcularNumCambiosSinMensaje(commits);
-		calcularNumIssues(issues);
-		calcularNumIssuesCerradas(issues);
-		calcularMediaDiasCierre(issues);
-		calcularMediaDiasEntreCambios(commits);
-		calcularMediaDiasPorLinea(commits);
-		calcularUltimaModificacion(issues, commits);
-		calcularPorcentajeIssuesCerradas(issues);
+		this.numCambios = 0;
+		this.numIssues = 0;
+		this.numIssuesCerradas = 0;
+		this.mediaDiasCambios = 0;
+		this.mediaDiasCierre = 0;
+		this.mediaDiasLinea = 0;
+		this.ultimaModificacion = null;
+		this.porcentajeIssuesCerradas = 0;
+		this.calcularNumIssues(issues);
+		this.calcularNumCambiosSinMensaje(commits);
+		this.calcularNumIssues(issues);
+		this.calcularNumIssuesCerradas(issues);
+		this.calcularMediaDiasCierre(issues);
+		this.calcularMediaDiasEntreCambios(commits);
+		this.calcularMediaDiasPorLinea(commits);
+		this.calcularUltimaModificacion(issues, commits);
+		this.calcularPorcentajeIssuesCerradas(issues);
 	}
-
+	
 	public void calcularNumCambiosSinMensaje(ArrayList<?> commits) 
 	{
 		int aux = 0;
@@ -43,12 +51,12 @@ public class MetricasGitHub<IssueGithub> implements FachadaMetricas
 				aux++;
 			}
 		}
-		this.num_Cambios = aux;
+		this.numCambios = aux;
 	}
 
 	public void calcularNumIssues(ArrayList<?> issues) 
 	{
-		this.num_Issues = issues.size();
+		this.numIssues = issues.size();
 	}
 	
 	public void calcularNumIssuesCerradas(ArrayList<?> issues) 
@@ -63,7 +71,7 @@ public class MetricasGitHub<IssueGithub> implements FachadaMetricas
 			}
 		}
 		
-		this.num_Issues_Cerradas = cerradas;
+		this.numIssuesCerradas = cerradas;
 	}
 	
 	public void calcularMediaDiasCierre(ArrayList<?> issues) 
@@ -83,7 +91,7 @@ public class MetricasGitHub<IssueGithub> implements FachadaMetricas
 		mediaDias /= cerradas;
 		
 		
-		this.media_Dias_Cierre = mediaDias;
+		this.mediaDiasCierre = mediaDias;
 	}
 
 	public void calcularMediaDiasEntreCambios(ArrayList<?> commits) 
@@ -98,7 +106,7 @@ public class MetricasGitHub<IssueGithub> implements FachadaMetricas
 		mediaDias /= (1000 * 60 * 60 * 24);
 		mediaDias /= commits.size();
 		
-		this.media_Dias_Cambios = mediaDias;		
+		this.mediaDiasCambios = mediaDias;		
 	}
 
 	public void calcularMediaDiasPorLinea(ArrayList<?> commits) 
@@ -115,12 +123,12 @@ public class MetricasGitHub<IssueGithub> implements FachadaMetricas
 			}			
 		}
 			
-		this.media_Dias_Linea = dias / (1000 * 60 * 60 * 24) / lineas;
+		this.mediaDiasLinea = dias / (1000 * 60 * 60 * 24) / lineas;
 	}
 	
 	public void calcularPorcentajeIssuesCerradas(ArrayList<?> issues)
 	{		
-		this.porcentaje_Issues_Cerradas = this.num_Issues_Cerradas * 100 / this.num_Issues;
+		this.porcentajeIssuesCerradas = this.numIssuesCerradas * 100 / this.numIssues;
 	}
 	
 	public void calcularUltimaModificacion(ArrayList<?> issues, ArrayList<?> commits)
@@ -142,59 +150,59 @@ public class MetricasGitHub<IssueGithub> implements FachadaMetricas
 			}
 		}
 		
-		this.ultima_Modificacion = ultimaModificacion;
+		this.ultimaModificacion = ultimaModificacion;
 	}
 
-	public int getNum_Cambios() 
+	public int getNumCambios() 
 	{
-		return num_Cambios;
+		return numCambios;
 	}
 	
-	public int getNum_Issues() 
+	public int getNumIssues() 
 	{
-		return num_Issues;
+		return numIssues;
 	}
 	
-	public int getNum_Issues_Cerradas() 
+	public int getNumIssuesCerradas() 
 	{
-		return num_Issues_Cerradas;
+		return numIssuesCerradas;
 	}
 	
-	public double getMedia_Dias_Cambios() 
+	public double getMediaDiasCambios() 
 	{
-		return media_Dias_Cambios;
+		return mediaDiasCambios;
 	}
 
-	public double getMedia_Dias_Cierre() 
+	public double getMediaDiasCierre() 
 	{
-		return media_Dias_Cierre;
+		return mediaDiasCierre;
 	}
 
-	public double getMedia_Dias_Linea() 
+	public double getMediaDiasLinea() 
 	{
-		return media_Dias_Linea;
+		return mediaDiasLinea;
 	}
 
-	public double getPorcentaje_Issues_Cerradas() 
+	public double getPorcentajeIssuesCerradas() 
 	{
-		return porcentaje_Issues_Cerradas;
+		return porcentajeIssuesCerradas;
 	}
 	
-	public Date getUltima_Modificacion() 
+	public Date getUltimaModificacion() 
 	{
-		return ultima_Modificacion;
+		return ultimaModificacion;
 	}
 
 	public String toString()
 	{
 		return "Estadisticas:" + 
-				"\n Número de issues: " + this.num_Issues + 
-				"\n Número de issues cerradas: " + this.num_Issues_Cerradas + 
-				"\n Media de dias para cerrar issue: " + this.media_Dias_Cierre + 
-				"\n Porcentaje de issues cerradas: " + this.porcentaje_Issues_Cerradas + 
-				"\n Numero de commits sin mensaje: " + this.num_Cambios + 
-				"\n Media de dias por commit: " + formateador.format(this.media_Dias_Cambios) + 
-				"\n Media de dias por linea: " + formateador.format(this.media_Dias_Linea) +
-				"\n Ultima modificacion: " + this.ultima_Modificacion;
+				"\n Número de issues: " + this.numIssues + 
+				"\n Número de issues cerradas: " + this.numIssuesCerradas + 
+				"\n Media de dias para cerrar issue: " + this.mediaDiasCierre + 
+				"\n Porcentaje de issues cerradas: " + this.porcentajeIssuesCerradas + 
+				"\n Numero de commits sin mensaje: " + this.numCambios + 
+				"\n Media de dias por commit: " + formateador.format(this.mediaDiasCambios) + 
+				"\n Media de dias por linea: " + formateador.format(this.mediaDiasLinea) +
+				"\n Ultima modificacion: " + this.ultimaModificacion;
 	}
 }

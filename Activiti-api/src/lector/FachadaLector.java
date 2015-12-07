@@ -12,7 +12,7 @@ public interface FachadaLector
 	
 	public void obtenerMetricas();
 	
-	public MetricasGitHub<?> getMetricas();
+	public FachadaMetricas getMetricas();
 	
 	public String[] getNombres();
 }

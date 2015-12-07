@@ -11,7 +11,7 @@ public class CommitGitHub implements Serializable
 	private Commit commit;
 	private Stats stats;
 	private String sha;
-	private String html_url;
+	private String htmlUrl;
 	
 	public Commit getCommit() 
 	{
@@ -21,9 +21,9 @@ public class CommitGitHub implements Serializable
 	{
 		return sha;
 	}
-	public String getHtml_url() 
+	public String getHtmlUrl() 
 	{
-		return html_url;
+		return htmlUrl;
 	}
 	public Stats getStats() 
 	{
@@ -34,7 +34,7 @@ public class CommitGitHub implements Serializable
 	{
 		return "Full commit:" + 
 				"\nsha: " + this.sha + 
-				"\nhtml_url: " + this.html_url + 
+				"\nhtml_url: " + this.htmlUrl + 
 				"\ncommit: " + this.commit + 
 				"\nstats: " + this.stats;
 	}
@@ -45,7 +45,7 @@ public class CommitGitHub implements Serializable
     	private String message;
     	private Author author;
     	private Author committer;
-    	private int comment_count;
+    	private int commentCount;
     	
 		public String getUrl() 
 		{
@@ -67,9 +67,9 @@ public class CommitGitHub implements Serializable
 			return committer;
 		}
 		
-		public int getComment_count() 
+		public int getCommentCount() 
 		{
-			return comment_count;
+			return commentCount;
 		}
 		
 		public String toString()
@@ -78,7 +78,7 @@ public class CommitGitHub implements Serializable
 					"\nmessage: " + this.message +
 					"\nauthor: " + this.author +
 					"\ncommitter: " + this.committer +
-					"\ncomment_count: " + this.comment_count;
+					"\ncomment_count: " + this.commentCount;
 		}
 		
 		public class Author

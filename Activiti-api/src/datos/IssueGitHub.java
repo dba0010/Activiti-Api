@@ -18,9 +18,9 @@ public class IssueGitHub implements Serializable
 	private String title;
 	private String description;
 	private String comments;
-	private Date closed_at;
-	private Date created_at;
-	private Date updated_at;
+	private Date closedAt;
+	private Date createdAt;
+	private Date updatedAt;
 	
 	
 	
@@ -56,17 +56,17 @@ public class IssueGitHub implements Serializable
 	
 	public Date getClosedAt() 
 	{
-		return closed_at;
+		return closedAt;
 	}
 	
 	public Date getCreatedAt() 
 	{
-		return created_at;
+		return createdAt;
 	}
 	
 	public Date getUpdatedAt() 
 	{
-		return updated_at;
+		return updatedAt;
 	}
 	
 	public String toString() 
@@ -77,8 +77,8 @@ public class IssueGitHub implements Serializable
 				"\n State: " + this.state +
 				"\n Description: " + this.description +
 				"\n Comments: " + this.comments +
-				"\n Closed at: " + this.closed_at +
-				"\n Created at: " + this.created_at +
-				"\n Updated at: " + this.updated_at;
+				"\n Closed at: " + this.closedAt +
+				"\n Created at: " + this.createdAt +
+				"\n Updated at: " + this.updatedAt;
 	}
 }

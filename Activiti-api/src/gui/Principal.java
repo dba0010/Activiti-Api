@@ -139,7 +139,7 @@ public class Principal {
 				btnBuscarRepositorios.setEnabled(true);
 			}
 		});
-		cmbSitiosWeb.setModel(new DefaultComboBoxModel<String>(new String[] {"GitHub", "Bitbucket"}));
+		cmbSitiosWeb.setModel(new DefaultComboBoxModel<String>(new String[] {"GitHub"}));
 		cmbSitiosWeb.setBounds(102, 24, 86, 20);
 		pnlPrincipal.add(cmbSitiosWeb);
 		
@@ -165,21 +165,16 @@ public class Principal {
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				if(cmbSitiosWeb.getSelectedItem().equals("GitHub"))
-				{
-					fabricaLector = FabricaLectorGitHub.getInstance();
-					lector = fabricaLector.crearFachadaLector();
-				}
-				else if(cmbSitiosWeb.getSelectedItem().equals("Bitbucket"))
-				{
-					fabricaLector = FabricaLectorBitbucket.getInstance();
-					lector = fabricaLector.crearFachadaLector();
-				}
 				try
 				{
-					lector.obtenerRepositorios(txtUsuario.getText());
+					if(cmbSitiosWeb.getSelectedItem().equals("GitHub"))
+					{
+						fabricaLector = FabricaLectorGitHub.getInstance();
+						lector = fabricaLector.crearFachadaLector(txtUsuario.getText());
+					}
 					cmbRepositorio.setModel(new DefaultComboBoxModel<String>(lector.getNombres()));
 					btnObtenerDatos.setEnabled(true);
+					txtaInfo.setText("");
 				}
 				catch(IOException e)
 				{
@@ -203,20 +198,19 @@ public class Principal {
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
+				txtaInfo.setText("");
 				try
 				{
-					lector.obtenerIssues(txtUsuario.getText(), cmbRepositorio.getSelectedItem().toString());
-					lector.obtenerCommits(txtUsuario.getText(), cmbRepositorio.getSelectedItem().toString());
-					lector.obtenerMetricas();
+					lector = fabricaLector.crearFachadaLector(txtUsuario.getText(), cmbRepositorio.getSelectedItem().toString());
 					txtaInfo.setText(lector.getMetricas().toString());
 				}
 				catch(IOException e)
 				{
-					JOptionPane.showMessageDialog(frmFormulario,"Debes introducir un nombre de ususario valido.");
+					JOptionPane.showMessageDialog(frmFormulario,"No se han recibido datos.");
 				}
 				catch(NullPointerException e)
 				{
-					JOptionPane.showMessageDialog(frmFormulario,"Debes introducir un nombre de ususario valido.");
+					JOptionPane.showMessageDialog(frmFormulario,"No se han recibido datos.");
 				}
 			}
 		});

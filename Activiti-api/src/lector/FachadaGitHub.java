@@ -2,163 +2,112 @@ package lector;
 
 
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
-
-import datos.*;
+import org.eclipse.egit.github.core.Issue;
+import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.RepositoryCommit;
+import org.eclipse.egit.github.core.RepositoryId;
+import org.eclipse.egit.github.core.client.GitHubClient;
+import org.eclipse.egit.github.core.service.*;
 
 public class FachadaGitHub implements FachadaLector
 {
 	private static FachadaGitHub instancia;
 	
-	private static String usuario= "";
+	private GitHubClient cliente;
 	
-	private static String repositorio = "";
+	private RepositoryService servicioRepositorios;
 	
-	private ArrayList<RepositorioGitHub> repositorios = new ArrayList<RepositorioGitHub>();
+	private IssueService servicioIssues;
 	
-	private static ArrayList<IssueGitHub> issues = new ArrayList<IssueGitHub>();
+	private CommitService servicioCommits;
 	
-	private static ArrayList<CommitGitHub> commits = new ArrayList<CommitGitHub>();
+	private List<Repository> repositorios;
+	
+	private List<Issue> issues;
+	
+	private List<RepositoryCommit> commits;
 	
 	private String[] nombresRepositorio;
 	
-	MetricasGitHub<?> metricas;
+	MetricasGitHub metricas;
 		
 	/*Constructor privado*/
-	private FachadaGitHub(String usuario) throws IOException
+	private FachadaGitHub(String usuario, String password) throws IOException
 	{
-		FachadaGitHub.usuario = usuario;
-		this.obtenerRepositorios(usuario);
-	}
-	
-	private FachadaGitHub(String usuario, String repositorio) throws IOException
-	{
-		this.obtenerRepositorios(usuario);
-		this.obtenerIssues(usuario, repositorio);
-		this.obtenerCommits(usuario, repositorio);
-		this.obtenerMetricas();
+		cliente = new GitHubClient();
+        cliente.setCredentials(usuario, password);
+        this.servicioRepositorios = new RepositoryService(this.cliente);
+		this.repositorios = this.servicioRepositorios.getRepositories(usuario);
 	}
 	
 	/*Creacion de instancia y return de la misma*/
-	
-	public static FachadaGitHub getInstance(String usuario) throws IOException
+	public static FachadaGitHub getInstance(String usuario, String password) throws IOException
 	{
-		if(FachadaGitHub.usuario != usuario)
-		{
-			instancia = new FachadaGitHub(usuario);
-		}
-		return instancia;
-	}
-	
-	public static FachadaGitHub getInstance(String usuario, String repositorio) throws IOException
-	{
-		if (FachadaGitHub.usuario != usuario || FachadaGitHub.repositorio != repositorio)
-		{
-			instancia = new FachadaGitHub(usuario, repositorio);
-		}
-		return instancia;
-	}
-
-	private JsonElement consulta(String consulta) throws IOException 
-	{
-		URLConnection conexion;
-		JsonElement raiz = null;
+		instancia = new FachadaGitHub(usuario, password);
 		
-		conexion = new URL(consulta).openConnection();
-		conexion.connect();
-	
-		JsonReader lector = new JsonReader(new InputStreamReader(conexion.getInputStream()));
-	
-		JsonParser parseador = new JsonParser();
-		raiz = parseador.parse(lector);
-		
-		return raiz;
+		return instancia;
 	}
 	
 	public void obtenerRepositorios(String usuario) throws IOException
 	{
-		JsonElement raiz = consulta("https://api.github.com/users/" + usuario + "/repos");
-		JsonArray lista = raiz.getAsJsonArray();
-    	Gson json = new Gson();
-    	
-    	for(JsonElement elemento : lista)
-    	{
-    		repositorios.add(json.fromJson(elemento, RepositorioGitHub.class));  		
-    	}
-    	
-    	nombresRepositorio = new String[repositorios.size()];
-    	int contador = 0;
-		for(Object x : repositorios)
+		this.servicioRepositorios = new RepositoryService(this.cliente);
+		
+		this.repositorios = this.servicioRepositorios.getRepositories(usuario);
+		
+		this.nombresRepositorio = new String[this.repositorios.size()];
+		int contador = 0;
+		for(Repository x : this.repositorios)
 		{
-			nombresRepositorio[contador] = ((Repositorio) x).getName();
+			this.nombresRepositorio[contador] = x.getName();
 			contador++;
 		}
 	}
 
-	public void obtenerIssues(String usuario, String repositorio) throws MalformedURLException, IOException 
+	public void obtenerIssues(String usuario, RepositoryId repositorio) throws IOException
 	{
-		JsonElement raiz = consulta("https://api.github.com/repos/" + usuario + "/" + repositorio + "/issues");
-    	JsonArray lista = raiz.getAsJsonArray();
-    	Gson json = new Gson();
-    	
-    	issues = new ArrayList<IssueGitHub>();
-    	
-    	for(JsonElement elemento : lista)
-    	{
-    		IssueGitHub issue = json.fromJson(elemento, IssueGitHub.class);
-    		issues.add(issue); 		
-    	}
+		this.servicioIssues = new IssueService(this.cliente);
+		
+		Map<String,String> filtro = new HashMap<String,String>();
+		filtro.put("state", "all");
+       	
+		this.issues = this.servicioIssues.getIssues(repositorio, filtro);
 	}
 	
-	public void obtenerCommits(String usuario, String repositorio) throws MalformedURLException, IOException 
+	public void obtenerCommits(RepositoryId repositorio) throws IOException 
 	{
-    	JsonElement raiz = consulta("https://api.github.com/repos/" + usuario +"/" + repositorio + "/commits");
-    	JsonArray lista = raiz.getAsJsonArray();
-    	Gson json = new Gson();
-    	
-    	ArrayList<InfoCommit> infoCommits = new ArrayList<InfoCommit>();
-    	
-    	for(JsonElement elemento : lista)
-    	{
-    		InfoCommit infCommit = json.fromJson(elemento, InfoCommit.class);
-    		infoCommits.add(infCommit);
-    	}
-    	
-    	commits = new ArrayList<CommitGitHub>();
-    	
-    	for(InfoCommit x : infoCommits)
-    	{
-    		raiz = consulta(x.getUrl());
-    		json = new Gson();
-    		JsonObject objeto;
-    		objeto = raiz.getAsJsonObject();
-    		CommitGitHub commit = json.fromJson(objeto, CommitGitHub.class);
-        	commits.add(commit);
-    	}
+		this.servicioCommits = new CommitService(this.cliente);
+		
+		this.commits = this.servicioCommits.getCommits(repositorio);
+		
+		RepositoryCommit commitAux = null;
+		for(int i = 0; i < this.commits.size(); i++)
+		{
+			commitAux = this.commits.get(i);
+			this.commits.remove(i);
+			this.commits.add(i, this.servicioCommits.getCommit(repositorio, commitAux.getSha()));
+		}
 	}
 		
-	public void obtenerMetricas()
+	public void obtenerMetricas(String usuario, RepositoryId repositorio) throws IOException
 	{
-		metricas = new MetricasGitHub<Object>(issues, commits);
+		this.metricas = null;
+		
+		this.obtenerIssues(usuario, repositorio);
+		this.obtenerCommits(repositorio);		
+				
+		metricas = new MetricasGitHub(issues, commits);
 	}
 	
-	public MetricasGitHub<?> getMetricas()
+	public MetricasGitHub getMetricas()
 	{
 		return this.metricas;
 	}
 	
-	public String[] getNombres() 
+	public String[] getNombresRepositorio() 
 	{
 		return this.nombresRepositorio;
 	}

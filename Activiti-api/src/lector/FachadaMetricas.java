@@ -1,22 +1,24 @@
 package lector;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.egit.github.core.*;
 
 public interface FachadaMetricas
 {
-	public void calcularNumCambiosSinMensaje(ArrayList<?> commits);
+	public void calcularNumCambiosSinMensaje(List<RepositoryCommit> commits);
 	
-	public void calcularNumIssues(ArrayList<?> issues);
+	public void calcularNumIssues(List<Issue> issues);
 	
-	public void calcularNumIssuesCerradas(ArrayList<?> issues);
+	public void calcularNumIssuesCerradas(List<Issue> issues);
 	
-	public void calcularMediaDiasCierre(ArrayList<?> issues);
+	public void calcularMediaDiasCierre(List<Issue> issues);
 	
-	public void calcularMediaDiasEntreCambios(ArrayList<?> commits);
+	public void calcularMediaDiasEntreCambios(List<RepositoryCommit> commits);
 	
-	public void calcularMediaDiasPorLinea(ArrayList<?> commits);
+	public void calcularMediaDiasPorLinea(List<RepositoryCommit> commits);
 	
-	public void calcularPorcentajeIssuesCerradas(ArrayList<?> issues);
+	public void calcularPorcentajeIssuesCerradas(List<Issue> issues);
 	
-	public void calcularUltimaModificacion(ArrayList<?> issues, ArrayList<?> commits);
+	public void calcularUltimaModificacion(List<Issue> issues, List<RepositoryCommit> commits);
 }

@@ -22,17 +22,10 @@ public class FabricaLectorGitHub implements FabricaLector
 		}
 		return instancia;
 	}
-	
-	
-	public FachadaLector crearFachadaLector(String usuario) throws IOException 
+		
+	public FachadaLector crearFachadaLector(String usuario, String password) throws IOException 
 	{
-		fachadaLector = FachadaGitHub.getInstance(usuario); 
-		return fachadaLector;
-	}
-	
-	public FachadaLector crearFachadaLector(String usuario, String repositorio) throws IOException 
-	{
-		fachadaLector = FachadaGitHub.getInstance(usuario, repositorio); 
+		fachadaLector = FachadaGitHub.getInstance(usuario, password); 
 		return fachadaLector;
 	}
 	

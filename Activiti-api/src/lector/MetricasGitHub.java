@@ -1,12 +1,13 @@
 package lector;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import datos.*;
+import org.eclipse.egit.github.core.Issue;
+import org.eclipse.egit.github.core.RepositoryCommit;
 
-public class MetricasGitHub<IssueGithub> implements FachadaMetricas
+public class MetricasGitHub implements FachadaMetricas
 {	
 	private int numCambios = 0;
 	private int numIssues = 0;
@@ -19,7 +20,7 @@ public class MetricasGitHub<IssueGithub> implements FachadaMetricas
 	
 	private DecimalFormat formateador = new DecimalFormat("###0.00"); 
 	
-	public MetricasGitHub(ArrayList<IssueGitHub> issues, ArrayList<CommitGitHub> commits)
+	public MetricasGitHub(List<Issue> issues, List<RepositoryCommit> commits)
 	{
 		this.numCambios = 0;
 		this.numIssues = 0;
@@ -40,13 +41,13 @@ public class MetricasGitHub<IssueGithub> implements FachadaMetricas
 		this.calcularPorcentajeIssuesCerradas(issues);
 	}
 	
-	public void calcularNumCambiosSinMensaje(ArrayList<?> commits) 
+	public void calcularNumCambiosSinMensaje(List<RepositoryCommit> commits) 
 	{
 		int aux = 0;
 		
-		for(Object x : commits)
+		for(RepositoryCommit x : commits)
 		{
-			if(((CommitGitHub) x).getCommit().getMessage() == "")
+			if(x.getCommit().getMessage() == "")
 			{
 				aux++;
 			}
@@ -54,18 +55,18 @@ public class MetricasGitHub<IssueGithub> implements FachadaMetricas
 		this.numCambios = aux;
 	}
 
-	public void calcularNumIssues(ArrayList<?> issues) 
+	public void calcularNumIssues(List<Issue> issues) 
 	{
 		this.numIssues = issues.size();
 	}
 	
-	public void calcularNumIssuesCerradas(ArrayList<?> issues) 
+	public void calcularNumIssuesCerradas(List<Issue> issues) 
 	{
 		int cerradas = 0;
 		
-		for(Object x : issues)
+		for(Issue x : issues)
 		{
-			if(((IssueGitHub) x).getState().equals("close"))
+			if(x.getState().equals("close"))
 			{
 				cerradas++;
 			}
@@ -74,17 +75,17 @@ public class MetricasGitHub<IssueGithub> implements FachadaMetricas
 		this.numIssuesCerradas = cerradas;
 	}
 	
-	public void calcularMediaDiasCierre(ArrayList<?> issues) 
+	public void calcularMediaDiasCierre(List<Issue> issues) 
 	{
 		double mediaDias = 0;
 		int cerradas = 0;
 		
-		for(Object x : issues)
+		for(Issue x : issues)
 		{
-			if(((IssueGitHub) x).getState().equals("close"))
+			if(x.getState().equals("close"))
 			{
 				cerradas++;
-				mediaDias += (((IssueGitHub) x).getClosedAt().getTime() - ((IssueGitHub) x).getCreatedAt().getTime())/ (1000 * 60 * 60 * 24);
+				mediaDias += (x.getClosedAt().getTime() - x.getCreatedAt().getTime() )/ (1000 * 60 * 60 * 24);
 			}
 		}
 		
@@ -94,13 +95,13 @@ public class MetricasGitHub<IssueGithub> implements FachadaMetricas
 		this.mediaDiasCierre = mediaDias;
 	}
 
-	public void calcularMediaDiasEntreCambios(ArrayList<?> commits) 
+	public void calcularMediaDiasEntreCambios(List<RepositoryCommit> commits) 
 	{
 		double mediaDias = 0;
 		
 		for(int i = 0; i < commits.size()-1; i++)
 		{
-			mediaDias += ((CommitGitHub) commits.get(i)).getCommit().getAuthor().getDate().getTime() - ((CommitGitHub) commits.get(i+1)).getCommit().getAuthor().getDate().getTime();
+			mediaDias += commits.get(i).getCommit().getAuthor().getDate().getTime() - commits.get(i+1).getCommit().getAuthor().getDate().getTime();
 		}
 		
 		mediaDias /= (1000 * 60 * 60 * 24);
@@ -109,44 +110,44 @@ public class MetricasGitHub<IssueGithub> implements FachadaMetricas
 		this.mediaDiasCambios = mediaDias;		
 	}
 
-	public void calcularMediaDiasPorLinea(ArrayList<?> commits) 
+	public void calcularMediaDiasPorLinea(List<RepositoryCommit> commits) 
 	{
 		double dias = 0;
 		int lineas = 0;
 		
 		for(int i = 0; i < commits.size(); i++)
 		{
-			lineas += ((CommitGitHub) commits.get(i)).getStats().getTotal();
+			lineas += commits.get(i).getStats().getTotal();
 			if(i < commits.size() - 1)
 			{
-				dias += ((CommitGitHub) commits.get(i)).getCommit().getAuthor().getDate().getTime() - ((CommitGitHub) commits.get(i+1)).getCommit().getAuthor().getDate().getTime();
+				dias += commits.get(i).getCommit().getAuthor().getDate().getTime() - commits.get(i+1).getCommit().getAuthor().getDate().getTime();
 			}			
 		}
 			
 		this.mediaDiasLinea = dias / (1000 * 60 * 60 * 24) / lineas;
 	}
 	
-	public void calcularPorcentajeIssuesCerradas(ArrayList<?> issues)
+	public void calcularPorcentajeIssuesCerradas(List<Issue> issues)
 	{		
 		this.porcentajeIssuesCerradas = this.numIssuesCerradas * 100 / this.numIssues;
 	}
 	
-	public void calcularUltimaModificacion(ArrayList<?> issues, ArrayList<?> commits)
+	public void calcularUltimaModificacion(List<Issue> issues, List<RepositoryCommit> commits)
 	{
 		Date ultimaModificacion = null;
 		
-		for(Object x : issues)
+		for(Issue x : issues)
 		{
-			if(ultimaModificacion == null || ((IssueGitHub) x).getUpdatedAt().after(ultimaModificacion))
+			if(ultimaModificacion == null || x.getUpdatedAt().after(ultimaModificacion))
 			{
-				ultimaModificacion = ((IssueGitHub) x).getUpdatedAt();
+				ultimaModificacion =  x.getUpdatedAt();
 			}
 		}
-		for(Object y : commits)
+		for(RepositoryCommit y : commits)
 		{
-			if(ultimaModificacion == null || ((CommitGitHub) y).getCommit().getAuthor().getDate().after(ultimaModificacion))
+			if(ultimaModificacion == null || y.getCommit().getAuthor().getDate().after(ultimaModificacion))
 			{
-				ultimaModificacion = ((CommitGitHub) y).getCommit().getAuthor().getDate();
+				ultimaModificacion =  y.getCommit().getAuthor().getDate();
 			}
 		}
 		

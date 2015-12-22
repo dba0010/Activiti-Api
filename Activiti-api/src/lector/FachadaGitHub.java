@@ -83,13 +83,13 @@ public class FachadaGitHub implements FachadaLector
 		
 		this.commits = this.servicioCommits.getCommits(repositorio);
 		
-		RepositoryCommit commitAux = null;
+		/*RepositoryCommit commitAux = null;
 		for(int i = 0; i < this.commits.size(); i++)
 		{
 			commitAux = this.commits.get(i);
 			this.commits.remove(i);
 			this.commits.add(i, this.servicioCommits.getCommit(repositorio, commitAux.getSha()));
-		}
+		}*/
 	}
 		
 	public void obtenerMetricas(String usuario, RepositoryId repositorio) throws IOException

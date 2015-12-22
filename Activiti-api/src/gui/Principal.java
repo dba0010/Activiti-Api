@@ -276,13 +276,5 @@ public class Principal {
 		});
 		btnObtenerDatos.setBounds(227, 169, 152, 23);
 		pnlPrincipal.add(btnObtenerDatos);
-		
-		
-		
-		
-		
-		
-		
-		
-	}
+	}	
 }

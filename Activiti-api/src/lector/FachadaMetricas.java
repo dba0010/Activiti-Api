@@ -1,7 +1,6 @@
 package lector;
 
 import java.util.List;
-
 import org.eclipse.egit.github.core.*;
 
 public interface FachadaMetricas
@@ -16,7 +15,7 @@ public interface FachadaMetricas
 	
 	public void calcularMediaDiasEntreCambios(List<RepositoryCommit> commits);
 	
-	public void calcularMediaDiasPorLinea(List<RepositoryCommit> commits);
+	public void calcularDiasPrimerUltimoCommit(List<RepositoryCommit> commits);
 	
 	public void calcularPorcentajeIssuesCerradas(List<Issue> issues);
 	

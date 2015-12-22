@@ -14,7 +14,7 @@ public class MetricasGitHub implements FachadaMetricas
 	private int numIssuesCerradas = 0;
 	private double mediaDiasCambios = 0;
 	private double mediaDiasCierre = 0;
-	private double mediaDiasLinea = 0;
+	private double diasPrimerUltimoCommit = 0;
 	private Date ultimaModificacion = null;
 	private double porcentajeIssuesCerradas = 0;
 	
@@ -27,16 +27,15 @@ public class MetricasGitHub implements FachadaMetricas
 		this.numIssuesCerradas = 0;
 		this.mediaDiasCambios = 0;
 		this.mediaDiasCierre = 0;
-		this.mediaDiasLinea = 0;
+		this.diasPrimerUltimoCommit = 0;
 		this.ultimaModificacion = null;
 		this.porcentajeIssuesCerradas = 0;
-		this.calcularNumIssues(issues);
 		this.calcularNumCambiosSinMensaje(commits);
 		this.calcularNumIssues(issues);
 		this.calcularNumIssuesCerradas(issues);
 		this.calcularMediaDiasCierre(issues);
 		this.calcularMediaDiasEntreCambios(commits);
-		this.calcularMediaDiasPorLinea(commits);
+		this.calcularDiasPrimerUltimoCommit(commits);
 		this.calcularUltimaModificacion(issues, commits);
 		this.calcularPorcentajeIssuesCerradas(issues);
 	}
@@ -66,7 +65,7 @@ public class MetricasGitHub implements FachadaMetricas
 		
 		for(Issue x : issues)
 		{
-			if(x.getState().equals("close"))
+			if(x.getState().equals("closed"))
 			{
 				cerradas++;
 			}
@@ -82,15 +81,14 @@ public class MetricasGitHub implements FachadaMetricas
 		
 		for(Issue x : issues)
 		{
-			if(x.getState().equals("close"))
+			if(x.getState().equals("closed"))
 			{
 				cerradas++;
 				mediaDias += (x.getClosedAt().getTime() - x.getCreatedAt().getTime() )/ (1000 * 60 * 60 * 24);
 			}
 		}
-		
+		if(cerradas == 0){cerradas = 1;}
 		mediaDias /= cerradas;
-		
 		
 		this.mediaDiasCierre = mediaDias;
 	}
@@ -105,26 +103,31 @@ public class MetricasGitHub implements FachadaMetricas
 		}
 		
 		mediaDias /= (1000 * 60 * 60 * 24);
-		mediaDias /= commits.size();
+		if(commits.size() == 0)
+		{
+			mediaDias = 0;
+		}
+		else
+		{
+			mediaDias /= commits.size();
+		}
+		
 		
 		this.mediaDiasCambios = mediaDias;		
 	}
 
-	public void calcularMediaDiasPorLinea(List<RepositoryCommit> commits) 
+	public void calcularDiasPrimerUltimoCommit(List<RepositoryCommit> commits) 
 	{
 		double dias = 0;
-		int lineas = 0;
 		
 		for(int i = 0; i < commits.size(); i++)
 		{
-			lineas += commits.get(i).getStats().getTotal();
 			if(i < commits.size() - 1)
 			{
 				dias += commits.get(i).getCommit().getAuthor().getDate().getTime() - commits.get(i+1).getCommit().getAuthor().getDate().getTime();
 			}			
 		}
-			
-		this.mediaDiasLinea = dias / (1000 * 60 * 60 * 24) / lineas;
+		this.diasPrimerUltimoCommit = dias / (1000 * 60 * 60 * 24);
 	}
 	
 	public void calcularPorcentajeIssuesCerradas(List<Issue> issues)
@@ -179,9 +182,9 @@ public class MetricasGitHub implements FachadaMetricas
 		return mediaDiasCierre;
 	}
 
-	public double getMediaDiasLinea() 
+	public double getDiasPrimerUltimoCommit() 
 	{
-		return mediaDiasLinea;
+		return diasPrimerUltimoCommit;
 	}
 
 	public double getPorcentajeIssuesCerradas() 
@@ -199,11 +202,11 @@ public class MetricasGitHub implements FachadaMetricas
 		return "Estadisticas:" + 
 				"\n Número de issues: " + this.numIssues + 
 				"\n Número de issues cerradas: " + this.numIssuesCerradas + 
-				"\n Media de dias para cerrar issue: " + this.mediaDiasCierre + 
-				"\n Porcentaje de issues cerradas: " + this.porcentajeIssuesCerradas + 
+				"\n Media de dias para cerrar issue: " + formateador.format(this.mediaDiasCierre) + 
+				"\n Porcentaje de issues cerradas: " + this.porcentajeIssuesCerradas + "%" +
 				"\n Numero de commits sin mensaje: " + this.numCambios + 
 				"\n Media de dias por commit: " + formateador.format(this.mediaDiasCambios) + 
-				"\n Media de dias por linea: " + formateador.format(this.mediaDiasLinea) +
-				"\n Ultima modificacion: " + this.ultimaModificacion;
+				"\n Dias entre el primer y el ultimo commit: " + formateador.format(this.diasPrimerUltimoCommit) +
+				"\n Ultima modificacion: " + this.ultimaModificacion.toString();
 	}
 }

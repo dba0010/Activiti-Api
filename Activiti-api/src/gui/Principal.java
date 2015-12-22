@@ -235,8 +235,7 @@ public class Principal {
 			{
 				try
 				{
-					lector.obtenerRepositorios(txtUsuarioSearch.getText());
-					cmbRepositorio.setModel(new DefaultComboBoxModel<String>(lector.getNombresRepositorio()));
+					cmbRepositorio.setModel(new DefaultComboBoxModel<String>(lector.getNombresRepositorio(txtUsuarioSearch.getText())));
 					btnObtenerDatos.setEnabled(true);
 					txtaInfo.setText("");
 				}
@@ -265,8 +264,7 @@ public class Principal {
 				txtaInfo.setText("");
 				try
 				{
-					lector.obtenerMetricas(txtUsuarioSearch.getText(), new RepositoryId(txtUsuarioSearch.getText(),cmbRepositorio.getSelectedItem().toString()));
-					txtaInfo.setText(lector.getMetricas().toString());
+					txtaInfo.setText(lector.getMetricas(txtUsuarioSearch.getText(), new RepositoryId(txtUsuarioSearch.getText(),cmbRepositorio.getSelectedItem().toString())).toString());
 				}
 				catch(IOException e)
 				{

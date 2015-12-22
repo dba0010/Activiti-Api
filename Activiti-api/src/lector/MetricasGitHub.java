@@ -40,7 +40,7 @@ public class MetricasGitHub implements FachadaMetricas
 		this.calcularPorcentajeIssuesCerradas(issues);
 	}
 	
-	public void calcularNumCambiosSinMensaje(List<RepositoryCommit> commits) 
+	private void calcularNumCambiosSinMensaje(List<RepositoryCommit> commits) 
 	{
 		int aux = 0;
 		
@@ -54,12 +54,12 @@ public class MetricasGitHub implements FachadaMetricas
 		this.numCambios = aux;
 	}
 
-	public void calcularNumIssues(List<Issue> issues) 
+	private void calcularNumIssues(List<Issue> issues) 
 	{
 		this.numIssues = issues.size();
 	}
 	
-	public void calcularNumIssuesCerradas(List<Issue> issues) 
+	private void calcularNumIssuesCerradas(List<Issue> issues) 
 	{
 		int cerradas = 0;
 		
@@ -74,7 +74,7 @@ public class MetricasGitHub implements FachadaMetricas
 		this.numIssuesCerradas = cerradas;
 	}
 	
-	public void calcularMediaDiasCierre(List<Issue> issues) 
+	private void calcularMediaDiasCierre(List<Issue> issues) 
 	{
 		double mediaDias = 0;
 		int cerradas = 0;
@@ -93,7 +93,7 @@ public class MetricasGitHub implements FachadaMetricas
 		this.mediaDiasCierre = mediaDias;
 	}
 
-	public void calcularMediaDiasEntreCambios(List<RepositoryCommit> commits) 
+	private void calcularMediaDiasEntreCambios(List<RepositoryCommit> commits) 
 	{
 		double mediaDias = 0;
 		
@@ -116,7 +116,7 @@ public class MetricasGitHub implements FachadaMetricas
 		this.mediaDiasCambios = mediaDias;		
 	}
 
-	public void calcularDiasPrimerUltimoCommit(List<RepositoryCommit> commits) 
+	private void calcularDiasPrimerUltimoCommit(List<RepositoryCommit> commits) 
 	{
 		double dias = 0;
 		
@@ -130,12 +130,12 @@ public class MetricasGitHub implements FachadaMetricas
 		this.diasPrimerUltimoCommit = dias / (1000 * 60 * 60 * 24);
 	}
 	
-	public void calcularPorcentajeIssuesCerradas(List<Issue> issues)
+	private void calcularPorcentajeIssuesCerradas(List<Issue> issues)
 	{		
 		this.porcentajeIssuesCerradas = this.numIssuesCerradas * 100 / this.numIssues;
 	}
 	
-	public void calcularUltimaModificacion(List<Issue> issues, List<RepositoryCommit> commits)
+	private void calcularUltimaModificacion(List<Issue> issues, List<RepositoryCommit> commits)
 	{
 		Date ultimaModificacion = null;
 		

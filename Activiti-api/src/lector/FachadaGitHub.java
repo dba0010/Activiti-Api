@@ -52,7 +52,7 @@ public class FachadaGitHub implements FachadaLector
 		return instancia;
 	}
 	
-	public void obtenerRepositorios(String usuario) throws IOException
+	private void obtenerRepositorios(String usuario) throws IOException
 	{
 		this.servicioRepositorios = new RepositoryService(this.cliente);
 		
@@ -67,7 +67,7 @@ public class FachadaGitHub implements FachadaLector
 		}
 	}
 
-	public void obtenerIssues(String usuario, RepositoryId repositorio) throws IOException
+	private void obtenerIssues(String usuario, RepositoryId repositorio) throws IOException
 	{
 		this.servicioIssues = new IssueService(this.cliente);
 		
@@ -77,7 +77,7 @@ public class FachadaGitHub implements FachadaLector
 		this.issues = this.servicioIssues.getIssues(repositorio, filtro);
 	}
 	
-	public void obtenerCommits(RepositoryId repositorio) throws IOException 
+	private void obtenerCommits(RepositoryId repositorio) throws IOException 
 	{
 		this.servicioCommits = new CommitService(this.cliente);
 		
@@ -92,7 +92,7 @@ public class FachadaGitHub implements FachadaLector
 		}*/
 	}
 		
-	public void obtenerMetricas(String usuario, RepositoryId repositorio) throws IOException
+	private void obtenerMetricas(String usuario, RepositoryId repositorio) throws IOException
 	{
 		this.metricas = null;
 		
@@ -102,36 +102,17 @@ public class FachadaGitHub implements FachadaLector
 		metricas = new MetricasGitHub(issues, commits);
 	}
 	
-	public MetricasGitHub getMetricas()
+	public MetricasGitHub getMetricas(String usuario, RepositoryId repositorio) throws IOException
 	{
+		this.obtenerMetricas(usuario, repositorio);
+		
 		return this.metricas;
 	}
 	
-	public String[] getNombresRepositorio() 
+	public String[] getNombresRepositorio(String usuario) throws IOException 
 	{
+		this.obtenerRepositorios(usuario);
+		
 		return this.nombresRepositorio;
 	}
-	
-	class InfoCommit
-	{
-		String sha;
-		String url;
-		
-		public String getSha() 
-		{
-			return sha;
-		}
-		public String getUrl() 
-		{
-			return url;
-		}
-		
-		public String toString()
-		{
-			return "Info-commit:" + 
-					"\n\tid: " + this.sha + 
-					"\n\turl: " + this.url;
-		}
-	}
-
 }

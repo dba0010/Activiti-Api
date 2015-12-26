@@ -33,7 +33,7 @@ public class FachadaGitHub implements FachadaLector
 	
 	private String[] nombresRepositorio;
 	
-	MetricasGitHub metricas;
+	FachadaMetricas metricas;
 		
 	/*Constructor privado*/
 	private FachadaGitHub(String usuario, String password) throws IOException
@@ -102,7 +102,7 @@ public class FachadaGitHub implements FachadaLector
 		metricas = new MetricasGitHub(issues, commits);
 	}
 	
-	public MetricasGitHub getMetricas(String usuario, RepositoryId repositorio) throws IOException
+	public FachadaMetricas getMetricas(String usuario, RepositoryId repositorio) throws IOException
 	{
 		this.obtenerMetricas(usuario, repositorio);
 		

@@ -1,5 +1,6 @@
 package lector;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
@@ -7,206 +8,106 @@ import java.util.List;
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.RepositoryCommit;
 
+import metricas.*;
+import motorMetricas.Metrica;
+import motorMetricas.ResultadoMetrica;
+import motorMetricas.valores.*;
+import motorMetricas.valores.Double;
+
 public class MetricasGitHub implements FachadaMetricas
 {	
-	private int numCambios = 0;
-	private int numIssues = 0;
-	private int numIssuesCerradas = 0;
-	private double mediaDiasCambios = 0;
-	private double mediaDiasCierre = 0;
-	private double diasPrimerUltimoCommit = 0;
-	private Date ultimaModificacion = null;
-	private double porcentajeIssuesCerradas = 0;
+	ResultadoMetrica metricas;
+	
+	private Metrica numIssues;
+	private Metrica numIssuesCerradas;
+	private Metrica porcentajeIssuesCerradas;
+	private Metrica mediaDiasCierre;
+	private Metrica numCambiosSinMensaje;
+	private Metrica mediaDiasCambios;
+	private Metrica diasPrimerUltimoCommit;
+	private Metrica ultimaModificacion;
 	
 	private DecimalFormat formateador = new DecimalFormat("###0.00"); 
 	
-	public MetricasGitHub(List<Issue> issues, List<RepositoryCommit> commits)
+	public MetricasGitHub(List<Issue> issues, List<RepositoryCommit> commits) throws IOException
 	{
-		this.numCambios = 0;
-		this.numIssues = 0;
-		this.numIssuesCerradas = 0;
-		this.mediaDiasCambios = 0;
-		this.mediaDiasCierre = 0;
-		this.diasPrimerUltimoCommit = 0;
-		this.ultimaModificacion = null;
-		this.porcentajeIssuesCerradas = 0;
-		this.calcularNumCambiosSinMensaje(commits);
-		this.calcularNumIssues(issues);
-		this.calcularNumIssuesCerradas(issues);
-		this.calcularMediaDiasCierre(issues);
-		this.calcularMediaDiasEntreCambios(commits);
-		this.calcularDiasPrimerUltimoCommit(commits);
-		this.calcularUltimaModificacion(issues, commits);
-		this.calcularPorcentajeIssuesCerradas(issues);
-	}
-	
-	private void calcularNumCambiosSinMensaje(List<RepositoryCommit> commits) 
-	{
-		int aux = 0;
+		metricas = new ResultadoMetrica();
+				
+		this.numIssues = new NumeroIssues();
+		this.numIssues.calculate(issues, metricas);
 		
-		for(RepositoryCommit x : commits)
-		{
-			if(x.getCommit().getMessage() == "")
-			{
-				aux++;
-			}
-		}
-		this.numCambios = aux;
-	}
-
-	private void calcularNumIssues(List<Issue> issues) 
-	{
-		this.numIssues = issues.size();
-	}
-	
-	private void calcularNumIssuesCerradas(List<Issue> issues) 
-	{
-		int cerradas = 0;
+		this.numIssuesCerradas = new NumeroIssuesCerradas();
+		this.numIssuesCerradas.calculate(issues, metricas);
 		
-		for(Issue x : issues)
-		{
-			if(x.getState().equals("closed"))
-			{
-				cerradas++;
-			}
-		}
+		this.porcentajeIssuesCerradas = new PorcentajeIssuesCerradas();
+		this.porcentajeIssuesCerradas.calculate(issues, metricas);
 		
-		this.numIssuesCerradas = cerradas;
-	}
-	
-	private void calcularMediaDiasCierre(List<Issue> issues) 
-	{
-		double mediaDias = 0;
-		int cerradas = 0;
+		this.mediaDiasCierre = new MediaDiasCierre();
+		this.mediaDiasCierre.calculate(issues, metricas);
 		
-		for(Issue x : issues)
-		{
-			if(x.getState().equals("closed"))
-			{
-				cerradas++;
-				mediaDias += (x.getClosedAt().getTime() - x.getCreatedAt().getTime() )/ (1000 * 60 * 60 * 24);
-			}
-		}
-		if(cerradas == 0){cerradas = 1;}
-		mediaDias /= cerradas;
+		this.numCambiosSinMensaje = new NumeroCambiosSinMensaje();
+		this.numCambiosSinMensaje.calculate(commits, metricas);
 		
-		this.mediaDiasCierre = mediaDias;
-	}
-
-	private void calcularMediaDiasEntreCambios(List<RepositoryCommit> commits) 
-	{
-		double mediaDias = 0;
+		this.mediaDiasCambios = new MediaDiasCambio();
+		this.mediaDiasCambios.calculate(commits, metricas);
 		
-		for(int i = 0; i < commits.size()-1; i++)
-		{
-			mediaDias += commits.get(i).getCommit().getAuthor().getDate().getTime() - commits.get(i+1).getCommit().getAuthor().getDate().getTime();
-		}
+		this.diasPrimerUltimoCommit = new DiasPrimerUltimoCommit();
+		this.diasPrimerUltimoCommit.calculate(commits, metricas);
 		
-		mediaDias /= (1000 * 60 * 60 * 24);
-		if(commits.size() == 0)
-		{
-			mediaDias = 0;
-		}
-		else
-		{
-			mediaDias /= commits.size();
-		}
-		
-		
-		this.mediaDiasCambios = mediaDias;		
-	}
-
-	private void calcularDiasPrimerUltimoCommit(List<RepositoryCommit> commits) 
-	{
-		double dias = 0;
-		
-		for(int i = 0; i < commits.size(); i++)
-		{
-			if(i < commits.size() - 1)
-			{
-				dias += commits.get(i).getCommit().getAuthor().getDate().getTime() - commits.get(i+1).getCommit().getAuthor().getDate().getTime();
-			}			
-		}
-		this.diasPrimerUltimoCommit = dias / (1000 * 60 * 60 * 24);
-	}
-	
-	private void calcularPorcentajeIssuesCerradas(List<Issue> issues)
-	{		
-		this.porcentajeIssuesCerradas = this.numIssuesCerradas * 100 / this.numIssues;
-	}
-	
-	private void calcularUltimaModificacion(List<Issue> issues, List<RepositoryCommit> commits)
-	{
-		Date ultimaModificacion = null;
-		
-		for(Issue x : issues)
-		{
-			if(ultimaModificacion == null || x.getUpdatedAt().after(ultimaModificacion))
-			{
-				ultimaModificacion =  x.getUpdatedAt();
-			}
-		}
-		for(RepositoryCommit y : commits)
-		{
-			if(ultimaModificacion == null || y.getCommit().getAuthor().getDate().after(ultimaModificacion))
-			{
-				ultimaModificacion =  y.getCommit().getAuthor().getDate();
-			}
-		}
-		
-		this.ultimaModificacion = ultimaModificacion;
-	}
-
-	public int getNumCambios() 
-	{
-		return numCambios;
+		this.ultimaModificacion = new UltimaModificacion();
+		this.ultimaModificacion.calculate(commits, metricas);	
 	}
 	
 	public int getNumIssues() 
 	{
-		return numIssues;
+		return ((Entero)this.metricas.getMedida(0).getValue()).getValor();
 	}
 	
 	public int getNumIssuesCerradas() 
 	{
-		return numIssuesCerradas;
+		return ((Entero)this.metricas.getMedida(1).getValue()).getValor();
+	}
+	
+	public double getPorcentajeIssuesCerradas() 
+	{
+		return ((Double)this.metricas.getMedida(2).getValue()).getValor();
+	}
+	
+	public double getMediaDiasCierre() 
+	{
+		return ((Double)this.metricas.getMedida(3).getValue()).getValor();
+	}
+	
+	public int getNumCambiosSinMensaje()
+	{
+		return ((Entero)this.metricas.getMedida(4).getValue()).getValor();
 	}
 	
 	public double getMediaDiasCambios() 
 	{
-		return mediaDiasCambios;
-	}
-
-	public double getMediaDiasCierre() 
-	{
-		return mediaDiasCierre;
+		return ((Double)this.metricas.getMedida(5).getValue()).getValor();
 	}
 
 	public double getDiasPrimerUltimoCommit() 
 	{
-		return diasPrimerUltimoCommit;
-	}
-
-	public double getPorcentajeIssuesCerradas() 
-	{
-		return porcentajeIssuesCerradas;
+		return ((Double)this.metricas.getMedida(6).getValue()).getValor();
 	}
 	
 	public Date getUltimaModificacion() 
 	{
-		return ultimaModificacion;
+		return ((Fecha)this.metricas.getMedida(7).getValue()).getValor();
 	}
 
 	public String toString()
 	{
 		return "Estadisticas:" + 
-				"\n Número de issues: " + this.numIssues + 
-				"\n Número de issues cerradas: " + this.numIssuesCerradas + 
-				"\n Media de dias para cerrar issue: " + formateador.format(this.mediaDiasCierre) + 
-				"\n Porcentaje de issues cerradas: " + this.porcentajeIssuesCerradas + "%" +
-				"\n Numero de commits sin mensaje: " + this.numCambios + 
-				"\n Media de dias por commit: " + formateador.format(this.mediaDiasCambios) + 
-				"\n Dias entre el primer y el ultimo commit: " + formateador.format(this.diasPrimerUltimoCommit) +
-				"\n Ultima modificacion: " + this.ultimaModificacion.toString();
+				"\n Número de issues: " + ((Entero)this.metricas.getMedida(0).getValue()).getValor() + 
+				"\n Número de issues cerradas: " + ((Entero)this.metricas.getMedida(1).getValue()).getValor() + 
+				"\n Porcentaje de issues cerradas: " + ((Double)this.metricas.getMedida(2).getValue()).getValor() + "%" +
+				"\n Media de dias para cerrar issue: " + formateador.format(((Double)this.metricas.getMedida(3).getValue()).getValor()) + 
+				"\n Numero de commits sin mensaje: " + ((Entero)this.metricas.getMedida(4).getValue()).getValor() + 
+				"\n Media de dias por commit: " + formateador.format(((Double)this.metricas.getMedida(5).getValue()).getValor()) + 
+				"\n Dias entre el primer y el ultimo commit: " + formateador.format(((Double)this.metricas.getMedida(6).getValue()).getValor()) +
+				"\n Ultima modificacion: " + ((Fecha)this.metricas.getMedida(7).getValue()).getValor().toString();
 	}
 }

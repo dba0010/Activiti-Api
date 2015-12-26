@@ -28,36 +28,34 @@ public class PrincipalTest extends TestCase
 			
 			
 			//Probamos el repositorio clopezno/libre-gift
-			lector.obtenerRepositorios("clopezno");			
-			lector.obtenerMetricas("clopezno", new RepositoryId("clopezno","libre-gift"));
-
-			MetricasGitHub metricas = (MetricasGitHub) lector.getMetricas();
+			lector.getNombresRepositorio("clopezno");			
+			
+			MetricasGitHub metricas = (MetricasGitHub) lector.getMetricas("clopezno", new RepositoryId("clopezno","libre-gift"));
 						
 			DecimalFormat formateador = new DecimalFormat("###0.00"); 
 			
 			assertEquals(12, metricas.getNumIssues());
 			assertEquals(10, metricas.getNumIssuesCerradas());
-			assertEquals(0.0, metricas.getMediaDiasCierre());
+			assertEquals("0,00", formateador.format(metricas.getMediaDiasCierre()));
 			assertEquals(83.0, metricas.getPorcentajeIssuesCerradas());
-			assertEquals(0, metricas.getNumCambios());
+			assertEquals(0, metricas.getNumCambiosSinMensaje());
 			assertEquals("256,99", formateador.format(metricas.getMediaDiasCambios()));
 			assertEquals("770,98", formateador.format(metricas.getDiasPrimerUltimoCommit()));			
 			assertEquals("Fri May 22 13:47:06 CEST 2015", metricas.getUltimaModificacion().toString());
 			
 			//probamos el repositorio jam0101/TFGII-Quiz-Grafos
-			lector.obtenerRepositorios("jam0101");			
-			lector.obtenerMetricas("jam0101", new RepositoryId("jam0101","TFGII-Quiz-Grafos"));
+			lector.getNombresRepositorio("jam0101");			
 
-			metricas = (MetricasGitHub) lector.getMetricas();
+			metricas = (MetricasGitHub) lector.getMetricas("jam0101", new RepositoryId("jam0101","TFGII-Quiz-Grafos"));
 			
 			assertEquals(44, metricas.getNumIssues());
 			assertEquals(43, metricas.getNumIssuesCerradas());
 			assertEquals("27,91", formateador.format(metricas.getMediaDiasCierre()));
 			assertEquals(97.0, metricas.getPorcentajeIssuesCerradas());
-			assertEquals(0, metricas.getNumCambios());
+			assertEquals(0, metricas.getNumCambiosSinMensaje());
 			assertEquals("6,89", formateador.format(metricas.getMediaDiasCambios()));
 			assertEquals("131,00", formateador.format(metricas.getDiasPrimerUltimoCommit()));	
-			assertEquals("Tue Oct 27 18:44:46 CET 2015", metricas.getUltimaModificacion().toString());
+			assertEquals("Thu Jul 09 12:01:45 CEST 2015", metricas.getUltimaModificacion().toString());
 		}
 		catch (IOException e) 
 		{

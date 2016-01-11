@@ -24,6 +24,10 @@ import javax.swing.JTextArea;
 import javax.swing.JPasswordField;
 
 import org.eclipse.egit.github.core.RepositoryId;
+import javax.swing.JScrollPane;
+import java.awt.Color;
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
 
 
 public class Principal {
@@ -39,14 +43,14 @@ public class Principal {
 	private JPanel pnlPrincipal;
 	
 	/**
-	 * Lavel para el combobox de los sitios web.
+	 * Panel con los campos para realizar la conexion a GitHUB.
 	 */
-	private JLabel lblSitiosWeb;
-	
+	private JPanel panel_conexion;
+
 	/**
-	 * Combobox para seleccionar el sitio web con el que se quiere trabajar.
+	 * Panel con los campos de informacion del repositorio sobre el que se va a buscar informacion.
 	 */
-	private JComboBox<String> cmbSitiosWeb;
+	private JPanel panel_repositorio;
 	
 	/**
 	 * Label del campo de texto de usuario.
@@ -104,6 +108,11 @@ public class Principal {
 	private JButton btnObtenerDatos;
 	
 	/**
+	 * Panel para activar barras de scroll al textarea.
+	 */
+	private JScrollPane scroll;
+	
+	/**
 	 * Area de texto donde se muestra la informacion.
 	 */
 	private JTextArea txtaInfo;
@@ -148,7 +157,7 @@ public class Principal {
 	{
 		frmFormulario = new JFrame();
 		frmFormulario.setResizable(false);
-		frmFormulario.setBounds(100, 100, 412, 526);
+		frmFormulario.setBounds(100, 100, 414, 526);
 		frmFormulario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmFormulario.getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -156,79 +165,86 @@ public class Principal {
 		frmFormulario.getContentPane().add(pnlPrincipal, BorderLayout.CENTER);
 		pnlPrincipal.setLayout(null);
 		
-		lblSitiosWeb = new JLabel("Sitio web");
-		lblSitiosWeb.setBounds(26, 27, 92, 14);
-		pnlPrincipal.add(lblSitiosWeb);
+		txtaInfo = new JTextArea();
+		txtaInfo.setLineWrap(true);
+		txtaInfo.setEditable(false);
 		
-		cmbSitiosWeb = new JComboBox<String>();
-		cmbSitiosWeb.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				btnBuscarRepositorios.setEnabled(true);
-			}
-		});
-		cmbSitiosWeb.setModel(new DefaultComboBoxModel<String>(new String[] {"GitHub"}));
-		cmbSitiosWeb.setBounds(131, 24, 86, 20);
-		pnlPrincipal.add(cmbSitiosWeb);
+		scroll = new JScrollPane(txtaInfo);
+		scroll.setViewportBorder(new TitledBorder(null, "Estadisticas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		scroll.setBounds(10, 197, 386, 290);
+		pnlPrincipal.add(scroll);
+		
+		panel_conexion = new JPanel();
+		panel_conexion.setBorder(new TitledBorder(null, "Conexion", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_conexion.setBounds(10, 11, 386, 82);
+		pnlPrincipal.add(panel_conexion);
+		panel_conexion.setLayout(null);
 		
 		lblUsuarioCon = new JLabel("Usuario");
-		lblUsuarioCon.setBounds(26, 55, 46, 14);
-		pnlPrincipal.add(lblUsuarioCon);
+		lblUsuarioCon.setBounds(10, 24, 46, 14);
+		panel_conexion.add(lblUsuarioCon);
 		
 		txtUsuarioCon = new JTextField();
-		txtUsuarioCon.setBounds(131, 52, 86, 20);
-		pnlPrincipal.add(txtUsuarioCon);
+		txtUsuarioCon.setBounds(66, 21, 86, 20);
+		panel_conexion.add(txtUsuarioCon);
 		
 		lblPassword = new JLabel("password");
-		lblPassword.setBounds(227, 55, 63, 14);
-		pnlPrincipal.add(lblPassword);
+		lblPassword.setBounds(224, 24, 63, 14);
+		panel_conexion.add(lblPassword);
 		
 		txtpPassword = new JPasswordField();
-		txtpPassword.setBounds(300, 52, 79, 20);
-		pnlPrincipal.add(txtpPassword);
+		txtpPassword.setBounds(297, 21, 79, 20);
+		panel_conexion.add(txtpPassword);
 		
 		btnConectar = new JButton("Conectar");
-		btnConectar.addActionListener(new ActionListener() 
+		btnConectar.setBounds(148, 49, 89, 23);
+		panel_conexion.add(btnConectar);
+		
+		panel_repositorio = new JPanel();
+		panel_repositorio.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informacion del repositorio", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_repositorio.setBounds(10, 104, 386, 82);
+		pnlPrincipal.add(panel_repositorio);
+		panel_repositorio.setLayout(null);
+		
+		lblUsuarioSearch = new JLabel("Usuario propietario:");
+		lblUsuarioSearch.setBounds(10, 22, 115, 14);
+		panel_repositorio.add(lblUsuarioSearch);
+		
+		txtUsuarioSearch = new JTextField();
+		txtUsuarioSearch.setBounds(129, 19, 96, 20);
+		panel_repositorio.add(txtUsuarioSearch);
+		txtUsuarioSearch.setColumns(10);		
+		
+		btnBuscarRepositorios = new JButton("Buscar repositorios");
+		btnBuscarRepositorios.setBounds(235, 18, 141, 23);
+		panel_repositorio.add(btnBuscarRepositorios);
+		
+		lblRepositorio = new JLabel("Repositorio");
+		lblRepositorio.setBounds(10, 52, 67, 14);
+		panel_repositorio.add(lblRepositorio);
+		
+		cmbRepositorio = new JComboBox<String>();
+		cmbRepositorio.setBounds(129, 49, 96, 20);
+		panel_repositorio.add(cmbRepositorio);
+		
+		btnObtenerDatos = new JButton("Obtener datos");
+		btnObtenerDatos.setBounds(235, 48, 141, 23);
+		panel_repositorio.add(btnObtenerDatos);
+		btnObtenerDatos.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
+				txtaInfo.setText("");
 				try
 				{
-					if(cmbSitiosWeb.getSelectedItem().equals("GitHub"))
-					{
-						fabricaLector = FabricaLectorGitHub.getInstance();
-						lector = fabricaLector.crearFachadaLector(txtUsuarioCon.getText(), String.valueOf(txtpPassword.getPassword()));
-						JOptionPane.showMessageDialog(frmFormulario,"Conectado satisfactoriamente como " + txtUsuarioCon.getText() + ".");
-					}
-				} 
-				catch (IOException e) 
+					txtaInfo.setText(lector.getMetricas(txtUsuarioSearch.getText(), new RepositoryId(txtUsuarioSearch.getText(),cmbRepositorio.getSelectedItem().toString())).toString());
+				}
+				catch(IOException e)
 				{
-					JOptionPane.showMessageDialog(frmFormulario,"Fallo al conectar.");
+					JOptionPane.showMessageDialog(frmFormulario,"No se han recibido datos.");
 				}
 			}
 		});
-		btnConectar.setBounds(171, 83, 89, 23);
-		pnlPrincipal.add(btnConectar);
-		
-		lblUsuarioSearch = new JLabel("Usuario a buscar");
-		lblUsuarioSearch.setBounds(26, 140, 105, 14);
-		pnlPrincipal.add(lblUsuarioSearch);
-		
-		txtUsuarioSearch = new JTextField();
-		txtUsuarioSearch.setBounds(132, 137, 86, 20);
-		pnlPrincipal.add(txtUsuarioSearch);
-		txtUsuarioSearch.setColumns(10);		
-		
-		lblRepositorio = new JLabel("Repositorio");
-		lblRepositorio.setBounds(26, 173, 67, 14);
-		pnlPrincipal.add(lblRepositorio);
-		
-		cmbRepositorio = new JComboBox<String>();
-		cmbRepositorio.setBounds(133, 170, 85, 20);
-		pnlPrincipal.add(cmbRepositorio);
-		
-		btnBuscarRepositorios = new JButton("Buscar repositorios");
 		btnBuscarRepositorios.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
@@ -249,30 +265,23 @@ public class Principal {
 				}
 			}
 		});
-		btnBuscarRepositorios.setBounds(228, 136, 151, 23);
-		pnlPrincipal.add(btnBuscarRepositorios);
-		
-		txtaInfo = new JTextArea();
-		txtaInfo.setBounds(26, 203, 353, 284);
-		pnlPrincipal.add(txtaInfo);
-		
-		btnObtenerDatos = new JButton("Obtener datos");
-		btnObtenerDatos.addActionListener(new ActionListener() 
+		btnConectar.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				txtaInfo.setText("");
 				try
 				{
-					txtaInfo.setText(lector.getMetricas(txtUsuarioSearch.getText(), new RepositoryId(txtUsuarioSearch.getText(),cmbRepositorio.getSelectedItem().toString())).toString());
-				}
-				catch(IOException e)
+					fabricaLector = FabricaLectorGitHub.getInstance();
+					lector = fabricaLector.crearFachadaLector(txtUsuarioCon.getText(), String.valueOf(txtpPassword.getPassword()));
+					JOptionPane.showMessageDialog(frmFormulario,"Conectado satisfactoriamente como " + txtUsuarioCon.getText() + ".");
+				} 
+				catch (IOException e) 
 				{
-					JOptionPane.showMessageDialog(frmFormulario,"No se han recibido datos.");
+					JOptionPane.showMessageDialog(frmFormulario,"Fallo al conectar.");
 				}
 			}
 		});
-		btnObtenerDatos.setBounds(227, 169, 152, 23);
-		pnlPrincipal.add(btnObtenerDatos);
+		
+		
 	}	
 }

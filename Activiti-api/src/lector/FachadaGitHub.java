@@ -13,6 +13,7 @@ import org.eclipse.egit.github.core.RepositoryId;
 import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.service.*;
 
+
 public class FachadaGitHub implements FachadaLector
 {
 	private static FachadaGitHub instancia;

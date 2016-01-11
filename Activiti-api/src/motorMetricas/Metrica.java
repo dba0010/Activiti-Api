@@ -6,10 +6,6 @@ import java.util.List;
 
 public abstract class Metrica implements IMetric
 {
-	protected Valor valueMinDefault;
-
-	protected Valor valueMaxDefault;
-
 	protected String author;
 
 	protected int year;
@@ -40,16 +36,6 @@ public abstract class Metrica implements IMetric
 	public abstract Valor run(List<?> lista) throws IOException;
 
 	public abstract void check();
-
-	public Valor getValueMinDefault() 
-	{
-		return valueMinDefault;
-	}
-
-	public Valor getValueMaxDefault() 
-	{
-		return valueMaxDefault;
-	}
 
 	public Descripcion getDescripcion() 
 	{

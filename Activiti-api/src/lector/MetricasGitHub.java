@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.RepositoryCommit;
-
 import metricas.*;
 import motorMetricas.Metrica;
 import motorMetricas.ResultadoMetrica;
@@ -26,6 +26,9 @@ public class MetricasGitHub implements FachadaMetricas
 	private Metrica mediaDiasCambios;
 	private Metrica diasPrimerUltimoCommit;
 	private Metrica ultimaModificacion;
+	private Metrica CommitXMes;
+	private Metrica CommitXDia;
+	private Metrica CommitXAutor;
 	
 	private DecimalFormat formateador = new DecimalFormat("###0.00"); 
 	
@@ -56,6 +59,15 @@ public class MetricasGitHub implements FachadaMetricas
 		
 		this.ultimaModificacion = new UltimaModificacion();
 		this.ultimaModificacion.calculate(commits, metricas);	
+		
+		this.CommitXMes = new CommitPorMes();
+		this.CommitXMes.calculate(commits, metricas);
+		
+		this.CommitXDia = new CommitPorDia();
+		this.CommitXDia.calculate(commits, metricas);
+		
+		this.CommitXAutor = new CommitPorAutor();
+		this.CommitXAutor.calculate(commits, metricas);
 	}
 	
 	public int getNumIssues() 
@@ -97,10 +109,25 @@ public class MetricasGitHub implements FachadaMetricas
 	{
 		return ((Fecha)this.metricas.getMedida(7).getValue()).getValor();
 	}
-
+	
+	public Map<String, Double> getCommitXMes()
+	{
+		return ((Conjunto)this.metricas.getMedida(8).getValue()).getValor();
+	}
+	
+	public Map<String, Double> getCommitXDia()
+	{
+		return ((Conjunto)this.metricas.getMedida(9).getValue()).getValor();
+	}
+	
+	public Map<String, Double> getCommitXAutor()
+	{
+		return ((Conjunto)this.metricas.getMedida(10).getValue()).getValor();
+	}
+	
 	public String toString()
 	{
-		return "Estadisticas:" + 
+		String x = "Estadisticas:" + 
 				"\n Número de issues: " + ((Entero)this.metricas.getMedida(0).getValue()).getValor() + 
 				"\n Número de issues cerradas: " + ((Entero)this.metricas.getMedida(1).getValue()).getValor() + 
 				"\n Porcentaje de issues cerradas: " + ((Double)this.metricas.getMedida(2).getValue()).getValor() + "%" +
@@ -108,6 +135,25 @@ public class MetricasGitHub implements FachadaMetricas
 				"\n Numero de commits sin mensaje: " + ((Entero)this.metricas.getMedida(4).getValue()).getValor() + 
 				"\n Media de dias por commit: " + formateador.format(((Double)this.metricas.getMedida(5).getValue()).getValor()) + 
 				"\n Dias entre el primer y el ultimo commit: " + formateador.format(((Double)this.metricas.getMedida(6).getValue()).getValor()) +
-				"\n Ultima modificacion: " + ((Fecha)this.metricas.getMedida(7).getValue()).getValor().toString();
+				"\n Ultima modificacion: " + ((Fecha)this.metricas.getMedida(7).getValue()).getValor().toString() +
+				"\n Commits por mes:";
+				Map<String, Double> aux = getCommitXMes();
+				for(String key : aux.keySet())
+				{
+					x += "\n\t" + key + ": " + aux.get(key).getValor();
+				}
+				x += "\n Commits por dia:";
+				aux = getCommitXDia();
+				for(String key : aux.keySet())
+				{
+					x += "\n\t" + key + ": " + aux.get(key).getValor();
+				}
+				x += "\n Commits por autor:";
+				aux = getCommitXAutor();
+				for(String key : aux.keySet())
+				{
+					x += "\n\t" + key + ": " + aux.get(key).getValor();
+				}
+		return x;
 	}
 }

@@ -1,0 +1,10 @@
+Objetivos del proyecto
+
+El objetivo principal de este proyecto es implementar un software capaz de proporcionar una informacion mas detallada, clara y precisa de los datos que se pueden obtener directamente desde la plataforma GitHub para permitir una compresion mas clara y completa a los usuarios de la evolucion y el estado del desarrollo de un proyecto alojado en dicha plataforma. 
+
+Objetivos técnicos.
+
+- Ante la existencias de otras plataformas que siguen la misma filosofia que GitHub, uno de los objetivos es que al implementar el software resultante de este proyecto pueda ser este facilmente incrementado para trabajar con estas otras plataformas de manera lo mas sencilla y rapida posible.
+Por ello se van a utilzar patrones de diseño para permitir esta facilidad de escalabilidad frente a nuevas plataformas que se deseen implementar y frente a nuevas metricas que pretendan incluir dentro del conjunto de metricas ya implementado.
+- Implementar un conjunto de metricas que ofrezcan una vision del estado y la evolucion de un proyecto lo mas completa y correcta de cara a que al usuario le resulte interesante y atractiva dicha informacion obtenida con el resultado de este proyecto.
+Las metricas va a extraerse del conjunto de metricas utilizado en la tesis sPACE: Software Project Assessment in the Course of Evolution, desarrollada por Jacek Ratzinguer [2] y de versiones de las propias que muestra GitHub sobre los proyectos que se van a adaptar a los datos que se pueden obtener.

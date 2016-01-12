@@ -10,21 +10,20 @@ import motorMetricas.Metrica;
 import motorMetricas.Valor;
 import motorMetricas.valores.Entero;
 
-public class NumeroIssues extends Metrica
+public class NumeroWatchers extends Metrica
 {
 	private Descripcion descripcion;
-	
-	public NumeroIssues()
+		
+	public NumeroWatchers()
 	{
-		descripcion = new Descripcion("Proceso de orientacion", "NumeroIssues", "Numero de issues total creadas en el repositorio",
-				"¿Cuantas issues se han creado en el repositorio?", "NI numero de issues", "NI >= 0 mejor valores bajos",
-				"Absoluta", "NI contador", "Repositorio GitHub de un proyecto");
+		descripcion = new Descripcion("Proceso de orientacion", "NumeroWatchers", "Muestra el numero de usuarios subscritos al proyecto",
+				"¿Cuantos usuarios subscritos tiene el proyecto?", "NW watchers", "NW >= 0 mejor valores altos",
+				"Absoluta", "NW contador", "Repositorio GitHub de un proyecto");
 	}
 	
 	public Valor run(List<?> lista) throws IOException
 	{
-		Entero entero = new Entero(lista.size());
-		return entero;
+		return null;
 	}
 	
 	public Valor run(List<?> lista, List<?> lista2) throws IOException
@@ -34,7 +33,8 @@ public class NumeroIssues extends Metrica
 	
 	public Valor run(Repository dato) throws IOException 
 	{
-		return null;
+		Entero entero = new Entero(dato.getWatchers());
+		return entero;
 	}
 	
 	public Descripcion getDescripcion()

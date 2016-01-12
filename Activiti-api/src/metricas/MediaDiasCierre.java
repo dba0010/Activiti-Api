@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.egit.github.core.Issue;
+import org.eclipse.egit.github.core.Repository;
 
 import motorMetricas.Descripcion;
 import motorMetricas.Metrica;
@@ -16,9 +17,9 @@ public class MediaDiasCierre extends Metrica
 	
 	public MediaDiasCierre()
 	{
-		descripcion = new Descripcion("Estadistica", "Media de dias de cieere de issues", "Media de los dias que se tarda en cerrar una issue",
-				"¿Cuanto se tarda de media en cerrar una issue?", "D dias de media", "D > 0 mejor valores bajos",
-				"Absoluta", "D contador", "Repositorio GitHub de un proyecto");
+		descripcion = new Descripcion("Proceso de orientacion", "MediaDiasCierre", "Muestra los dias que se tarda en cerrar una issue, normalizado por el numero de issues cerradas",
+				"¿Cuanto se tarda de media en cerrar una issue?", "MDC = D (suma de los dias) / NIC (numero de issues cerradas)", "MDC >= 0 mejor valores bajos",
+				"Ratio", "D contador, NIC contador", "Repositorio GitHub de un proyecto");
 	}
 	
 	public Valor run(List<?> lista) throws IOException
@@ -39,6 +40,16 @@ public class MediaDiasCierre extends Metrica
 		
 		Double valor = new Double(mediaDias);
 		return valor;
+	}
+	
+	public Valor run(List<?> lista, List<?> lista2) throws IOException 
+	{
+		return null;
+	}
+	
+	public Valor run(Repository dato) throws IOException 
+	{
+		return null;
 	}
 	
 	public Descripcion getDescripcion()

@@ -3,6 +3,8 @@ package motorMetricas;
 import java.io.IOException;
 import java.util.List;
 
+import org.eclipse.egit.github.core.Repository;
+
 
 public abstract class Metrica implements IMetric
 {
@@ -32,8 +34,30 @@ public abstract class Metrica implements IMetric
 		metricResult.addMeasure(measure);
 		return valor;
 	}
+    
+    public Valor calculate(List<?> lista, List<?> lista2, ResultadoMetrica metricResult) throws IOException	
+    {
+		check();
+		Valor valor = run(lista, lista2);
+		Medida measure=new Medida(valor);
+		metricResult.addMeasure(measure);
+		return valor;
+	}
+    
+    public Valor calculate(Repository dato, ResultadoMetrica metricResult) throws IOException	
+    {
+		check();
+		Valor valor = run(dato);
+		Medida measure=new Medida(valor);
+		metricResult.addMeasure(measure);
+		return valor;
+	}
 
 	public abstract Valor run(List<?> lista) throws IOException;
+	
+	public abstract Valor run(List<?> lista, List<?> lista2) throws IOException;
+	
+	public abstract Valor run(Repository dato) throws IOException;
 
 	public abstract void check();
 

@@ -4,8 +4,8 @@ import java.util.Date;
 
 import motorMetricas.Valor;
 
-public class Fecha implements Valor{
-
+public class Fecha implements Valor
+{
 	private Date valor;
 
     public Fecha() 
@@ -15,7 +15,7 @@ public class Fecha implements Valor{
 
 	public Fecha(Date valor)
 	{
-		this.valor=valor;
+		this.valor = valor;
 	}
 
 	public Date getValor() 

@@ -3,6 +3,7 @@ package metricas;
 import java.io.IOException;
 import java.util.List;
 
+import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryCommit;
 
 import motorMetricas.Descripcion;
@@ -16,9 +17,9 @@ public class NumeroCambiosSinMensaje extends Metrica
 	
 	public NumeroCambiosSinMensaje()
 	{
-		descripcion = new Descripcion("Estadistica", "Numero de commits sin mensaje", "Numero de commits realizados que no tienen mensaje.",
-				"¿Cuantos commits se han realizado sin mensaje?", "N numero de commits sin mensaje", "N >= 0 mejor valores bajos",
-				"Absoluta", "N contador", "Repositorio GitHub de un proyecto");
+		descripcion = new Descripcion("Proceso de orientacion", "NumeroCambiosSinMensaje", "Numero de cambios realizados que no tienen mensaje.",
+				"¿Cuantos cambios se han realizado sin mensaje?", "NCSM numero de cambios sin mensaje", "NCSM >= 0 mejor valores bajos",
+				"Absoluta", "NCSM contador", "Repositorio GitHub de un proyecto");
 	}
 	
 	public Valor run(List<?> lista) throws IOException
@@ -34,6 +35,16 @@ public class NumeroCambiosSinMensaje extends Metrica
 		}
 
 		return entero;
+	}
+	
+	public Valor run(List<?> lista, List<?> lista2) throws IOException 
+	{
+		return null;
+	}
+	
+	public Valor run(Repository dato) throws IOException 
+	{
+		return null;
 	}
 	
 	public Descripcion getDescripcion()

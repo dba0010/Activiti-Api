@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.egit.github.core.Issue;
+import org.eclipse.egit.github.core.Repository;
 
 import motorMetricas.Descripcion;
 import motorMetricas.Metrica;
@@ -16,9 +17,9 @@ public class PorcentajeIssuesCerradas extends Metrica
 	
 	public PorcentajeIssuesCerradas()
 	{
-		descripcion = new Descripcion("Estadistica", "Porcentaje de issues cerradas", "Porcentaje de las issues cerrdas en el repositorio",
-				"¿Proporceion de issues cerradas en el repositorio en funcion de las creadas?", "X porcentaje", "0 <= N <= 100 mejor valores altos",
-				"Ratio", "NI contador, NC contador", "Repositorio GitHub de un proyecto");
+		descripcion = new Descripcion("Proceso de orientacion", "PorcentajeIssuesCerradas", "Porcentaje de las issues cerradas en el repositorio",
+				"¿Proporcion de issues cerradas en el repositorio en funcion de las creadas?", "PIC = NIC (Numero de issues cerradas) * 100 / NI (Numero de issues)", "0 <= N <= 100 mejor valores altos",
+				"Ratio", "NIC contador, NI contador", "Repositorio GitHub de un proyecto");
 	}
 	
 	public Valor run(List<?> lista) throws IOException
@@ -35,6 +36,16 @@ public class PorcentajeIssuesCerradas extends Metrica
 		Double valor = new Double(cerradas * 100 / lista.size());
 		
 		return valor;
+	}
+	
+	public Valor run(List<?> lista, List<?> lista2) throws IOException 
+	{
+		return null;
+	}
+	
+	public Valor run(Repository dato) throws IOException 
+	{
+		return null;
 	}
 	
 	public Descripcion getDescripcion()

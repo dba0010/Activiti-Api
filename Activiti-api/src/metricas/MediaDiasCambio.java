@@ -3,6 +3,7 @@ package metricas;
 import java.io.IOException;
 import java.util.List;
 
+import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryCommit;
 
 import motorMetricas.Descripcion;
@@ -16,9 +17,9 @@ public class MediaDiasCambio extends Metrica
 	
 	public MediaDiasCambio()
 	{
-		descripcion = new Descripcion("Estadistica", "Media de dias entre commits", "Dias de media de realizacion de un commit",
-				"¿Cuantos dias de media pasan entre commits?", "C dias de media", "C >= 0 mejor valores bajos",
-				"Absoluta", "C contador", "Repositorio GitHub de un proyecto");
+		descripcion = new Descripcion("Restricciones temporales", "MediaDiasCambio", "Dias de media para la realizacion de un cambio",
+				"¿Cuantos dias de media pasan entre cambios?", "MDC = D (Dias desde el primer al ultimo cambio) / NTC (Numero total de cambios)", "MDC >= 0 mejor valores bajos",
+				"Absoluta", "D contador, NTC contador", "Repositorio GitHub de un proyecto");
 	}
 	
 	public Valor run(List<?> lista) throws IOException
@@ -43,6 +44,16 @@ public class MediaDiasCambio extends Metrica
 		
 		Double valor = new Double(mediaDias);	
 		return valor;
+	}
+	
+	public Valor run(List<?> lista, List<?> lista2) throws IOException 
+	{
+		return null;
+	}
+	
+	public Valor run(Repository dato) throws IOException 
+	{
+		return null;
 	}
 	
 	public Descripcion getDescripcion()

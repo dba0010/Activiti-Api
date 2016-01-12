@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.egit.github.core.Issue;
+import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryCommit;
+
 import metricas.*;
 import motorMetricas.Metrica;
 import motorMetricas.ResultadoMetrica;
@@ -26,13 +28,20 @@ public class MetricasGitHub implements FachadaMetricas
 	private Metrica mediaDiasCambios;
 	private Metrica diasPrimerUltimoCommit;
 	private Metrica ultimaModificacion;
-	private Metrica CommitXMes;
-	private Metrica CommitXDia;
-	private Metrica CommitXAutor;
+	private Metrica commitXMes;
+	private Metrica commitXDia;
+	private Metrica commitXAutor;
+	private Metrica issueXAutor;
+	private Metrica numWatchers;
+	private Metrica contadorAutor;
+	private Metrica contadorTareas;
+	private Metrica relacionMesPico;
+	private Metrica contadorCambiosPico;
+	private Metrica ratioActividadCambio;
 	
 	private DecimalFormat formateador = new DecimalFormat("###0.00"); 
 	
-	public MetricasGitHub(List<Issue> issues, List<RepositoryCommit> commits) throws IOException
+	public MetricasGitHub(Repository repositorio, List<Issue> issues, List<RepositoryCommit> commits) throws IOException
 	{
 		metricas = new ResultadoMetrica();
 				
@@ -60,14 +69,35 @@ public class MetricasGitHub implements FachadaMetricas
 		this.ultimaModificacion = new UltimaModificacion();
 		this.ultimaModificacion.calculate(commits, metricas);	
 		
-		this.CommitXMes = new CommitPorMes();
-		this.CommitXMes.calculate(commits, metricas);
+		this.commitXMes = new CommitPorMes();
+		this.commitXMes.calculate(commits, metricas);
 		
-		this.CommitXDia = new CommitPorDia();
-		this.CommitXDia.calculate(commits, metricas);
+		this.commitXDia = new CommitPorDia();
+		this.commitXDia.calculate(commits, metricas);
 		
-		this.CommitXAutor = new CommitPorAutor();
-		this.CommitXAutor.calculate(commits, metricas);
+		this.commitXAutor = new CambioPorAutor();
+		this.commitXAutor.calculate(commits, metricas);
+		
+		this.issueXAutor = new IssuesPorAutor();
+		this.issueXAutor.calculate(issues, metricas);
+		
+		this.numWatchers = new NumeroWatchers();
+		this.numWatchers.calculate(repositorio, metricas);
+		
+		this.contadorAutor = new ContadorAutor();
+		this.contadorAutor.calculate(commits, metricas);
+		
+		this.contadorTareas = new ContadorTareas();
+		this.contadorTareas.calculate(issues, commits, metricas);
+		
+		this.relacionMesPico = new RelacionMesPico();
+		this.relacionMesPico.calculate(commits, metricas);
+		
+		this.contadorCambiosPico = new ContadorCambiosPico();
+		this.contadorCambiosPico.calculate(commits, metricas);
+		
+		this.ratioActividadCambio = new RatioActividadCambio();
+		this.ratioActividadCambio.calculate(commits, metricas);
 	}
 	
 	public int getNumIssues() 
@@ -125,6 +155,41 @@ public class MetricasGitHub implements FachadaMetricas
 		return ((Conjunto)this.metricas.getMedida(10).getValue()).getValor();
 	}
 	
+	public Map<String, Double> getIssueXAutor()
+	{
+		return ((Conjunto)this.metricas.getMedida(11).getValue()).getValor();
+	}
+	
+	public int getNumWatchers()
+	{
+		return ((Entero)this.metricas.getMedida(12).getValue()).getValor();
+	}
+	
+	public String getContadorAutor() 
+	{
+		return formateador.format(((Double)this.metricas.getMedida(13).getValue()).getValor());
+	}
+	
+	public String getContadorTareas() 
+	{
+		return formateador.format(((Double)this.metricas.getMedida(14).getValue()).getValor());
+	}
+	
+	public String getRelacionMesPico() 
+	{
+		return ((Cadena)this.metricas.getMedida(15).getValue()).getValor();
+	}
+	
+	public String getContadorCambiosPico() 
+	{
+		return formateador.format(((Double)this.metricas.getMedida(16).getValue()).getValor());
+	}
+	
+	public String getRatioActividadCambio() 
+	{
+		return formateador.format(((Double)this.metricas.getMedida(17).getValue()).getValor());
+	}
+	
 	public String toString()
 	{
 		String x = "Estadisticas:" + 
@@ -142,6 +207,9 @@ public class MetricasGitHub implements FachadaMetricas
 				{
 					x += "\n\t" + key + ": " + aux.get(key).getValor();
 				}
+				x += "\n Relacion mes pico: " + getRelacionMesPico();
+				x += "\n Contador cambios pico: " + getContadorCambiosPico();
+				x += "\n Ratio actividad cambio: " + getRatioActividadCambio();
 				x += "\n Commits por dia:";
 				aux = getCommitXDia();
 				for(String key : aux.keySet())
@@ -154,6 +222,15 @@ public class MetricasGitHub implements FachadaMetricas
 				{
 					x += "\n\t" + key + ": " + aux.get(key).getValor();
 				}
+				x += "\n Issues por autor:";
+				aux = getIssueXAutor();
+				for(String key : aux.keySet())
+				{
+					x += "\n\t" + key + ": " + aux.get(key).getValor();
+				}
+				x += "\n Numero de watchers: " + getNumWatchers();
+				x += "\n Contador autores: " + getContadorAutor();
+				x += "\n Contador tareas: " + getContadorTareas();
 		return x;
 	}
 }

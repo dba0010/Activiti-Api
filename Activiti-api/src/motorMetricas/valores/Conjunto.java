@@ -5,15 +5,12 @@ import java.util.Map;
 
 import motorMetricas.Valor;
 
-public class Conjunto implements Valor{
-
-	//private Map<String,Double> conjunto = new HashMap<String,Double>();
-	
+public class Conjunto implements Valor
+{	
 	private Map<String,Double> conjunto = new LinkedHashMap<String,Double>();
 
     public Conjunto() 
     {
-    	//conjunto = new HashMap<String,Double>();
     	conjunto = new LinkedHashMap<String,Double>();
     }
 

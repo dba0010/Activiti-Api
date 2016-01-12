@@ -3,6 +3,7 @@ package metricas;
 import java.io.IOException;
 import java.util.List;
 
+import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryCommit;
 
 import motorMetricas.Descripcion;
@@ -11,15 +12,15 @@ import motorMetricas.Valor;
 import motorMetricas.valores.Conjunto;
 import motorMetricas.valores.Double;
 
-public class CommitPorAutor extends Metrica
+public class CambioPorAutor extends Metrica
 {
 	private Descripcion descripcion;
 		
-	public CommitPorAutor()
+	public CambioPorAutor()
 	{
-		descripcion = new Descripcion("Estadistica", "Numero de commits realizados por cada usuario participante", "Muestra el numero de commits realizados por cada usuario participante en el proyecto",
-				"¿Cuantos commits ha realizado cada usuario?", "Cu commits por usuaurio", "Cu >= 0 mejor valores altos",
-				"Absoluta", "Cu contador", "Repositorio GitHub de un proyecto");
+		descripcion = new Descripcion("Equipo", "CambioPorAutor", "Muestra el numero de commits realizados por cada usuario participante en el proyecto",
+				"¿Cuantos commits ha realizado cada usuario?", "CA cambio por autor", "CA > 0 mejor valores altos",
+				"Absoluta", "CA contador", "Repositorio GitHub de un proyecto");
 	}
 	
 	public Valor run(List<?> lista) throws IOException
@@ -40,6 +41,16 @@ public class CommitPorAutor extends Metrica
 		}
 		
 		return valores;
+	}
+	
+	public Valor run(List<?> lista, List<?> lista2) throws IOException 
+	{
+		return null;
+	}
+	
+	public Valor run(Repository dato) throws IOException 
+	{
+		return null;
 	}
 	
 	public Descripcion getDescripcion()

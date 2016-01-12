@@ -2,18 +2,18 @@ package motorMetricas.valores;
 
 import motorMetricas.Valor;
 
-public class Entero implements Valor{
-
+public class Entero implements Valor
+{
 	private int valor;
 
     public Entero() 
     {
-        valor=0;
+        valor = 0;
     }
 
 	public Entero(int valor)
 	{
-		this.valor=valor;
+		this.valor = valor;
 	}
 
 

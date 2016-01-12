@@ -28,6 +28,8 @@ public class FachadaGitHub implements FachadaLector
 	
 	private List<Repository> repositorios;
 	
+	private Repository repositorio;
+	
 	private List<Issue> issues;
 	
 	private List<RepositoryCommit> commits;
@@ -58,7 +60,7 @@ public class FachadaGitHub implements FachadaLector
 		this.servicioRepositorios = new RepositoryService(this.cliente);
 		
 		this.repositorios = this.servicioRepositorios.getRepositories(usuario);
-		
+				
 		this.nombresRepositorio = new String[this.repositorios.size()];
 		int contador = 0;
 		for(Repository x : this.repositorios)
@@ -68,7 +70,12 @@ public class FachadaGitHub implements FachadaLector
 		}
 	}
 
-	private void obtenerIssues(String usuario, RepositoryId repositorio) throws IOException
+	private void obtenerRepositorio(String usuario, RepositoryId repositorio) throws IOException
+	{
+		this.repositorio = this.servicioRepositorios.getRepository(usuario, repositorio.getName());
+	}
+	
+	private void obtenerIssues(RepositoryId repositorio) throws IOException
 	{
 		this.servicioIssues = new IssueService(this.cliente);
 		
@@ -97,10 +104,11 @@ public class FachadaGitHub implements FachadaLector
 	{
 		this.metricas = null;
 		
-		this.obtenerIssues(usuario, repositorio);
+		this.obtenerRepositorio(usuario, repositorio);
+		this.obtenerIssues(repositorio);
 		this.obtenerCommits(repositorio);		
 				
-		metricas = new MetricasGitHub(issues, commits);
+		metricas = new MetricasGitHub(this.repositorio, this.issues, this.commits);
 	}
 	
 	public FachadaMetricas getMetricas(String usuario, RepositoryId repositorio) throws IOException

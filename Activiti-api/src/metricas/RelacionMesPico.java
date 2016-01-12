@@ -10,30 +10,31 @@ import org.eclipse.egit.github.core.RepositoryCommit;
 import motorMetricas.Descripcion;
 import motorMetricas.Metrica;
 import motorMetricas.Valor;
+import motorMetricas.valores.Cadena;
 import motorMetricas.valores.Conjunto;
 import motorMetricas.valores.Double;
 
-public class CommitPorMes extends Metrica
+public class RelacionMesPico extends Metrica
 {
 	private Descripcion descripcion;
 	
 	private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 	
-	public CommitPorMes()
+	public RelacionMesPico()
 	{
-		descripcion = new Descripcion("Estadistica", "Numero de commits por mes", "Muestra el numero de commits realizados cada mes",
-				"¿Cuantos commits se han realizado cada mes?", "C commits por mes", "C >= 0 mejor valores altos",
-				"Absoluta", "C contador", "Repositorio GitHub de un proyecto");
+		descripcion = new Descripcion("Restricciones temporales", "RelacionMesPico", "Muestra el mes en que más cambios se han realizado.",
+				"¿Cuál es el mes en que más cambios se han realizado?", "M mes en el que mas cambios se han realizado", "",
+				"Nominal", "M mes", "Repositorio GitHub de un proyecto");
 	}
 	
 	public Valor run(List<?> lista) throws IOException
 	{
-		Conjunto valores = new Conjunto();
+		Conjunto commits = new Conjunto();
 		Calendar fecha = Calendar.getInstance();
 		
 		for(String key : meses)
 		{
-			valores.setValor(key, new Double(0));
+			commits.setValor(key, new Double(0));
 		}
 		
 		int i = 0;
@@ -41,12 +42,24 @@ public class CommitPorMes extends Metrica
 		{
 			fecha.setTime(((RepositoryCommit) x).getCommit().getAuthor().getDate());
 			i = fecha.get(Calendar.MONTH);
-			Double aux = new Double(valores.getValor(meses[i]).getValor());
+			Double aux = new Double(commits.getValor(meses[i]).getValor());
 			aux.setValor(aux.getValor() + 1);;
-			valores.setValor( meses[i], aux);
+			commits.setValor( meses[i], aux);
 		}
 		
-		return valores;
+		Double max = new Double(0);
+		Cadena valor = new Cadena();
+		
+		for(String key : commits.getValor().keySet())
+		{
+			if(max.getValor() == 0 || max.getValor() < commits.getValor(key).getValor())
+			{
+				valor.setValor(key);
+				max.setValor(commits.getValor(key).getValor());
+			}
+		}
+		
+		return valor;
 	}
 	
 	public Valor run(List<?> lista, List<?> lista2) throws IOException 

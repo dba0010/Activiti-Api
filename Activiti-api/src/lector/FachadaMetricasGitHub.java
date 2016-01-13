@@ -16,7 +16,7 @@ import motorMetricas.ResultadoMetrica;
 import motorMetricas.valores.*;
 import motorMetricas.valores.Double;
 
-public class MetricasGitHub implements FachadaMetricas
+public class FachadaMetricasGitHub implements FachadaMetricas
 {	
 	ResultadoMetrica metricas;
 	
@@ -41,7 +41,7 @@ public class MetricasGitHub implements FachadaMetricas
 	
 	private DecimalFormat formateador = new DecimalFormat("###0.00"); 
 	
-	public MetricasGitHub(Repository repositorio, List<Issue> issues, List<RepositoryCommit> commits) throws IOException
+	public FachadaMetricasGitHub(Repository repositorio, List<Issue> issues, List<RepositoryCommit> commits) throws IOException
 	{
 		metricas = new ResultadoMetrica();
 				

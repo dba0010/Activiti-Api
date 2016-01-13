@@ -120,12 +120,12 @@ public class Principal {
 	/**
 	 * Fabrica asbstracta.
 	 */
-	private FabricaLector fabricaLector;
+	private FabricaConexion fabricaConexion;
 	
 	/**
 	 * Fachada de rest.
 	 */
-	private FachadaLector lector;
+	private FachadaConexion conexion;
 		
 	/**
 	 * Launch the application.
@@ -237,7 +237,7 @@ public class Principal {
 				txtaInfo.setText("");
 				try
 				{
-					txtaInfo.setText(lector.getMetricas(txtUsuarioSearch.getText(), new RepositoryId(txtUsuarioSearch.getText(),cmbRepositorio.getSelectedItem().toString())).toString());
+					txtaInfo.setText(conexion.getMetricas(txtUsuarioSearch.getText(), new RepositoryId(txtUsuarioSearch.getText(),cmbRepositorio.getSelectedItem().toString())).toString());
 				}
 				catch(IOException e)
 				{
@@ -251,7 +251,7 @@ public class Principal {
 			{
 				try
 				{
-					cmbRepositorio.setModel(new DefaultComboBoxModel<String>(lector.getNombresRepositorio(txtUsuarioSearch.getText())));
+					cmbRepositorio.setModel(new DefaultComboBoxModel<String>(conexion.getNombresRepositorio(txtUsuarioSearch.getText())));
 					btnObtenerDatos.setEnabled(true);
 					txtaInfo.setText("");
 				}
@@ -271,8 +271,8 @@ public class Principal {
 			{
 				try
 				{
-					fabricaLector = FabricaLectorGitHub.getInstance();
-					lector = fabricaLector.crearFachadaLector(txtUsuarioCon.getText(), String.valueOf(txtpPassword.getPassword()));
+					fabricaConexion = FabricaConexionGitHub.getInstance();
+					conexion = fabricaConexion.crearFachadaConexion(txtUsuarioCon.getText(), String.valueOf(txtpPassword.getPassword()));
 					JOptionPane.showMessageDialog(frmFormulario,"Conectado satisfactoriamente como " + txtUsuarioCon.getText() + ".");
 				} 
 				catch (IOException e) 

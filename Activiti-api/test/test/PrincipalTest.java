@@ -15,7 +15,7 @@ public class PrincipalTest extends TestCase
 	{
 		try 
 		{
-			FabricaLector fabricaLector = FabricaLectorGitHub.getInstance();
+			FabricaConexion fabricaLector = FabricaConexionGitHub.getInstance();
 		
 			Scanner sc = new Scanner(System.in);
 			String usuario, password;
@@ -24,13 +24,13 @@ public class PrincipalTest extends TestCase
 			System.out.println("Introduzca contraseña: ");
 			password = sc.nextLine();
 			sc.close();
-			FachadaLector lector = fabricaLector.crearFachadaLector(usuario, password);
+			FachadaConexion lector = fabricaLector.crearFachadaConexion(usuario, password);
 			
 			
 			//Probamos el repositorio clopezno/libre-gift
 			lector.getNombresRepositorio("clopezno");			
 			
-			MetricasGitHub metricas = (MetricasGitHub) lector.getMetricas("clopezno", new RepositoryId("clopezno","libre-gift"));
+			FachadaMetricasGitHub metricas = (FachadaMetricasGitHub) lector.getMetricas("clopezno", new RepositoryId("clopezno","libre-gift"));
 						
 			DecimalFormat formateador = new DecimalFormat("###0.00"); 
 			
@@ -46,7 +46,7 @@ public class PrincipalTest extends TestCase
 			//probamos el repositorio jam0101/TFGII-Quiz-Grafos
 			lector.getNombresRepositorio("jam0101");			
 
-			metricas = (MetricasGitHub) lector.getMetricas("jam0101", new RepositoryId("jam0101","TFGII-Quiz-Grafos"));
+			metricas = (FachadaMetricasGitHub) lector.getMetricas("jam0101", new RepositoryId("jam0101","TFGII-Quiz-Grafos"));
 			
 			assertEquals(44, metricas.getNumIssues());
 			assertEquals(43, metricas.getNumIssuesCerradas());

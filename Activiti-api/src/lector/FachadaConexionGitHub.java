@@ -14,9 +14,9 @@ import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.service.*;
 
 
-public class FachadaGitHub implements FachadaLector
+public class FachadaConexionGitHub implements FachadaConexion
 {
-	private static FachadaGitHub instancia;
+	private static FachadaConexionGitHub instancia;
 	
 	private GitHubClient cliente;
 	
@@ -39,7 +39,7 @@ public class FachadaGitHub implements FachadaLector
 	FachadaMetricas metricas;
 		
 	/*Constructor privado*/
-	private FachadaGitHub(String usuario, String password) throws IOException
+	private FachadaConexionGitHub(String usuario, String password) throws IOException
 	{
 		cliente = new GitHubClient();
         cliente.setCredentials(usuario, password);
@@ -48,9 +48,9 @@ public class FachadaGitHub implements FachadaLector
 	}
 	
 	/*Creacion de instancia y return de la misma*/
-	public static FachadaGitHub getInstance(String usuario, String password) throws IOException
+	public static FachadaConexionGitHub getInstance(String usuario, String password) throws IOException
 	{
-		instancia = new FachadaGitHub(usuario, password);
+		instancia = new FachadaConexionGitHub(usuario, password);
 		
 		return instancia;
 	}
@@ -108,7 +108,7 @@ public class FachadaGitHub implements FachadaLector
 		this.obtenerIssues(repositorio);
 		this.obtenerCommits(repositorio);		
 				
-		metricas = new MetricasGitHub(this.repositorio, this.issues, this.commits);
+		metricas = new FachadaMetricasGitHub(this.repositorio, this.issues, this.commits);
 	}
 	
 	public FachadaMetricas getMetricas(String usuario, RepositoryId repositorio) throws IOException

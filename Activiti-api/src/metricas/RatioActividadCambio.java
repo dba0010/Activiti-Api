@@ -19,8 +19,8 @@ public class RatioActividadCambio extends Metrica
 	
 	public RatioActividadCambio()
 	{
-		descripcion = new Descripcion("Restricciones temporales", "RatioActividadCambio", "Muestra el número de cambios relativos al número de meses.",
-				"¿Cuál es el número medio de cambios por mes?", "RAC = (NTC = Número total de cambios) / NM (Número de meses)", "RAC > 0 Mejor valores intermedios",
+		descripcion = new Descripcion("Restricciones temporales", "RatioActividadCambio", "Muestra el nÃºmero de cambios relativos al nÃºmero de meses.",
+				"Â¿CuÃ¡l es el nÃºmero medio de cambios por mes?", "RAC = (NTC = NÃºmero total de cambios) / NM (NÃºmero de meses)", "RAC > 0 Mejor valores intermedios",
 				"Ratio", "NTC contador, NM contador", "Repositorio GitHub de un proyecto");
 	}
 	

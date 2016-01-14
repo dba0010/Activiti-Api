@@ -19,7 +19,7 @@ public class CambioPorAutor extends Metrica
 	public CambioPorAutor()
 	{
 		descripcion = new Descripcion("Equipo", "CambioPorAutor", "Muestra el numero de commits realizados por cada usuario participante en el proyecto",
-				"¿Cuantos commits ha realizado cada usuario?", "CA cambio por autor", "CA > 0 mejor valores altos",
+				"Â¿Cuantos commits ha realizado cada usuario?", "CA cambio por autor", "CA > 0 mejor valores altos",
 				"Absoluta", "CA contador", "Repositorio GitHub de un proyecto");
 	}
 	

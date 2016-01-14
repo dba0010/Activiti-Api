@@ -19,7 +19,7 @@ public class ContadorAutor extends Metrica
 	public ContadorAutor()
 	{
 		descripcion = new Descripcion("Equipo", "ContadorAutor", "Muestra el numero de autores trabajando, normalizado sobre el numero de cambios realizado",
-				"¿Cuál es la relación entre el número de desarrolladores y el número de cambios del proyecto?", "CA = NA (Numero autores) / NC (Numero cambios)", "CA > 0 mejor valores bajos",
+				"Â¿CuÃ¡l es la relaciÃ¡n entre el nÃºmero de desarrolladores y el nÃºmero de cambios del proyecto?", "CA = NA (Numero autores) / NC (Numero cambios)", "CA > 0 mejor valores bajos",
 				"Absoluta", "NA contador, NC contador", "Repositorio GitHub de un proyecto");
 	}
 	

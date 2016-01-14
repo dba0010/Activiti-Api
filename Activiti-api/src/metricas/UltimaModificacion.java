@@ -18,7 +18,7 @@ public class UltimaModificacion extends Metrica
 	public UltimaModificacion()
 	{
 		descripcion = new Descripcion("Restricciones temporales", "UltimaModificacion", "Fecha en la que se realizo el ultimo cambio en el repositorio",
-				"¿Cuando se realizo el ultimo cambio en el repositorio?", "UM fecha", "",
+				"Â¿Cuando se realizo el ultimo cambio en el repositorio?", "UM fecha", "",
 				"Absoluta", "UM fecha", "Repositorio GitHub de un proyecto");
 	}
 	

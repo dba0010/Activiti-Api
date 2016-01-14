@@ -19,7 +19,7 @@ public class IssuesPorAutor extends Metrica
 	public IssuesPorAutor()
 	{
 		descripcion = new Descripcion("Equipo", "IssuesPorAutor", "Muestra el numero de issues realizados por cada usuario participante en el proyecto",
-				"¿Cuantos issues ha realizado cada usuario?", "IPA issues por usuaurio", "IPA >= 0 mejor valores altos",
+				"Â¿Cuantos issues ha realizado cada usuario?", "IPA issues por usuaurio", "IPA >= 0 mejor valores altos",
 				"Absoluta", "IPA contador", "Repositorio GitHub de un proyecto");
 	}
 	

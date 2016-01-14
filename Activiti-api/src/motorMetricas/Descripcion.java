@@ -1,7 +1,7 @@
 package motorMetricas;
 
 /**
- * Implementa todos los campos que componen la descripción detallada de una métrica.
+ * Implementa todos los campos que componen la descripciÃ³n detallada de una mÃ©trica.
  * @author Irene Barbero Tera
  * @author Estrella Resa Camarero
  */

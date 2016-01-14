@@ -17,7 +17,7 @@ public class NumeroWatchers extends Metrica
 	public NumeroWatchers()
 	{
 		descripcion = new Descripcion("Proceso de orientacion", "NumeroWatchers", "Muestra el numero de usuarios subscritos al proyecto",
-				"¿Cuantos usuarios subscritos tiene el proyecto?", "NW watchers", "NW >= 0 mejor valores altos",
+				"Â¿Cuantos usuarios subscritos tiene el proyecto?", "NW watchers", "NW >= 0 mejor valores altos",
 				"Absoluta", "NW contador", "Repositorio GitHub de un proyecto");
 	}
 	

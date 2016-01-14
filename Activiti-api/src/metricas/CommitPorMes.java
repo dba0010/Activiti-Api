@@ -22,7 +22,7 @@ public class CommitPorMes extends Metrica
 	public CommitPorMes()
 	{
 		descripcion = new Descripcion("Restricciones temporales", "CommitPorMes", "Muestra el numero de commits realizados cada mes",
-				"¿Cuantos commits se han realizado cada mes?", "C commits por mes", "C >= 0 mejor valores altos",
+				"Â¿Cuantos commits se han realizado cada mes?", "C commits por mes", "C >= 0 mejor valores altos",
 				"Absoluta", "C contador", "Repositorio GitHub de un proyecto");
 	}
 	

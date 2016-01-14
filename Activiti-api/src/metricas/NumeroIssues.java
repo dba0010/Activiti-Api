@@ -17,7 +17,7 @@ public class NumeroIssues extends Metrica
 	public NumeroIssues()
 	{
 		descripcion = new Descripcion("Proceso de orientacion", "NumeroIssues", "Numero de issues total creadas en el repositorio",
-				"¿Cuantas issues se han creado en el repositorio?", "NI numero de issues", "NI >= 0 mejor valores bajos",
+				"Â¿Cuantas issues se han creado en el repositorio?", "NI numero de issues", "NI >= 0 mejor valores bajos",
 				"Absoluta", "NI contador", "Repositorio GitHub de un proyecto");
 	}
 	

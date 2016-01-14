@@ -36,7 +36,7 @@ public class FachadaConexionGitHub implements FachadaConexion
 	
 	private String[] nombresRepositorio;
 	
-	FachadaMetricas metricas;
+	private FachadaMetricas metricas;
 		
 	/*Constructor privado*/
 	private FachadaConexionGitHub(String usuario, String password) throws IOException

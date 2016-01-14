@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 
-import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryCommit;
 
 import motorMetricas.Descripcion;
@@ -15,8 +14,6 @@ import motorMetricas.valores.Double;
 
 public class CommitPorDia extends Metrica
 {
-	private Descripcion descripcion;
-	
 	private String[] dias = {"Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"};
 	
 	public CommitPorDia()
@@ -41,30 +38,9 @@ public class CommitPorDia extends Metrica
 		{
 			fecha.setTime(((RepositoryCommit) x).getCommit().getAuthor().getDate());
 			i = fecha.get(Calendar.DAY_OF_WEEK) - 1;
-			Double aux = new Double(valores.getValor(dias[i]).getValor());
-			aux.setValor(aux.getValor() + 1);;
-			valores.setValor( dias[i], aux);
+			valores.setValor( dias[i], new Double(valores.getValor(dias[i]).getValor() + 1));
 		}
 		
 		return valores;
-	}
-	
-	public Valor run(List<?> lista, List<?> lista2) throws IOException 
-	{
-		return null;
-	}
-	
-	public Valor run(Repository dato) throws IOException 
-	{
-		return null;
-	}
-	
-	public Descripcion getDescripcion()
-	{
-		return descripcion;
-	}
-
-	public void check() 
-	{		
 	}
 }

@@ -3,7 +3,6 @@ package metricas;
 import java.io.IOException;
 import java.util.List;
 
-import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryCommit;
 
 import motorMetricas.Descripcion;
@@ -13,8 +12,6 @@ import motorMetricas.valores.Double;
 
 public class MediaDiasCambio extends Metrica
 {
-	private Descripcion descripcion;
-	
 	public MediaDiasCambio()
 	{
 		descripcion = new Descripcion("Restricciones temporales", "MediaDiasCambio", "Dias de media para la realizacion de un cambio",
@@ -44,24 +41,5 @@ public class MediaDiasCambio extends Metrica
 		
 		Double valor = new Double(mediaDias);	
 		return valor;
-	}
-	
-	public Valor run(List<?> lista, List<?> lista2) throws IOException 
-	{
-		return null;
-	}
-	
-	public Valor run(Repository dato) throws IOException 
-	{
-		return null;
-	}
-	
-	public Descripcion getDescripcion()
-	{
-		return descripcion;
-	}
-
-	public void check() 
-	{		
 	}
 }

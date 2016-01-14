@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 
-import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryCommit;
 
 import motorMetricas.Descripcion;
@@ -15,8 +14,6 @@ import motorMetricas.valores.Fecha;
 
 public class RatioActividadCambio extends Metrica
 {
-	private Descripcion descripcion;
-	
 	public RatioActividadCambio()
 	{
 		descripcion = new Descripcion("Restricciones temporales", "RatioActividadCambio", "Muestra el número de cambios relativos al número de meses.",
@@ -56,24 +53,5 @@ public class RatioActividadCambio extends Metrica
 		if(diffMeses == 0){diffMeses = 1;}
 		
 		return new Double((double)lista.size()/diffMeses);
-	}
-	
-	public Valor run(List<?> lista, List<?> lista2) throws IOException 
-	{
-		return null;
-	}
-	
-	public Valor run(Repository dato) throws IOException 
-	{
-		return null;
-	}
-	
-	public Descripcion getDescripcion()
-	{
-		return descripcion;
-	}
-
-	public void check() 
-	{		
 	}
 }

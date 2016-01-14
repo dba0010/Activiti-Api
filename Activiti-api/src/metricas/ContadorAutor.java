@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryCommit;
 
 import motorMetricas.Descripcion;
@@ -14,8 +13,6 @@ import motorMetricas.valores.Double;
 
 public class ContadorAutor extends Metrica
 {
-	private Descripcion descripcion;
-		
 	public ContadorAutor()
 	{
 		descripcion = new Descripcion("Equipo", "ContadorAutor", "Muestra el numero de autores trabajando, normalizado sobre el numero de cambios realizado",
@@ -46,24 +43,5 @@ public class ContadorAutor extends Metrica
 		{
 			return new Double((double)autores.size()/lista.size());
 		}
-	}
-	
-	public Valor run(List<?> lista, List<?> lista2) throws IOException 
-	{
-		return null;
-	}
-	
-	public Valor run(Repository dato) throws IOException 
-	{
-		return null;
-	}
-	
-	public Descripcion getDescripcion()
-	{
-		return descripcion;
-	}
-
-	public void check() 
-	{		
 	}
 }

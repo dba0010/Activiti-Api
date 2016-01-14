@@ -3,7 +3,6 @@ package metricas;
 import java.io.IOException;
 import java.util.List;
 
-import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryCommit;
 
 import motorMetricas.Descripcion;
@@ -12,9 +11,7 @@ import motorMetricas.Valor;
 import motorMetricas.valores.Fecha;
 
 public class UltimaModificacion extends Metrica
-{
-	private Descripcion descripcion;
-	
+{	
 	public UltimaModificacion()
 	{
 		descripcion = new Descripcion("Restricciones temporales", "UltimaModificacion", "Fecha en la que se realizo el ultimo cambio en el repositorio",
@@ -35,24 +32,5 @@ public class UltimaModificacion extends Metrica
 		}
 		
 		return valor;
-	}
-	
-	public Valor run(List<?> lista, List<?> lista2) throws IOException 
-	{
-		return null;
-	}
-	
-	public Valor run(Repository dato) throws IOException 
-	{
-		return null;
-	}
-	
-	public Descripcion getDescripcion()
-	{
-		return descripcion;
-	}
-
-	public void check() 
-	{		
 	}
 }

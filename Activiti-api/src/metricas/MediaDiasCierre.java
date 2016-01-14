@@ -27,6 +27,8 @@ public class MediaDiasCierre extends Metrica
 		double mediaDias = 0;
 		int cerradas = 0;
 		
+		Double valor = new Double(0);
+		
 		for(Object x : lista)
 		{
 			if(((Issue) x).getState().equals("closed"))
@@ -38,7 +40,7 @@ public class MediaDiasCierre extends Metrica
 		if(cerradas == 0){cerradas = 1;}
 		mediaDias /= cerradas;
 		
-		Double valor = new Double(mediaDias);
+		valor.setValor(mediaDias);
 		return valor;
 	}
 	

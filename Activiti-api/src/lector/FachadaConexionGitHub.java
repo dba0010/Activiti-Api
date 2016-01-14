@@ -90,14 +90,6 @@ public class FachadaConexionGitHub implements FachadaConexion
 		this.servicioCommits = new CommitService(this.cliente);
 		
 		this.commits = this.servicioCommits.getCommits(repositorio);
-		
-		/*RepositoryCommit commitAux = null;
-		for(int i = 0; i < this.commits.size(); i++)
-		{
-			commitAux = this.commits.get(i);
-			this.commits.remove(i);
-			this.commits.add(i, this.servicioCommits.getCommit(repositorio, commitAux.getSha()));
-		}*/
 	}
 		
 	private void obtenerMetricas(String usuario, RepositoryId repositorio) throws IOException

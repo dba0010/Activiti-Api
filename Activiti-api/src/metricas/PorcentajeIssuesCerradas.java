@@ -25,6 +25,8 @@ public class PorcentajeIssuesCerradas extends Metrica
 	public Valor run(List<?> lista) throws IOException
 	{
 		int cerradas = 0;
+		Double valor = new Double(0);
+		
 		for(Object x : lista)
 		{
 			if(((Issue) x).getState().equals("closed"))
@@ -33,8 +35,11 @@ public class PorcentajeIssuesCerradas extends Metrica
 			}
 		}
 		
-		Double valor = new Double(cerradas * 100 / lista.size());
-		
+		if(lista.size() != 0)
+		{
+			valor.setValor(cerradas * 100 / lista.size());
+		}
+				
 		return valor;
 	}
 	

@@ -25,6 +25,7 @@ public class DiasPrimerUltimoCommit extends Metrica
 	public Valor run(List<?> lista) throws IOException
 	{
 		double dias = 0;
+		Double valor = new Double(0);
 		
 		for(int i = 0; i < lista.size(); i++)
 		{
@@ -34,7 +35,7 @@ public class DiasPrimerUltimoCommit extends Metrica
 			}			
 		}
 		
-		Double valor = new Double(dias / (1000 * 60 * 60 * 24));
+		valor.setValor(dias / (1000 * 60 * 60 * 24));
 			
 		return valor;
 	}

@@ -38,7 +38,14 @@ public class ContadorAutor extends Metrica
 			}
 		}
 		
-		return new Double((double)autores.size()/lista.size());
+		if(lista.size() == 0)
+		{
+			return new Double(0);
+		}
+		else
+		{
+			return new Double((double)autores.size()/lista.size());
+		}
 	}
 	
 	public Valor run(List<?> lista, List<?> lista2) throws IOException 

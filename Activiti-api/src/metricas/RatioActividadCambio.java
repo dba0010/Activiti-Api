@@ -53,6 +53,8 @@ public class RatioActividadCambio extends Metrica
 		
 		int diffMeses = mesesFin - mesesInicio;
 		
+		if(diffMeses == 0){diffMeses = 1;}
+		
 		return new Double((double)lista.size()/diffMeses);
 	}
 	

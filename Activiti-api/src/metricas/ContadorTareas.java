@@ -27,7 +27,14 @@ public class ContadorTareas extends Metrica
 	
 	public Valor run(List<?> lista, List<?> lista2) throws IOException
 	{
-		return new Double((double)lista.size()/lista2.size());
+		if(lista2.size() == 0)
+		{
+			return new Double(0);
+		}
+		else
+		{
+			return new Double((double)lista.size()/lista2.size());
+		}
 	}
 	
 	public Valor run(Repository dato) throws IOException 

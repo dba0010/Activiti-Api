@@ -237,7 +237,7 @@ public class Principal {
 				txtaInfo.setText("");
 				try
 				{
-					txtaInfo.setText(conexion.getMetricas(txtUsuarioSearch.getText(), new RepositoryId(txtUsuarioSearch.getText(),cmbRepositorio.getSelectedItem().toString())).toString());
+					txtaInfo.setText(conexion.getMetricas(txtUsuarioSearch.getText(), new RepositoryId(txtUsuarioSearch.getText(),cmbRepositorio.getSelectedItem().toString())));
 				}
 				catch(IOException e)
 				{

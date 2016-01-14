@@ -30,7 +30,7 @@ public abstract class Metrica implements IMetric
     {
 		check();
 		Valor valor = run(lista);
-		Medida measure=new Medida(valor);
+		Medida measure=new Medida(this, valor);
 		metricResult.addMeasure(measure);
 		return valor;
 	}
@@ -39,7 +39,7 @@ public abstract class Metrica implements IMetric
     {
 		check();
 		Valor valor = run(lista, lista2);
-		Medida measure=new Medida(valor);
+		Medida measure=new Medida(this, valor);
 		metricResult.addMeasure(measure);
 		return valor;
 	}
@@ -48,7 +48,7 @@ public abstract class Metrica implements IMetric
     {
 		check();
 		Valor valor = run(dato);
-		Medida measure=new Medida(valor);
+		Medida measure=new Medida(this, valor);
 		metricResult.addMeasure(measure);
 		return valor;
 	}

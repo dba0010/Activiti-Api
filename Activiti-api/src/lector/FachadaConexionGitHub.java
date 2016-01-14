@@ -103,11 +103,11 @@ public class FachadaConexionGitHub implements FachadaConexion
 		metricas = new FachadaMetricasGitHub(this.repositorio, this.issues, this.commits);
 	}
 	
-	public FachadaMetricas getMetricas(String usuario, RepositoryId repositorio) throws IOException
+	public String getMetricas(String usuario, RepositoryId repositorio) throws IOException
 	{
 		this.obtenerMetricas(usuario, repositorio);
 		
-		return this.metricas;
+		return this.metricas.getResultado().getMetricas();
 	}
 	
 	public String[] getNombresRepositorio(String usuario) throws IOException 

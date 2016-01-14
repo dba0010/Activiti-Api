@@ -1,26 +1,24 @@
 package motorMetricas;
 
-import java.util.Date;
-
 import motorMetricas.Valor;
 
-public class Medida {
-
-	private Date fecha;
-
+public class Medida 
+{
+	private Metrica metrica;
+	
 	private Valor value;
 	
-	public Medida(Valor value)
+	public Medida(Metrica metrica, Valor value)
 	{
-		fecha=new Date();
-		this.value=value;
+		this.metrica = metrica;
+		this.value = value;
 	}
 
-	public Date getFecha() 
+	public Metrica getMetrica()
 	{
-		return fecha;
+		return this.metrica;
 	}
-
+	
 	public Valor getValue() 
 	{
 		return value;

@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class FabricaConexionGitHub implements FabricaConexion
 {
-	FachadaConexionGitHub fachadaConexion; 
+	FachadaConexion fachadaConexion; 
 	
 	private static FabricaConexionGitHub instancia;
 	

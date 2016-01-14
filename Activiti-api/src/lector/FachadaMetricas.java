@@ -1,6 +1,8 @@
 package lector;
 
+import motorMetricas.ResultadoMetrica;
+
 public interface FachadaMetricas
 {
-	public String toString();
+	public ResultadoMetrica getResultado();
 }

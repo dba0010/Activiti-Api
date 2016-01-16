@@ -29,4 +29,9 @@ public class FabricaConexionGitHub implements FabricaConexion
 		return fachadaConexion;
 	}
 	
+	public FachadaConexion crearFachadaConexion()
+	{
+		fachadaConexion = FachadaConexionGitHub.getInstance(); 
+		return fachadaConexion;
+	}
 }

@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+encoding//src/gui/Principal.java=UTF-8
+encoding//src/lector/FabricaConexion.java=UTF-8
+encoding//src/lector/FabricaConexionGitHub.java=UTF-8
+encoding//src/lector/FachadaConexion.java=UTF-8
+encoding//src/lector/FachadaConexionGitHub.java=UTF-8
+encoding//src/lector/FachadaMetricas.java=UTF-8
+encoding//src/lector/FachadaMetricasGitHub.java=UTF-8
+encoding//src/metricas/CambioPorAutor.java=UTF-8
+encoding//src/metricas/CommitPorDia.java=UTF-8
+encoding/<project>=UTF-8

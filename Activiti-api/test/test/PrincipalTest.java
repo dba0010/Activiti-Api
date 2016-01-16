@@ -1,8 +1,6 @@
 package test;
 
 import java.io.IOException;
-import org.eclipse.egit.github.core.RepositoryId;
-
 import lector.*;
 import junit.framework.TestCase;
 
@@ -22,7 +20,8 @@ public class PrincipalTest extends TestCase
 			//Probamos el repositorio clopezno/libre-gift
 			lector.getNombresRepositorio("clopezno");			
 			
-			String resultadoMetricas = lector.getMetricas("clopezno", new RepositoryId("clopezno","libre-gift"));
+			lector.obtenerMetricas("clopezno", "libre-gift");
+			String resultadoMetricas = lector.getStringResultados();
 			String cadena = "Metricas:" +
 							"\n  NumeroIssues: 12" +
 							"\n  ContadorTareas: 4,00" +
@@ -71,7 +70,8 @@ public class PrincipalTest extends TestCase
 			//probamos el repositorio jam0101/TFGII-Quiz-Grafos
 			lector.getNombresRepositorio("jam0101");	
 			
-			resultadoMetricas = lector.getMetricas("jam0101", new RepositoryId("jam0101","TFGII-Quiz-Grafos"));
+			lector.obtenerMetricas("jam0101","TFGII-Quiz-Grafos");
+			resultadoMetricas = lector.getStringResultados();
 			cadena = "Metricas:" +
 					"\n  NumeroIssues: 44" +
 					"\n  ContadorTareas: 2,32" +

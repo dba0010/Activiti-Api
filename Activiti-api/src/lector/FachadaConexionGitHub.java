@@ -55,7 +55,22 @@ public class FachadaConexionGitHub implements FachadaConexion
 		return instancia;
 	}
 	
-	private void obtenerRepositorios(String usuario) throws IOException
+	/*Constructor privado*/
+	private FachadaConexionGitHub()
+	{
+		cliente = new GitHubClient();
+        this.servicioRepositorios = new RepositoryService(this.cliente);
+	}
+	
+	/*Creacion de instancia y return de la misma*/
+	public static FachadaConexionGitHub getInstance()
+	{
+		instancia = new FachadaConexionGitHub();
+		
+		return instancia;
+	}
+	
+	private void obtenerRepositorios(String usuario) throws IOException, IllegalArgumentException
 	{
 		this.servicioRepositorios = new RepositoryService(this.cliente);
 		
@@ -92,21 +107,20 @@ public class FachadaConexionGitHub implements FachadaConexion
 		this.commits = this.servicioCommits.getCommits(repositorio);
 	}
 		
-	private void obtenerMetricas(String usuario, RepositoryId repositorio) throws IOException
+	public void obtenerMetricas(String usuario, String repositorio) throws IOException
 	{
 		this.metricas = null;
+		RepositoryId idRepositorio = new RepositoryId(usuario,repositorio); 
 		
-		this.obtenerRepositorio(usuario, repositorio);
-		this.obtenerIssues(repositorio);
-		this.obtenerCommits(repositorio);		
+		this.obtenerRepositorio(usuario, idRepositorio);
+		this.obtenerIssues(idRepositorio);
+		this.obtenerCommits(idRepositorio);		
 				
 		metricas = new FachadaMetricasGitHub(this.repositorio, this.issues, this.commits);
 	}
 	
-	public String getMetricas(String usuario, RepositoryId repositorio) throws IOException
-	{
-		this.obtenerMetricas(usuario, repositorio);
-		
+	public String getStringResultados()
+	{		
 		return this.metricas.getResultado().getMetricas();
 	}
 	

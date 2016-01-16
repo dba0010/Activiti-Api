@@ -1,12 +1,12 @@
 package lector;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import org.eclipse.egit.github.core.RepositoryId;
 
 public interface FachadaConexion
 {	
-	public String getMetricas(String usuario, RepositoryId repositorio) throws MalformedURLException, IOException;
+	public void obtenerMetricas(String usuario,String repositorio) throws IOException;
+	
+	public String getStringResultados();
 		
 	public String[] getNombresRepositorio(String usuario) throws IOException;
 }

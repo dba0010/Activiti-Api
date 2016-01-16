@@ -1,0 +1,27 @@
+<toc version="1.0">
+    <tocitem text="Aplicación" target="Principal"/>
+    <tocitem text="Pantalla Inicio" target="Inicio"/>
+    <tocitem text="Pantalla Conexion" target="Conexion"/>
+    <tocitem text="Pantalla Repositorios" target="Repositorios"/>
+    <tocitem text="Pantalla Resultados" target="Resultados"/>
+    <tocitem text="Metricas" target="Metricas">
+    	<tocitem text="CambioPorAutor" target="CambioPorAutor"/>
+    	<tocitem text="CommitPorDia" target="CommitPorDia"/>
+    	<tocitem text="CommitPorMes" target="CommitPorMes"/>
+    	<tocitem text="ContadorAutor" target="ContadorAutor"/>
+    	<tocitem text="ContadorCambiosPico" target="ContadorCambiosPico"/>
+    	<tocitem text="ContadorTareas" target="ContadorTareas"/>
+    	<tocitem text="DiasPrimerUltimoCommit" target="DiasPrimerUltimoCommit"/>
+    	<tocitem text="IssuesPorAutor" target="IssuesPorAutor"/>
+    	<tocitem text="MediaDiasCambio" target="MediaDiasCambio"/>
+    	<tocitem text="MediaDiasCierre" target="MediaDiasCierre"/>
+    	<tocitem text="NumeroCambiosSinMensaje" target="NumeroCambiosSinMensaje"/>
+    	<tocitem text="NumeroIssues" target="NumeroIssues"/>
+    	<tocitem text="NumeroIssuesCerradas" target="NumeroIssuesCerradas"/>
+    	<tocitem text="NumeroWatchers" target="NumeroWatchers"/>
+    	<tocitem text="PorcentajeIssuesCerradas" target="PorcentajeIssuesCerradas"/>
+    	<tocitem text="RatioActividadCambio" target="RatioActividadCambio"/>
+    	<tocitem text="RelacionMesPico" target="RelacionMesPico"/>
+    	<tocitem text="UltimaModificacion" target="UltimaModificacion"/>
+    </tocitem>
+</toc>

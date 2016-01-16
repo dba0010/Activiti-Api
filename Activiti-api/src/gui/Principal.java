@@ -4,6 +4,8 @@ import lector.*;
 
 import java.awt.EventQueue;
 
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -15,6 +17,10 @@ import javax.swing.JPanel;
 
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.io.File;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Principal 
 {
@@ -54,6 +60,11 @@ public class Principal
 	private JButton btnGuardar;
 	
 	/**
+	 * Boton para mostrar la ventana de ayuda.
+	 */
+	private JButton btnAyuda;
+	
+	/**
 	 * Boton para volver al panel anterior.
 	 */
 	protected JButton btnAtras;
@@ -62,6 +73,16 @@ public class Principal
 	 * Panel anterior al que nos encontramos.
 	 */
 	protected JPanel anterior;
+	
+	/**
+	 * Elemento que guarda la informacion del archivo de ayuda.
+	 */
+	private HelpSet helpset;
+	
+	/**
+	 * Elemento encargado de mostrar la ayuda.
+	 */
+	private HelpBroker helpbroker;
 	
 	/**
 	 * Fabrica asbstracta.
@@ -89,7 +110,7 @@ public class Principal
 	public FachadaConexion getConexion() 
 	{
 		return conexion;
-	}
+	}	
 
 	/**
 	 * Launch the application.
@@ -119,6 +140,7 @@ public class Principal
 	public Principal() 
 	{
 		initialize();
+		cargarAyuda();
 	}
 	
 	/**
@@ -150,8 +172,10 @@ public class Principal
 		btnGuardar.setBounds(10, 466, 148, 23);
 		pnlBotones.add(btnGuardar);
 		
-		JPanel vacio = new JPanel();
-		pnlBotones.add(vacio);
+		btnAyuda = new JButton("Ayuda");
+		btnAyuda.setToolTipText("<html><p width=\"500\">Mostrar ventana de ayuda (F1)</p></html>");
+		btnAyuda.setBounds(10, 466, 148, 23);
+		pnlBotones.add(btnAyuda);
 		
 		btnAtras = new JButton("Atras");
 		btnAtras.setToolTipText("Retroceder al panel anterior.");
@@ -191,18 +215,39 @@ public class Principal
 				btnAtras.setVisible(true);
 				btnGuardar.setVisible(false);
 				frmFormulario.setTitle("Realizar conexion");
+				
+				//añadimos la ayuda a los botones
+				//Al pulsar sobre el boton del menu ayuda se muestra la ayuda
+				helpbroker.enableHelpOnButton(btnAyuda, "Conexion", helpset);
+				//Al presionar F1 sobre la ventana se muestra la ayuda
+				helpbroker.enableHelpKey(frmFormulario.getContentPane(), "Conexion", helpset);
+				
 				anterior = pnlInicio;
 				break;
 			case "gui.PanelRepositorio": 
 				btnAtras.setVisible(true);
 				btnGuardar.setVisible(false);
 				frmFormulario.setTitle("Seleccionar repositorio");
+				
+				//añadimos la ayuda a los botones
+				//Al pulsar sobre el boton del menu ayuda se muestra la ayuda
+				helpbroker.enableHelpOnButton(btnAyuda, "Repositorios", helpset);
+				//Al presionar F1 sobre la ventana se muestra la ayuda
+				helpbroker.enableHelpKey(frmFormulario.getContentPane(), "Repositorios", helpset);
+				
 				anterior = pnlConexion;
 				break;
 			case "gui.PanelResultados": 
 				btnAtras.setVisible(true);
 				btnGuardar.setVisible(true);
 				frmFormulario.setTitle("Resultados");
+
+				//añadimos la ayuda a los botones
+				//Al pulsar sobre el boton del menu ayuda se muestra la ayuda
+				helpbroker.enableHelpOnButton(btnAyuda, "Resultados", helpset);
+				//Al presionar F1 sobre la ventana se muestra la ayuda
+				helpbroker.enableHelpKey(frmFormulario.getContentPane(), "Resultados", helpset);
+				
 				anterior = pnlRepositorio;
 				break;
 		}
@@ -211,4 +256,29 @@ public class Principal
 		frmFormulario.getContentPane().add(panel);
 		frmFormulario.getContentPane().repaint();
 	}
+	
+
+	private void cargarAyuda() 
+	{
+		File archivo = new File("src/gui/ayuda/ayuda.hs");
+		URL hsURL;
+		try 
+		{
+			hsURL = archivo.toURI().toURL();
+			//Leemos el HelpSet de COnfiguracion
+			helpset = new HelpSet(null,hsURL);
+			helpbroker = helpset.createHelpBroker();
+			
+			//añadimos la ayuda a los botones
+			//Al pulsar sobre el boton del menu ayuda se muestra la ayuda
+			helpbroker.enableHelpOnButton(btnAyuda, "Principal", helpset);
+			//Al presionar F1 sobre la ventana se muestra la ayuda
+			helpbroker.enableHelpKey(frmFormulario.getContentPane(), "Principal", helpset);
+		}
+		catch (Exception ex) 
+		{
+			Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+
 }

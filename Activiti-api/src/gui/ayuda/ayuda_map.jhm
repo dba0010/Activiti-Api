@@ -1,0 +1,26 @@
+<map version="1.0">
+	<mapID target="Principal" url="html/principal.html"/>
+	<mapID target="Inicio" url="html/inicio.html"/>
+	<mapID target="Conexion" url="html/conexion.html"/>
+	<mapID target="Repositorios" url="html/repositorios.html"/>
+	<mapID target="Resultados" url="html/resultados.html"/>	
+	<mapID target="Metricas" url="html/metricas.html"/>
+	<mapID target="CambioPorAutor" url="html/cambioPorAutor.html"/>
+	<mapID target="CommitPorDia" url="html/commitPorDia.html"/>
+	<mapID target="CommitPorMes" url="html/commitPorMes.html"/>
+	<mapID target="ContadorAutor" url="html/contadorAutor.html"/>
+	<mapID target="ContadorCambiosPico" url="html/contadorCambiosPico.html"/>
+	<mapID target="ContadorTareas" url="html/contadorTareas.html"/>
+	<mapID target="DiasPrimerUltimoCommit" url="html/diasPrimerUltimoCommit.html"/>
+	<mapID target="IssuesPorAutor" url="html/issuesPorAutor.html"/>
+	<mapID target="MediaDiasCambio" url="html/mediaDiasCambio.html"/>
+	<mapID target="MediaDiasCierre" url="html/mediaDiasCierre.html"/>
+	<mapID target="NumeroCambiosSinMensaje" url="html/numeroCambiosSinMensaje.html"/>
+	<mapID target="NumeroIssues" url="html/numeroIssues.html"/>
+	<mapID target="NumeroIssuesCerradas" url="html/numeroIssuesCerradas.html"/>
+	<mapID target="NumeroWatchers" url="html/numeroWatchers.html"/>
+	<mapID target="PorcentajeIssuesCerradas" url="html/porcentajeIssuesCerradas.html"/>
+	<mapID target="RatioActividadCambio" url="html/ratioActividadCambio.html"/>
+	<mapID target="RelacionMesPico" url="html/relacionMesPico.html"/>
+	<mapID target="UltimaModificacion" url="html/ultimaModificacion.html"/>
+</map>

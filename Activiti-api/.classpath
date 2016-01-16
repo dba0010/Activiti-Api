@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="lib/org.eclipse.egit.github.core-2.1.5.jar"/>
 	<classpathentry kind="lib" path="lib/gson-2.3.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry kind="lib" path="lib/javahelp-2.0.05.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

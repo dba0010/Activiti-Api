@@ -1,0 +1,79 @@
+Conceptos teoricos
+
+Para la correcta realización de este proyecto debemos utilizar diversos conceptos teóricos de varios campos diversos como pueden ser los patrones de diseño, las metodologías ágiles etc.
+
+Patrones de diseño
+
+Lo primero que debemos de hacer antes de trabajar con los patrones de diseño es entender que es un patrón de diseño para poder utilizarlos de forma adecuada, lo primero es entender las definiciones que existen sobre los patrones de diseño una de ellas es "Los patrones de diseño son soluciones para problemas típicos y recurrentes que nos podemos encontrar a la hora de desarrollar una aplicación" otra definición es "Un patrón es una solución general, fruto de la experiencia, a un problema general que puede adaptarse a un problema concreto". Estas definiciones nos dicen que existen patrones ya definidos para problemas de carácter general que ya han sido mas que probados para solucionar problemas concretos por otros programadores, por lo que si entendemos que problema general se adapta a nuestro problema concreto podemos utilizar el patrón que soluciona ese problema general.
+El siguiente paso es definir cual es nuestro problema y compararlo con los problemas de carácter general que solucionan los distintos patrones para encontrar que patrón o patrones nos permiten solucionar nuestro problema concreto, para la realización del proyecto hemos encontrado los patrones de fabrica abstracta, fachada y singleton.
+- Patron fachada: El problema que pretendemos solucionar al emplear este patron es que realizando un estudio de las distintas plataformas existentes para el desarrollo de proyectos, cada una tiene una estructura propia a la hora de guardar la informacion sobre los commits o las issues. Tambien a la hora de realizar las peticiones cada plataforma como es logico tiene una direccion de red a la que hay que realizar la peticion, es decir para obtener las issues de Github debemos realizar la petición sobre la dirección "https://api.github.com/repos/{usuario}/{repositorio}/issues" en cambio para obtenerlas de Bitbucket debemos utilizar la direccion "https://bitbucket.org/api/1.0/repositories/{usuario}/{repositorio}/issues". Este patron fachada soluciona este problema ocultando al usuario las diferencia existentes haciendo que para el sea lo mismo pedir los datos de una plataforma o de otra.
+- Fabrica abstracta: El problema que se pretende solucionar con este patrón es la creacion de la fachada necesaria para realizar las operaciones de forma correcta sobre la plataforma seleccionada, cada fachada trabaja sobre una plataforma. El usuario decide sobre que plataforma desea trabajar y la fabrica se encarga de crearla para evitar que el usuario deba conocer aspectos del software que puede que escapen a su comprension.
+- Singleton: Este patrón soluciona los problemas que puedan surguir si se crean varias fabricas abstractas o fachasdas para trabajar con la plataforma que ha seleccionado el usuario.
+Todos estos patrones y problemas surgen en prevision de que se pretenda añadir implementaciones para trabajar con otras plataformas de desarrollo de software aparte de GitHub que es la unica que esta actualmente implementada.
+
+Métricas de medición
+
+Debemos entender que metricas pueden ser atractivas para el usuario a la hora de comprender y poder valorar el estado y la evolucion de un proyecto software y si es posible obtener la informacion necesaria de la plataforma para realizar esa metrica.
+A continuacion vamos a definir las metricas utilizadas agrupadas por categorias.
+De las metricas descritas en la tesis sPACE: Software Project Assessment in the Course of Evolution, desarrollada por Jacek Ratzinguer [2] vamos a seleccionar las que podemos realizar ya sea porque no podemos obtener el numero de lineas modificadas en cada cambio o commit ni el numero de bits modificado.
+
+Equipo
+Para todo proyecto de desarrollo software uno de los aspectos mas importantes es el trabajo en equipo. Estas metricas nos permiten conocer el numero de autores que estan trabajando en el proyecto y una estimacion de la actividad que estan realizando.
+
+- CambioPorAutor: Numero de cambios realizados por cada autor.
+- IssuesPorAutor: Numero de issues creadas por cada autor.
+- ContadorAutor: Número de autores trabajando, normalizado sobre el número total de cambios.
+
+Proceso de orientacion
+Esta categoria recoge las metricas que muestran el comportamiento del equipo de trabajo con respecto a las tareas o issues que se crean en el proyecto, cuanto tiempo tardan en cerrarlas, porcentaje de cierre etc. Con respecto a las metricas descritas en la tesis sPACE: Software Project Assessment in the Course of Evolution, desarrollada por Jacek Ratzinguer [2] hemos tenido que adaptar varias metricas ya que en la plataforma GitHub no se puede dar prioridad a las tareas que se declaran.
+
+- NumeroIssues: Numero de issues creadas en el proyecto.
+- NumeroIssuesCerradas: Numero de issues que se han cerrado.
+- MediaDiasCierre: Media de dias que se tarda en cerrar una issue.
+- PorcentajeIssuesCerradas: Porcentaje de issues que se han cerrado sobre las que se han creado.
+- NumeroCambiosSinMensaje: Numero de commits sin mensaje.
+- ContadorTareas: Número de tareas, normalizada sobre el número total de cambios.
+
+
+Restricciones temporales
+Las siguientes metricas son las realcionadas con las restricciones temporales. Para todo proyecto de desarrollo de software es interesante saber el tiempo que se aplica en las distintas acciones para poder prever como van a afectar futuros cambios o acciones en la evolucion del proyecto y su coste en el mismo.
+
+- MediaDiasCambio: Numero de dias de media entre cambios.
+- DiasPrimerUltimoCommit: Dias que han pasado desde que se realizo el primer commit hasta que se realiazo el ultimo.
+- UltimaModificacion: Fecha en la que se realizo el ultimo commit.
+- CommitPorDia: Numero de commits que se han realizado cada dia de la semana durante todo el proyecto.
+- CommitPorMes: Numero de commits que se han realizado cada mes durante todo el proyecto.
+- RelacionMesPico: Mes en que más cambios se han realizado.
+- ContadorCambiosPico: Número de cambios en el mes que mas se han realizado, normalizado sobre el número total de cambios.
+- RatioActividadCambio: Número de cambios relativos al número de meses.
+
+Importancia del proyecto
+Esta metrica nos da una idea de la importancia del proyecto al mostrar el numero de usuarios de la plataforma que han marcadao el proyecto como favorito.
+
+- NumeroWatchers: Número de usuarios que han marcado como favorito el proyecto.
+
+Metodologías ágiles
+
+Las metodologías ágiles heredan del manifiesto ágil publicado en febrero de 2001 [4] que aboga por dar mayor valor a los individuos y sus interacciones sobre los procesos y las herramientas, valora el software funcional por encima de la documentación, la colaboración con el cliente sobre la negociación contractual y la respuesta al cambio por encima de la planificación total.
+Sobre estos principios recogidos en el manifiesto ágil surgieron varias metodologías basadas en el desarrollo iterativo e incremental, en las cuales los requisitos y soluciones evolucionan en cada iteración mediante la colaboración de equipos auto organizados y multidisciplinarios. El desarrollo se realiza en cortos lapsos de tiempo, iteraciones, que permiten adaptar los requisitos a nuevos eventos externos o internos al desarrollo. Cada iteración tiene su planificación, análisis de requisitos, diseño, implementación, revisión y documentación. El objetivo de cada iteración es obtener un prototipo sin errores que cumpla los requisitos que se solicitaban en esa misma iteración. Al final de cada iteración el equipo vuelve a evaluar las prioridades del proyecto.
+
+Uno de los ejemplos de metodologías ágiles es Scrum:
+Scrum divide a los participantes en el desarrollo del producto por medio de varios roles cada uno con unas características, deberes y objetivos:
+Product Owner: Este rol representa la voz del cliente. Se asegura de que el equipo trabaje de forma adecuada desde la perspectiva del negocio.
+ScrumMaster: su principal objetivo es solucionar los problemas que impiden alcanzar el objetivo del sprint. Es el que se asegura de que el procreso scrum se utiliza como es debido.
+Equipo de desarrollo: es el responsable de entregar el producto. Formado por entre 3 y 9 personas con habilidades transversales necesarias para realizar el trabajo.
+Scrum también tiene un conjunto de reuniones utilizadas para dirigir el desarrollo:
+Daily scrum: se realiza cada día de un sprint, sirve para poner de manifiesta las tareas que esta realizando cada miembro del equipo y declarar si se ha encontrado algún problema para alcanzar los objetivos.
+
+
+GitHub
+
+GitHub es una plataforma de desarrollo colaborativo que permite alojar proyectos, proporcionando ademas de un facilitar un espacio de alojamiento en la red proporciona un sistema de control de versiones basado en git. GitHub provee a sus usuraios de una plataforma en la que alojar sus proyectos, con un control de versiones integrado, crea una pagina web para cada proyecto en la que se pueden ver varios graficos que proporcionana informacion referente a los cambios realizados en el proyecto, commits al mes, commits al dia, visitantes, lineas de codigo cambiadas al dia, forks o bifurcaciones del proyecto, etc.
+Una de las principales caracteristicas de GitHub es que tiene aspectos que coinciden con los de una red social, permite a desarrolladores de distintas partes del mundo ponerse en contacto y buscar proyectos en desarrollo que coincidan con sus ideas o buscar apoyos para desarrollar sus propias ideas. Como bien indica uno de sus eslogans "Build software better, together." esta es una de sus caracteristicas mas importantes y a la que quieren dar mayor importancia.
+
+Vocabulario de GitHub
+Para entender mejor algunas descripciones de las metricas con las que trabaja actualmente la aplicacion vamos a proceder a indicar a que se refeire cada palabra.
+Commit: Se refiere a los cambios realizados en el repositorio del proyecto como modificar lineas de codigo, eliminar o crear archivos.
+Issue: Son las tareas que crean los desarrolladores para indicar que acciones deben realizar como correguir bugs, añdir caracteristicas, etc.
+
+

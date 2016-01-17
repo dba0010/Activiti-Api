@@ -21,6 +21,6 @@ Introduccion: Breve descripcion del proposito del proyecto, del contenido de la 
 Objetivos del proyecto: Descripcion de los objetivos que se pretenden alcanzar con este proyecto. Distinguiendo entre los objetivos tecnicos para la realizacion del mismo como los objetivos de los requisitos del software del proyecto.
 Conceptos teoricos: Explicacion de los distintos apartados teoricos que se deben comprender para la satisfactoria realizacion del proyecto.
 Tecnicas y herramientas: Enumeracion de los aspectos mas destacados de las tecnicas metodologicas y las herramientas de desarrollo que se han utilizado en la realizacion del proyecto.
-Aspectos relevantes del desarrollo del proyecto: Explicacion de los aspectos mas destacados de las fases de analisis, diseño e implementacion.
+Aspectos relevantes del desarrollo del proyecto: Explicacion de los aspectos mas destacados de las fases de analisis, diseÃ±o e implementacion.
 Trabajos realizacionados: Descripcion de trabajos y proyectos realizados anteriormente en el campo en el que se realiza el proyecto.
 Conclusiones y lineas de trabjo futuras: Reumen de las conclusiones obtenidas en la realizacion del proyecto y posibles ideas para la mejora y continuidad del proyecto.

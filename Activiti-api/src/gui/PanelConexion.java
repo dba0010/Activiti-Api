@@ -74,7 +74,7 @@ public class PanelConexion extends JPanel
 		txtpContraseña.setColumns(10);
 		
 		btnConectar = new JButton("Conectar");
-		btnConectar.setToolTipText("<html><p width=\"500\">Conectar con el usuario seleccionado y pasar a seleccionar un repositorio.<br>Realizar la autentificaion aumenta la tasa de peticiones a 5000/hora.</p></html>");
+		btnConectar.setToolTipText("<html><p width=\"500\">Conectar con el usuario seleccionado y pasar a seleccionar un repositorio.<br>Realizar la autentificacion aumenta la tasa de peticiones a 5000/hora.</p></html>");
 		btnConectar.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 

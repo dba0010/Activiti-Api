@@ -51,25 +51,25 @@ public class PanelConexion extends JPanel
 	public PanelConexion(final Principal aplicacion) 
 	{
 		setLayout(null);
-		this.setBounds(0, 0, 409, 500);
+		this.setBounds(0, 0, 700, 500);
 		
 		lblUsuario = new JLabel("Usuario:");
-		lblUsuario.setBounds(134, 172, 148, 14);
+		lblUsuario.setBounds(276, 172, 148, 14);
 		add(lblUsuario);
 		
 		txtUsuario = new JTextField();
 		txtUsuario.setToolTipText("Usuario usuado para autentificarse en la plataforma.");
-		txtUsuario.setBounds(134, 197, 148, 20);
+		txtUsuario.setBounds(276, 197, 148, 20);
 		add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
 		lblContraseña = new JLabel("Contraseña:");
-		lblContraseña.setBounds(134, 228, 148, 14);
+		lblContraseña.setBounds(276, 228, 148, 14);
 		add(lblContraseña);
 		
 		txtpContraseña = new JPasswordField();
 		txtpContraseña.setToolTipText("Contraseña para autentificar el usuario en la plataforma.");
-		txtpContraseña.setBounds(134, 253, 148, 20);
+		txtpContraseña.setBounds(276, 253, 148, 20);
 		add(txtpContraseña);
 		txtpContraseña.setColumns(10);
 		
@@ -91,7 +91,7 @@ public class PanelConexion extends JPanel
 				}
 			}
 		});
-		btnConectar.setBounds(134, 284, 148, 23);
+		btnConectar.setBounds(276, 284, 148, 23);
 		add(btnConectar);
 		
 		btnDesconectado = new JButton("Modo desconectado");
@@ -110,7 +110,7 @@ public class PanelConexion extends JPanel
 				}
 			}
 		});
-		btnDesconectado.setBounds(134, 318, 148, 23);
+		btnDesconectado.setBounds(276, 318, 148, 23);
 		add(btnDesconectado);
 	}
 }

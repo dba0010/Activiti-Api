@@ -152,7 +152,7 @@ public class Principal
 		frmFormulario.setResizable(false);
 		frmFormulario.setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/imagenes/Ubu.png")));
 		frmFormulario.setTitle("Activiti-Api");
-		frmFormulario.setBounds(100, 100, 414, 526);
+		frmFormulario.setBounds(100, 100, 700, 530);
 		frmFormulario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmFormulario.getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -169,12 +169,10 @@ public class Principal
 			{
 			}
 		});
-		btnGuardar.setBounds(10, 466, 148, 23);
 		pnlBotones.add(btnGuardar);
 		
 		btnAyuda = new JButton("Ayuda");
 		btnAyuda.setToolTipText("<html><p width=\"500\">Mostrar ventana de ayuda (F1)</p></html>");
-		btnAyuda.setBounds(10, 466, 148, 23);
 		pnlBotones.add(btnAyuda);
 		
 		btnAtras = new JButton("Atras");

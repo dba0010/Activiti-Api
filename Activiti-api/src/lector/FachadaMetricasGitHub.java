@@ -2,13 +2,17 @@ package lector;
 
 import java.io.IOException;
 import java.util.List;
+
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryCommit;
 
+import charts.Graficos;
 import metricas.*;
 import motorMetricas.Metrica;
 import motorMetricas.ResultadoMetrica;
+import motorMetricas.valores.Conjunto;
+import motorMetricas.valores.Entero;
 
 public class FachadaMetricasGitHub implements FachadaMetricas
 {	
@@ -92,8 +96,46 @@ public class FachadaMetricasGitHub implements FachadaMetricas
 		this.numWatchers.calculate(repositorio, metricas);
 	}
 	
-	public ResultadoMetrica getResultado()
+	public Object[] getResultados()
 	{
-		return this.metricas;
+		Object[] resultados = new Object[6];
+		
+		//String con toda la lista de métricas y sus resultados.
+		resultados[0] = metricas.getMetricas();  
+		
+		int[] valoresPieChart = new int[2];
+		//Recorremos las metricas para recoger los valores que necesitaremos para los graficos.
+		for(int i = 0; i < metricas.size(); i++)
+		{
+			switch (metricas.getMedida(i).getMetrica().getDescripcion().getNombre())
+			{
+				case "NumeroIssues":
+					valoresPieChart[0] = ((Entero) metricas.getMedida(i).getValue()).getValor();
+					break;
+				case "NumeroIssuesCerradas":
+					valoresPieChart[0] -= ((Entero) metricas.getMedida(i).getValue()).getValor();
+					valoresPieChart[1] = ((Entero) metricas.getMedida(i).getValue()).getValor();
+					//Grafico de tarta para mostrar el porcentaje de cierre de issues.
+					resultados[1] = Graficos.crearGraficoTarta(new String[]{"Abiertas", "Cerradas"}, valoresPieChart, "Issues abiertas - cerradas");
+					break;
+				case "CommitPorMes":
+					resultados[2] = Graficos.crearGraficoBarra3d((Conjunto)metricas.getMedida(i).getValue(), "Commits por mes", "Meses", "Nº Commits");
+					break;
+				case "CommitPorDia":
+					resultados[3] = Graficos.crearGraficoBarra3d((Conjunto)metricas.getMedida(i).getValue(), "Commits por Día", "Días", "Nº Commits");
+					break;
+				case "CambioPorAutor":
+					resultados[4] = Graficos.crearGraficoBarra3d((Conjunto)metricas.getMedida(i).getValue(), "Cambio por autor", "Autor", "Nº Commits");
+					break;
+				case "IssuesPorAutor":
+					resultados[5] = Graficos.crearGraficoBarra3d((Conjunto)metricas.getMedida(i).getValue(), "Issues por autor", "Autor", "Nº Issues");
+					break;
+			}
+		}
+		
+		
+		
+		
+		return resultados;
 	}
 }

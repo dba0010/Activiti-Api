@@ -51,26 +51,26 @@ public class PanelRepositorio extends JPanel
 	public PanelRepositorio(final Principal aplicacion) 
 	{
 		setLayout(null);
-		this.setBounds(0, 0, 409, 500);
+		this.setBounds(0, 0, 700, 500);
 		
 		lblUsuario = new JLabel("Usuario:");
-		lblUsuario.setBounds(133, 165, 148, 14);
+		lblUsuario.setBounds(276, 172, 148, 14);
 		add(lblUsuario);
 		
 		txtUsuario = new JTextField();
 		txtUsuario.setToolTipText("Usuario del que buscar los repositorios de los que es propietario.");
 		
 		txtUsuario.setColumns(10);
-		txtUsuario.setBounds(133, 190, 148, 20);
+		txtUsuario.setBounds(276, 197, 148, 20);
 		add(txtUsuario);
 		
 		lblRepositorio = new JLabel("Repositorio:");
-		lblRepositorio.setBounds(133, 221, 148, 14);
+		lblRepositorio.setBounds(276, 228, 148, 14);
 		add(lblRepositorio);
 		
 		cmbRepositorios = new JComboBox<String>();
 		cmbRepositorios.setToolTipText("Repositorios de los que es propietario el usuario introducido.");
-		cmbRepositorios.setBounds(133, 246, 148, 20);
+		cmbRepositorios.setBounds(276, 253, 148, 20);
 		add(cmbRepositorios);
 		
 		txtUsuario.addFocusListener(new FocusAdapter() 
@@ -112,7 +112,7 @@ public class PanelRepositorio extends JPanel
 				}
 			}
 		});
-		btnMostrarMetricas.setBounds(133, 277, 148, 23);
+		btnMostrarMetricas.setBounds(276, 284, 148, 23);
 		add(btnMostrarMetricas);
 	}
 }

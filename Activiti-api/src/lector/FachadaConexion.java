@@ -6,7 +6,7 @@ public interface FachadaConexion
 {	
 	public void obtenerMetricas(String usuario,String repositorio) throws IOException;
 	
-	public String getStringResultados();
+	public Object[] getResultados();
 		
 	public String[] getNombresRepositorio(String usuario) throws IOException;
 }

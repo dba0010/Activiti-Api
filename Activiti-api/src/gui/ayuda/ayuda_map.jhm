@@ -1,10 +1,10 @@
 <map version="1.0">
+	<!-- Paginas web -->
 	<mapID target="Principal" url="html/principal.html"/>
 	<mapID target="Inicio" url="html/inicio.html"/>
 	<mapID target="Conexion" url="html/conexion.html"/>
 	<mapID target="Repositorios" url="html/repositorios.html"/>
-	<mapID target="Resultados" url="html/resultados.html"/>	
-	<mapID target="Metricas" url="html/metricas.html"/>
+	<mapID target="Resultados" url="html/resultados.html"/>
 	<mapID target="CambioPorAutor" url="html/cambioPorAutor.html"/>
 	<mapID target="CommitPorDia" url="html/commitPorDia.html"/>
 	<mapID target="CommitPorMes" url="html/commitPorMes.html"/>
@@ -23,4 +23,14 @@
 	<mapID target="RatioActividadCambio" url="html/ratioActividadCambio.html"/>
 	<mapID target="RelacionMesPico" url="html/relacionMesPico.html"/>
 	<mapID target="UltimaModificacion" url="html/ultimaModificacion.html"/>
+	
+	<!-- Iconos -->
+	<mapID target="AyudaIco"		 url="imagenes/help.png"/>
+	<mapID target="FolderClosed"	 url="imagenes/FolderClosed.gif"/>
+	<mapID target="FolderOpened"	 url="imagenes/FolderOpened.gif"/>
+	<mapID target="ItemIco"		 	 url="imagenes/book.png"/>
+	<mapID target="PrintIco"	 	 url="imagenes/printer.png"/>
+	<mapID target="PrintSetupIco"	 url="imagenes/printersetup.png"/>
+	<mapID target="BackwardIco"		 url="imagenes/Previous.gif"/>
+	<mapID target="ForwardIco"	 	 url="imagenes/Next.gif"/>
 </map>

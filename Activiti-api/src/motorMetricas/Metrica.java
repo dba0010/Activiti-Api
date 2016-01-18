@@ -15,25 +15,9 @@ import org.eclipse.egit.github.core.RepositoryCommit;
 
 public abstract class Metrica implements IMetric
 {
-	protected String author;
-
-	protected int year;
-
 	protected Descripcion descripcion;
 
-    protected String nombre;
-
-    public String getNombre() 
-    {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) 
-    {
-        this.nombre = nombre;
-    }
-
-    public Valor calculate(List<?> lista, ResultadoMetrica metricResult) throws IOException	
+	public Valor calculate(List<?> lista, ResultadoMetrica metricResult) throws IOException	
     {
 		check();
 		Valor valor = run(lista);
@@ -82,19 +66,7 @@ public abstract class Metrica implements IMetric
 	public Descripcion getDescripcion() 
 	{
 		return descripcion;
-	}
-
-	public String getAuthor() 
-	{
-		return author;
-	}
-
-	public int getYear() 
-	{
-		return year;
-	}
-
-	
+	}	
 	
 	protected Entero obternerIssuesCerradasGitHub(List<?> lista)
 	{
@@ -142,7 +114,7 @@ public abstract class Metrica implements IMetric
         }
         else
         {
-            return getNombre();
+            return "";
         }
     }
 }

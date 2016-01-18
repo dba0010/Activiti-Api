@@ -21,7 +21,7 @@ public class PrincipalTest extends TestCase
 			lector.getNombresRepositorio("clopezno");			
 			
 			lector.obtenerMetricas("clopezno", "libre-gift");
-			String resultadoMetricas = lector.getStringResultados();
+			String resultadoMetricas = lector.getResultados();
 			String cadena = "Metricas:" +
 							"\n  NumeroIssues: 12" +
 							"\n  ContadorTareas: 4,00" +
@@ -71,7 +71,7 @@ public class PrincipalTest extends TestCase
 			lector.getNombresRepositorio("jam0101");	
 			
 			lector.obtenerMetricas("jam0101","TFGII-Quiz-Grafos");
-			resultadoMetricas = lector.getStringResultados();
+			resultadoMetricas = lector.getResultados();
 			cadena = "Metricas:" +
 					"\n  NumeroIssues: 44" +
 					"\n  ContadorTareas: 2,32" +

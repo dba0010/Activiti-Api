@@ -1,10 +1,10 @@
-<toc version="1.0">
+<toc version="1.0" categoryclosedimage="FolderClosed" categoryopenimage="FolderOpened"  topicimage="ItemIco">
     <tocitem text="Aplicación" target="Principal"/>
     <tocitem text="Pantalla Inicio" target="Inicio"/>
     <tocitem text="Pantalla Conexion" target="Conexion"/>
     <tocitem text="Pantalla Repositorios" target="Repositorios"/>
     <tocitem text="Pantalla Resultados" target="Resultados"/>
-    <tocitem text="Metricas" target="Metricas">
+    <tocitem text="Metricas">
     	<tocitem text="CambioPorAutor" target="CambioPorAutor"/>
     	<tocitem text="CommitPorDia" target="CommitPorDia"/>
     	<tocitem text="CommitPorMes" target="CommitPorMes"/>

@@ -21,7 +21,7 @@ public class PrincipalTest extends TestCase
 			lector.getNombresRepositorio("clopezno");			
 			
 			lector.obtenerMetricas("clopezno", "libre-gift");
-			String resultadoMetricas = lector.getResultados();
+			Object[] resultadoMetricas = lector.getResultados();
 			String cadena = "Metricas:" +
 							"\n  NumeroIssues: 12" +
 							"\n  ContadorTareas: 4,00" +
@@ -65,7 +65,7 @@ public class PrincipalTest extends TestCase
 							"\n\tGoogleCodeExporter: 12.0" +
 							"\n  NumeroWatchers: 0";
 			
-			assertEquals(cadena, resultadoMetricas);
+			assertEquals(cadena, resultadoMetricas[0]);
 			
 			//probamos el repositorio jam0101/TFGII-Quiz-Grafos
 			lector.getNombresRepositorio("jam0101");	
@@ -115,7 +115,7 @@ public class PrincipalTest extends TestCase
 					"\n\tjam0101: 27.0" +
 					"\n  NumeroWatchers: 1";
 			
-			assertEquals(cadena, resultadoMetricas);
+			assertEquals(cadena, resultadoMetricas[0]);
 		}
 		catch (IOException e) 
 		{

@@ -16,7 +16,6 @@ public class Entero implements Valor
 		this.valor = valor;
 	}
 
-
 	public int getValor() 
 	{
 		return valor;
@@ -25,5 +24,10 @@ public class Entero implements Valor
     public void setValor(int valor) 
     {
        this.valor = valor;
+    }
+    
+    public String toString()
+    {
+    	return Integer.toString(valor);
     }
 }

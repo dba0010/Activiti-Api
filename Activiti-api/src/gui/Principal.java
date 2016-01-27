@@ -7,20 +7,31 @@ import java.awt.EventQueue;
 import javax.help.HelpBroker;
 import javax.help.HelpSet;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
+import java.awt.Cursor;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JMenuBar;
 
 public class Principal 
 {
@@ -53,6 +64,11 @@ public class Principal
 	 * Panel donde se muestran los resultados de las metricas.
 	 */
 	protected PanelResultados pnlResultados;
+	
+	/**
+	 * Panel donde seleccionar que dos ficheros de repositorio vamos a comparar.
+	 */
+	protected PanelComparacion pnlComparacion;
 
 	/**
 	 * Boton para guardar los resultados en un archivo.
@@ -93,6 +109,26 @@ public class Principal
 	 * Fachada de rest.
 	 */
 	protected FachadaConexion conexion;
+	
+	/**
+	 * Barra de menu para las distintas opciones que podemos realizar.
+	 */
+	private JMenuBar menuBar;
+	
+	/**
+	 * Menu para buscar un repositorio en una plataforma.
+	 */
+	private JMenuItem mnBuscarRepositorio;
+	
+	/**
+	 * Menu para seleccionar un fichero de resultados guardado anteriormente.
+	 */
+	private JMenuItem mnCargarArchivo;
+	
+	/**
+	 * Menu para comparar dos repositorios desde dos ficheros.
+	 */
+	private JMenuItem mnCompararArchivos;
 	
 	/**
 	 * Metodo get para la Fabrica encargada de crear la conexion.
@@ -160,13 +196,13 @@ public class Principal
 		pnlBotones.setLayout(new GridLayout(0, 3, 0, 0));
 		
 		btnGuardar = new JButton("Guardar Resultados");
-		btnGuardar.setEnabled(false);
 		btnGuardar.setToolTipText("<html><p width=\"500\">Guardar los resultados en un archivo.<br><br>(En desarrollo)</p></html>");
 		btnGuardar.setVisible(false);
 		btnGuardar.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				guardarResultados();
 			}
 		});
 		pnlBotones.add(btnGuardar);
@@ -192,6 +228,40 @@ public class Principal
 		pnlInicio = new PanelInicio(this);
 		frmFormulario.getContentPane().add(pnlInicio);
 		
+		menuBar = new JMenuBar();
+		frmFormulario.setJMenuBar(menuBar);
+				
+		mnBuscarRepositorio = new JMenuItem("Buscar Repositorio");
+		mnBuscarRepositorio.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				cargarPanel(pnlInicio);
+			}
+		});
+		menuBar.add(mnBuscarRepositorio);
+		
+		mnCargarArchivo = new JMenuItem("Cargar Informe");
+		mnCargarArchivo.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				cargarArchivo();
+			}
+		});
+		menuBar.add(mnCargarArchivo);
+				
+		mnCompararArchivos = new JMenuItem("Comparar Informes");
+		mnCompararArchivos.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				cargarPanel(pnlComparacion);
+			}
+		});
+		menuBar.add(mnCompararArchivos);
+		
+		pnlComparacion = new PanelComparacion(this);
 		pnlConexion = new PanelConexion(this);
 		pnlRepositorio = new PanelRepositorio(this);
 	}	
@@ -238,7 +308,7 @@ public class Principal
 			case "gui.PanelResultados": 
 				btnAtras.setVisible(true);
 				btnGuardar.setVisible(true);
-				frmFormulario.setTitle("Resultados");
+				frmFormulario.setTitle("Resultados - " + conexion.getNombreRepositorio());
 
 				//añadimos la ayuda a los botones
 				//Al pulsar sobre el boton del menu ayuda se muestra la ayuda
@@ -247,6 +317,32 @@ public class Principal
 				helpbroker.enableHelpKey(frmFormulario.getContentPane(), "Resultados", helpset);
 				
 				anterior = pnlRepositorio;
+				break;
+			case "gui.PanelComparacion":
+				btnAtras.setVisible(false);
+				btnGuardar.setVisible(false);
+				frmFormulario.setTitle("Comparar informes");
+				
+				/*//añadimos la ayuda a los botones
+				//Al pulsar sobre el boton del menu ayuda se muestra la ayuda
+				helpbroker.enableHelpOnButton(btnAyuda, "Comparacion", helpset);
+				//Al presionar F1 sobre la ventana se muestra la ayuda
+				helpbroker.enableHelpKey(frmFormulario.getContentPane(), "Comparacion", helpset);*/
+				
+				anterior = pnlInicio;
+				break;
+			case "PanelResultadosComparacion":
+				btnAtras.setVisible(true);
+				btnGuardar.setVisible(false);
+				frmFormulario.setTitle("Resultados comparacion");
+				
+				/*//añadimos la ayuda a los botones
+				//Al pulsar sobre el boton del menu ayuda se muestra la ayuda
+				helpbroker.enableHelpOnButton(btnAyuda, "ResultadosComparacion", helpset);
+				//Al presionar F1 sobre la ventana se muestra la ayuda
+				helpbroker.enableHelpKey(frmFormulario.getContentPane(), "ResultadosComparacion", helpset);*/
+				
+				anterior = pnlComparacion;
 				break;
 		}
 		
@@ -278,5 +374,90 @@ public class Principal
 			Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-
+	
+	
+	public void cargarArchivo()
+	{
+		try
+		{
+			JFileChooser file = new JFileChooser();
+			FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.TXT", "txt");
+			file.setFileFilter(filtro);
+			int abrir = file.showDialog(frmFormulario, "Cargar");
+			File abre = null;
+			if (abrir == JFileChooser.APPROVE_OPTION)
+			{
+				abre = file.getSelectedFile();
+			}			
+			if(abre!=null)
+			{     
+				FileReader lee =new FileReader(abre);
+				BufferedReader archivo = new BufferedReader(lee);
+				String linea = "";
+				if( (linea = archivo.readLine()) != null)
+				{
+					if(linea.equals("GitHub"))
+					{
+						this.fabricaConexion = FabricaConexionGitHub.getInstance();
+						this.conexion = fabricaConexion.crearFachadaConexion();
+						conexion.leerArchivo(archivo);
+					}
+				}
+				archivo.close();
+				lee.close();
+				
+				pnlResultados = new PanelResultados(this);
+				cargarPanel(pnlResultados);
+				btnAtras.setVisible(false);
+				btnGuardar.setVisible(false);
+				frmFormulario.getContentPane().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}    
+		}
+		catch(IOException ex)
+		{
+			JOptionPane.showMessageDialog(this.frmFormulario, ex+ "" + "\nNo se ha encontrado el informe", "ADVERTENCIA!!!", JOptionPane.WARNING_MESSAGE);
+		}
+	}
+	
+	
+	public void guardarResultados()
+	{
+		try
+		{
+			JFileChooser fileChooser = new JFileChooser();
+			FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.TXT", "txt");
+			fileChooser.setFileFilter(filtro);
+			int abrir = fileChooser.showDialog(frmFormulario, "Guardar");
+			File guarda = null;
+			if (abrir == JFileChooser.APPROVE_OPTION)
+			{
+				guarda = fileChooser.getSelectedFile();
+			}
+			if(guarda !=null)
+			{
+				if(guarda.exists())
+				{
+					int respuesta = JOptionPane.showConfirmDialog(frmFormulario, "¿Deseas Sobreescribir el informe?", "Confirmar guardado", JOptionPane.YES_NO_OPTION);
+					
+					if(respuesta == JOptionPane.YES_OPTION)
+					{
+						FileWriter save = new FileWriter(guarda);
+						save.write(conexion.generarArchivo());
+						save.close();
+						
+						if(!(guarda.getAbsolutePath().endsWith(".txt")))
+						{
+		                    File temp = new File(guarda.getAbsolutePath()+".txt");
+		                    guarda.renameTo(temp);
+		                }
+						JOptionPane.showMessageDialog(this.frmFormulario, "El informe se ha guardado Exitosamente", "Información",JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+			}
+		}
+		catch(IOException ex)
+		{
+			JOptionPane.showMessageDialog(this.frmFormulario, "Error al guardar el informe", "Advertencia",JOptionPane.WARNING_MESSAGE);
+		}
+	}
 }

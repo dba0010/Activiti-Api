@@ -9,7 +9,7 @@ import motorMetricas.Descripcion;
 import motorMetricas.Metrica;
 import motorMetricas.Valor;
 import motorMetricas.valores.Conjunto;
-import motorMetricas.valores.Double;
+import motorMetricas.valores.Entero;
 
 public class CambioPorAutor extends Metrica
 {
@@ -27,11 +27,11 @@ public class CambioPorAutor extends Metrica
 		for(Object x : lista)
 		{
 			String autor = ((RepositoryCommit) x).getCommit().getAuthor().getName();
-			Double aux = new Double(0);
+			Entero aux = new Entero(0);
 			
 			if(valores.getValor().containsKey(autor))
 			{
-				aux = new Double(valores.getValor(autor).getValor());
+				aux = new Entero(valores.getValor(autor).getValor());
 			}
 			aux.setValor(aux.getValor() + 1);
 			valores.setValor( autor, aux);

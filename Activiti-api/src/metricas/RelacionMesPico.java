@@ -8,7 +8,7 @@ import motorMetricas.Metrica;
 import motorMetricas.Valor;
 import motorMetricas.valores.Cadena;
 import motorMetricas.valores.Conjunto;
-import motorMetricas.valores.Double;
+import motorMetricas.valores.Largo;
 
 public class RelacionMesPico extends Metrica
 {
@@ -23,7 +23,7 @@ public class RelacionMesPico extends Metrica
 	{
 		Conjunto commits = obtenerCambiosXMesGitHub(lista);
 		
-		Double max = new Double(0);
+		Largo max = new Largo(0);
 		Cadena valor = new Cadena();
 		
 		for(String key : commits.getValor().keySet())

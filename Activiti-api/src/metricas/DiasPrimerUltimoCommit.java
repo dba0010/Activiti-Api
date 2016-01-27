@@ -8,7 +8,7 @@ import org.eclipse.egit.github.core.RepositoryCommit;
 import motorMetricas.Descripcion;
 import motorMetricas.Metrica;
 import motorMetricas.Valor;
-import motorMetricas.valores.Double;
+import motorMetricas.valores.Largo;
 
 public class DiasPrimerUltimoCommit extends Metrica
 {
@@ -22,7 +22,7 @@ public class DiasPrimerUltimoCommit extends Metrica
 	public Valor run(List<?> lista) throws IOException
 	{
 		double dias = 0;
-		Double valor = new Double(0);
+		Largo valor = new Largo(0);
 		
 		for(int i = 0; i < lista.size(); i++)
 		{

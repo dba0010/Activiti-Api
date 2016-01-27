@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import motorMetricas.valores.Conjunto;
-import motorMetricas.valores.Double;
 import motorMetricas.valores.Entero;
 
 import org.eclipse.egit.github.core.Issue;
@@ -92,7 +91,7 @@ public abstract class Metrica implements IMetric
 		
 		for(String key : meses)
 		{
-			valores.setValor(key, new Double(0));
+			valores.setValor(key, new Entero(0));
 		}
 		
 		int i = 0;
@@ -100,7 +99,7 @@ public abstract class Metrica implements IMetric
 		{
 			fecha.setTime(((RepositoryCommit) x).getCommit().getAuthor().getDate());
 			i = fecha.get(Calendar.MONTH);
-			valores.setValor( meses[i], new Double(valores.getValor(meses[i]).getValor() + 1));
+			valores.setValor( meses[i], new Entero(valores.getValor(meses[i]).getValor() + 1));
 		}
 		
 		return valores;

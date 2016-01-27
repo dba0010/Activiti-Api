@@ -33,10 +33,10 @@ public class PanelResultados extends JPanel
 	public PanelResultados(final Principal aplicacion) 
 	{
 		setLayout(null);
-		this.setBounds(0, 0, 700, 500);
+		this.setBounds(0, 0, 700, 470);
 		
 		tabpnlPrincipal = new JTabbedPane(JTabbedPane.TOP);
-		tabpnlPrincipal.setBounds(0, 0, 700, 480);
+		tabpnlPrincipal.setBounds(0, 0, 695, 450);
 		add(tabpnlPrincipal);
 		
 		scrpnlAuxiliar = new JScrollPane();

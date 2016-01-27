@@ -8,7 +8,7 @@ import org.eclipse.egit.github.core.Issue;
 import motorMetricas.Descripcion;
 import motorMetricas.Metrica;
 import motorMetricas.Valor;
-import motorMetricas.valores.Double;
+import motorMetricas.valores.Largo;
 
 public class MediaDiasCierre extends Metrica
 {
@@ -34,6 +34,6 @@ public class MediaDiasCierre extends Metrica
 		if(cerradas == 0){cerradas = 1;}
 		mediaDias /= cerradas;
 		
-		return new Double(mediaDias);
+		return new Largo(mediaDias);
 	}
 }

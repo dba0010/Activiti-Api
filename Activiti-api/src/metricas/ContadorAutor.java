@@ -9,7 +9,7 @@ import org.eclipse.egit.github.core.RepositoryCommit;
 import motorMetricas.Descripcion;
 import motorMetricas.Metrica;
 import motorMetricas.Valor;
-import motorMetricas.valores.Double;
+import motorMetricas.valores.Largo;
 
 public class ContadorAutor extends Metrica
 {
@@ -37,11 +37,11 @@ public class ContadorAutor extends Metrica
 		
 		if(lista.size() == 0)
 		{
-			return new Double(0);
+			return new Largo(0);
 		}
 		else
 		{
-			return new Double((double)autores.size()/lista.size());
+			return new Largo((double)autores.size()/lista.size());
 		}
 	}
 }

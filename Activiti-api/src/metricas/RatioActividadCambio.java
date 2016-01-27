@@ -9,7 +9,7 @@ import org.eclipse.egit.github.core.RepositoryCommit;
 import motorMetricas.Descripcion;
 import motorMetricas.Metrica;
 import motorMetricas.Valor;
-import motorMetricas.valores.Double;
+import motorMetricas.valores.Largo;
 import motorMetricas.valores.Fecha;
 
 public class RatioActividadCambio extends Metrica
@@ -52,6 +52,6 @@ public class RatioActividadCambio extends Metrica
 		
 		if(diffMeses == 0){diffMeses = 1;}
 		
-		return new Double((double)lista.size()/diffMeses);
+		return new Largo((double)lista.size()/diffMeses);
 	}
 }

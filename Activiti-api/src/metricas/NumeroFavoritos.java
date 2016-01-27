@@ -8,12 +8,12 @@ import motorMetricas.Metrica;
 import motorMetricas.Valor;
 import motorMetricas.valores.Entero;
 
-public class NumeroWatchers extends Metrica
+public class NumeroFavoritos extends Metrica
 {
-	public NumeroWatchers()
+	public NumeroFavoritos()
 	{
-		descripcion = new Descripcion("Proceso de orientacion", "NumeroWatchers", "Muestra el numero de usuarios subscritos al proyecto",
-				"¿Cuantos usuarios subscritos tiene el proyecto?", "NW watchers", "NW >= 0 mejor valores altos",
+		descripcion = new Descripcion("Proceso de orientacion", "NumeroFavoritos", "Muestra el numero de usuarios que han marcado al proyecto como favorito.",
+				"¿Cuantos usuarios han declarado como favorito el proyecto?", "NF Faoritos", "NW >= 0 mejor valores altos",
 				"Absoluta", "NW contador", "Repositorio GitHub de un proyecto");
 	}
 	

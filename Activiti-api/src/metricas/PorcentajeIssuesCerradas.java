@@ -6,7 +6,7 @@ import java.util.List;
 import motorMetricas.Descripcion;
 import motorMetricas.Metrica;
 import motorMetricas.Valor;
-import motorMetricas.valores.Double;
+import motorMetricas.valores.Largo;
 
 public class PorcentajeIssuesCerradas extends Metrica
 {
@@ -23,11 +23,11 @@ public class PorcentajeIssuesCerradas extends Metrica
 		
 		if(lista.size() == 0)
 		{
-			return new Double(0);
+			return new Largo(0);
 		}
 		else
 		{
-			return new Double(cerradas * 100 / lista.size());
+			return new Largo(cerradas * 100 / lista.size());
 		}
 	}
 }

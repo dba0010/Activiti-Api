@@ -23,7 +23,7 @@ public class PanelInicio extends JPanel
 	public PanelInicio(final Principal aplicacion) 
 	{
 		this.setLayout(null);
-		this.setBounds(0, 0, 700, 500);
+		this.setBounds(0, 0, 700, 470);
 		
 		btnGithub = new JButton("GitHub");
 		btnGithub.setToolTipText("Comenzar a trabajar con la plataforma GitHub");
@@ -36,7 +36,7 @@ public class PanelInicio extends JPanel
 				aplicacion.cargarPanel(aplicacion.pnlConexion);
 			}
 		});
-		btnGithub.setBounds(255, 137, 190, 84);
+		btnGithub.setBounds(255, 111, 190, 84);
 		this.add(btnGithub);
 	}
 }

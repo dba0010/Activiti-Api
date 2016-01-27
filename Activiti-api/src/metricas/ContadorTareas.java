@@ -6,7 +6,7 @@ import java.util.List;
 import motorMetricas.Descripcion;
 import motorMetricas.Metrica;
 import motorMetricas.Valor;
-import motorMetricas.valores.Double;
+import motorMetricas.valores.Largo;
 
 public class ContadorTareas extends Metrica
 {
@@ -21,11 +21,11 @@ public class ContadorTareas extends Metrica
 	{
 		if(lista2.size() == 0)
 		{
-			return new Double(0);
+			return new Largo(0);
 		}
 		else
 		{
-			return new Double((double)lista.size()/lista2.size());
+			return new Largo((double)lista.size()/lista2.size());
 		}
 	}
 }

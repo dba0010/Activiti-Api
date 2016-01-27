@@ -1,7 +1,6 @@
 package motorMetricas.valores;
 
 import java.util.Date;
-
 import motorMetricas.Valor;
 
 public class Fecha implements Valor
@@ -25,6 +24,11 @@ public class Fecha implements Valor
 
     public void setValor(Date valor) 
     {
-       this.valor = valor;
+    	this.valor = valor;
+    }
+    
+    public String toString()
+    {
+		return valor.toString();
     }
 }

@@ -10,7 +10,7 @@ import motorMetricas.Descripcion;
 import motorMetricas.Metrica;
 import motorMetricas.Valor;
 import motorMetricas.valores.Conjunto;
-import motorMetricas.valores.Double;
+import motorMetricas.valores.Entero;
 
 public class CommitPorDia extends Metrica
 {
@@ -30,7 +30,7 @@ public class CommitPorDia extends Metrica
 		
 		for(String key : dias)
 		{
-			valores.setValor(key, new Double(0));
+			valores.setValor(key, new Entero(0));
 		}
 		
 		int i = 0;
@@ -38,7 +38,7 @@ public class CommitPorDia extends Metrica
 		{
 			fecha.setTime(((RepositoryCommit) x).getCommit().getAuthor().getDate());
 			i = fecha.get(Calendar.DAY_OF_WEEK) - 1;
-			valores.setValor( dias[i], new Double(valores.getValor(dias[i]).getValor() + 1));
+			valores.setValor( dias[i], new Entero(valores.getValor(dias[i]).getValor() + 1));
 		}
 		
 		return valores;

@@ -2,16 +2,16 @@ package motorMetricas.valores;
 
 import motorMetricas.Valor;
 
-public class Double implements Valor
+public class Largo implements Valor
 {
 	private double valor;
 
-    public Double() 
+    public Largo() 
     {
         valor = 0;
     }
 
-	public Double(double valor)
+	public Largo(double valor)
 	{
 		this.valor = valor;
 	}
@@ -24,5 +24,10 @@ public class Double implements Valor
     public void setValor(double valor) 
     {
        this.valor = valor;
+    }
+    
+    public String toString()
+    {
+    	return String.valueOf(valor);
     }
 }

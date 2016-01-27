@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.egit.github.core.Issue;
+
 import motorMetricas.Descripcion;
 import motorMetricas.Metrica;
 import motorMetricas.Valor;
 import motorMetricas.valores.Conjunto;
-import motorMetricas.valores.Double;
+import motorMetricas.valores.Entero;
 
 public class IssuesPorAutor extends Metrica
 {
@@ -26,11 +27,11 @@ public class IssuesPorAutor extends Metrica
 		for(Object x : lista)
 		{
 			String autor = ((Issue) x).getUser().getLogin();
-			Double aux = new Double(0);
+			Entero aux = new Entero(0);
 			
 			if(valores.getValor().containsKey(autor))
 			{
-				aux = new Double(valores.getValor(autor).getValor());
+				aux = new Entero(valores.getValor(autor).getValor());
 			}
 			aux.setValor(aux.getValor() + 1);
 			valores.setValor( autor, aux);

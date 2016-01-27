@@ -8,7 +8,7 @@ import org.eclipse.egit.github.core.RepositoryCommit;
 import motorMetricas.Descripcion;
 import motorMetricas.Metrica;
 import motorMetricas.Valor;
-import motorMetricas.valores.Double;
+import motorMetricas.valores.Largo;
 
 public class MediaDiasCambio extends Metrica
 {
@@ -39,7 +39,7 @@ public class MediaDiasCambio extends Metrica
 			mediaDias /= lista.size();
 		}
 		
-		Double valor = new Double(mediaDias);	
+		Largo valor = new Largo(mediaDias);	
 		return valor;
 	}
 }

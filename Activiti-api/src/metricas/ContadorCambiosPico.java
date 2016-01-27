@@ -7,7 +7,7 @@ import motorMetricas.Descripcion;
 import motorMetricas.Metrica;
 import motorMetricas.Valor;
 import motorMetricas.valores.Conjunto;
-import motorMetricas.valores.Double;
+import motorMetricas.valores.Largo;
 
 public class ContadorCambiosPico extends Metrica
 {
@@ -22,7 +22,7 @@ public class ContadorCambiosPico extends Metrica
 	{
 		Conjunto commits = obtenerCambiosXMesGitHub(lista);
 				
-		Double max = new Double(0);
+		Largo max = new Largo(0);
 		
 		for(String key : commits.getValor().keySet())
 		{
@@ -34,11 +34,11 @@ public class ContadorCambiosPico extends Metrica
 		
 		if(lista.size() == 0)
 		{
-			return new Double(0);
+			return new Largo(0);
 		}
 		else
 		{
-			return new Double((double)max.getValor()/lista.size());
+			return new Largo((double)max.getValor()/lista.size());
 		}
 	}
 }

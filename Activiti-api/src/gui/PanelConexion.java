@@ -7,6 +7,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import java.awt.Cursor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -51,25 +52,25 @@ public class PanelConexion extends JPanel
 	public PanelConexion(final Principal aplicacion) 
 	{
 		setLayout(null);
-		this.setBounds(0, 0, 700, 500);
+		this.setBounds(0, 0, 700, 470);
 		
 		lblUsuario = new JLabel("Usuario:");
-		lblUsuario.setBounds(276, 172, 148, 14);
+		lblUsuario.setBounds(276, 144, 148, 14);
 		add(lblUsuario);
 		
 		txtUsuario = new JTextField();
 		txtUsuario.setToolTipText("Usuario usuado para autentificarse en la plataforma.");
-		txtUsuario.setBounds(276, 197, 148, 20);
+		txtUsuario.setBounds(276, 169, 148, 20);
 		add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
 		lblContraseña = new JLabel("Contraseña:");
-		lblContraseña.setBounds(276, 228, 148, 14);
+		lblContraseña.setBounds(276, 200, 148, 14);
 		add(lblContraseña);
 		
 		txtpContraseña = new JPasswordField();
 		txtpContraseña.setToolTipText("Contraseña para autentificar el usuario en la plataforma.");
-		txtpContraseña.setBounds(276, 253, 148, 20);
+		txtpContraseña.setBounds(276, 225, 148, 20);
 		add(txtpContraseña);
 		txtpContraseña.setColumns(10);
 		
@@ -81,17 +82,23 @@ public class PanelConexion extends JPanel
 			{
 				try 
 				{
+
+					aplicacion.frmFormulario.getContentPane().setCursor(new Cursor(Cursor.WAIT_CURSOR));
+					
 					aplicacion.conexion = aplicacion.fabricaConexion.crearFachadaConexion(txtUsuario.getText(), String.valueOf(txtpContraseña.getPassword()));
 					
 					aplicacion.cargarPanel(aplicacion.pnlRepositorio);
+
+					aplicacion.frmFormulario.getContentPane().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 				} 
 				catch (IOException e1) 
 				{
 					JOptionPane.showMessageDialog(aplicacion.frmFormulario,"Fallo al conectar.");
+					aplicacion.frmFormulario.getContentPane().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 				}
 			}
 		});
-		btnConectar.setBounds(276, 284, 148, 23);
+		btnConectar.setBounds(276, 256, 148, 23);
 		add(btnConectar);
 		
 		btnDesconectado = new JButton("Modo desconectado");
@@ -110,7 +117,7 @@ public class PanelConexion extends JPanel
 				}
 			}
 		});
-		btnDesconectado.setBounds(276, 318, 148, 23);
+		btnDesconectado.setBounds(276, 290, 148, 23);
 		add(btnDesconectado);
 	}
 }

@@ -8,7 +8,7 @@ import java.util.Vector;
 import motorMetricas.valores.Cadena;
 import motorMetricas.valores.Conjunto;
 import motorMetricas.valores.Entero;
-import motorMetricas.valores.Double;
+import motorMetricas.valores.Largo;
 import motorMetricas.valores.Fecha;
 
 
@@ -57,14 +57,14 @@ public class ResultadoMetrica
 			{
 				case "motorMetricas.valores.Entero": cadena += "\n  " + x.getMetrica().getDescripcion().getNombre() + ": " + ((Entero) x.getValue()).getValor();
 								break;
-				case "motorMetricas.valores.Double": cadena += "\n  " + x.getMetrica().getDescripcion().getNombre() + ": " + formateador.format(((Double) x.getValue()).getValor());
+				case "motorMetricas.valores.Largo": cadena += "\n  " + x.getMetrica().getDescripcion().getNombre() + ": " + formateador.format(((Largo) x.getValue()).getValor());
 								break;
 				case "motorMetricas.valores.Fecha": cadena += "\n  " + x.getMetrica().getDescripcion().getNombre() + ": " + ((Fecha) x.getValue()).getValor().toString();
 								break;
 				case "motorMetricas.valores.Cadena": cadena += "\n  " + x.getMetrica().getDescripcion().getNombre() + ": " + ((Cadena) x.getValue()).getValor();
 								break;
 				case "motorMetricas.valores.Conjunto": cadena += "\n  " + x.getMetrica().getDescripcion().getNombre() + ": ";
-								Map<String, Double> aux = ((Conjunto) x.getValue()).getValor();
+								Map<String, Entero> aux = ((Conjunto) x.getValue()).getValor();
 								for(String key : aux.keySet())
 								{
 									cadena += "\n\t" + key + ": " + aux.get(key).getValor();

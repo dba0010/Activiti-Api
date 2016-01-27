@@ -25,4 +25,9 @@ public class Cadena implements Valor
     {
        this.valor = valor;
     }
+    
+    public String toString()
+    {
+		return valor;
+    }
 }

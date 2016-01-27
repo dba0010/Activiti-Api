@@ -1,6 +1,7 @@
 package lector;
 
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,8 @@ public class FachadaConexionGitHub implements FachadaConexion
 {
 	private static FachadaConexionGitHub instancia;
 	
+	private String nombreRepositorio;
+
 	private GitHubClient cliente;
 	
 	private RepositoryService servicioRepositorios;
@@ -114,7 +117,9 @@ public class FachadaConexionGitHub implements FachadaConexion
 		
 		this.obtenerRepositorio(usuario, idRepositorio);
 		this.obtenerIssues(idRepositorio);
-		this.obtenerCommits(idRepositorio);		
+		this.obtenerCommits(idRepositorio);	
+		
+		this.nombreRepositorio = idRepositorio.getOwner() + "_" + idRepositorio.getName();
 				
 		metricas = new FachadaMetricasGitHub(this.repositorio, this.issues, this.commits);
 	}
@@ -124,10 +129,53 @@ public class FachadaConexionGitHub implements FachadaConexion
 		return this.metricas.getResultados();
 	}
 	
+	public char[] generarArchivo()
+	{
+		String resultado = "GitHub\n" + this.nombreRepositorio + "\n" + this.metricas.generarArchivo();
+		return resultado.toCharArray();
+	}
+	
+	public void leerArchivo(BufferedReader archivo)
+	{
+		String linea = "";
+		try 
+		{
+			if((linea = archivo.readLine()) != null)
+			{
+				this.nombreRepositorio = linea;
+				this.metricas = new FachadaMetricasGitHub(archivo);
+			}
+		}
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	public String[] getNombresRepositorio(String usuario) throws IOException 
 	{
 		this.obtenerRepositorios(usuario);
 		
 		return this.nombresRepositorio;
+	}
+	
+	public String getNombreRepositorio()
+	{
+		return this.nombreRepositorio;
+	}
+	
+	public int getPeticionesRestantes()
+	{
+		return this.cliente.getRemainingRequests();
+	}
+	
+	public String comparar(FachadaConexion comparacion)
+	{
+		return metricas.comparar(comparacion);
+	}
+	
+	public FachadaMetricas getMetricas()
+	{
+		return metricas;
 	}
 }

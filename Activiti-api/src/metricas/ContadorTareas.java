@@ -12,7 +12,7 @@ public class ContadorTareas extends Metrica
 {
 	public ContadorTareas()
 	{
-		descripcion = new Descripcion("Proceso de orientacion", "ContadorTareas", "Muestra el número de tareas, normalizada sobre el número total de cambios.",
+		descripcion = new Descripcion("Proceso de orientación", "ContadorTareas", "Muestra el número de tareas, normalizada sobre el número total de cambios.",
 				"¿Cuál es el volumen medio de trabajo de las tareas?", "CT = NT (Numero de tareas) / NTC (Numero total de cambios)", "CT >= 0 mejor valores intermedios",
 				"Ratio", "NT contador, NTC contador", "Repositorio GitHub de un proyecto");
 	}

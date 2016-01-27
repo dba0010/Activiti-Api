@@ -14,8 +14,8 @@ public class MediaDiasCierre extends Metrica
 {
 	public MediaDiasCierre()
 	{
-		descripcion = new Descripcion("Proceso de orientacion", "MediaDiasCierre", "Muestra los dias que se tarda en cerrar una issue, normalizado por el numero de issues cerradas",
-				"¿Cuanto se tarda de media en cerrar una issue?", "MDC = D (suma de los dias) / NIC (numero de issues cerradas)", "MDC >= 0 mejor valores bajos",
+		descripcion = new Descripcion("Proceso de orientacion", "MediaDiasCierre", "Muestra los días que se tarda en cerrar una issue, normalizado por el numero de issues cerradas",
+				"¿Cuanto se tarda de media en cerrar una issue?", "MDC = D (suma de los días) / NIC (numero de issues cerradas)", "MDC >= 0 mejor valores bajos",
 				"Ratio", "D contador, NIC contador", "Repositorio GitHub de un proyecto");
 	}
 	

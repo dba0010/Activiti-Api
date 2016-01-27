@@ -14,8 +14,8 @@ public class MediaDiasCambio extends Metrica
 {
 	public MediaDiasCambio()
 	{
-		descripcion = new Descripcion("Restricciones temporales", "MediaDiasCambio", "Dias de media para la realizacion de un cambio",
-				"¿Cuantos dias de media pasan entre cambios?", "MDC = D (Dias desde el primer al ultimo cambio) / NTC (Numero total de cambios)", "MDC >= 0 mejor valores bajos",
+		descripcion = new Descripcion("Restricciones temporales", "MediaDiasCambio", "Días de media para la realización de un cambio",
+				"¿Cuantos días de media pasan entre cambios?", "MDC = D (Días desde el primer al último cambio) / NTC (Número total de cambios)", "MDC >= 0 mejor valores bajos",
 				"Absoluta", "D contador, NTC contador", "Repositorio GitHub de un proyecto");
 	}
 	

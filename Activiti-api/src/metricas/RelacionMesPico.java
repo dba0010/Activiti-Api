@@ -15,7 +15,7 @@ public class RelacionMesPico extends Metrica
 	public RelacionMesPico()
 	{
 		descripcion = new Descripcion("Restricciones temporales", "RelacionMesPico", "Muestra el mes en que más cambios se han realizado.",
-				"¿Cuál es el mes en que más cambios se han realizado?", "M mes en el que mas cambios se han realizado", "",
+				"¿Cuál es el mes en que más cambios se han realizado?", "M mes en el que más cambios se han realizado", "",
 				"Nominal", "M mes", "Repositorio GitHub de un proyecto");
 	}
 	

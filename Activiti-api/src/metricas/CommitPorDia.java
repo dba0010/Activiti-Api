@@ -18,8 +18,8 @@ public class CommitPorDia extends Metrica
 	
 	public CommitPorDia()
 	{
-		descripcion = new Descripcion("Restricciones temporales", "CommitPorDia", "Muestra el numero de commits realizados cada dia de la semana",
-				"¿Cuantos commits se han realizado cada dia de la semana?", "C commits por dia", "C >= 0 mejor valores altos",
+		descripcion = new Descripcion("Restricciones temporales", "CommitPorDia", "Muestra el número de commits realizados cada día de la semana",
+				"¿Cuántos commits se han realizado cada día de la semana?", "C commits por día", "C >= 0 mejor valores altos",
 				"Absoluta", "C contador", "Repositorio GitHub de un proyecto");
 	}
 	

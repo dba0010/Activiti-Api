@@ -14,8 +14,8 @@ public class DiasPrimerUltimoCommit extends Metrica
 {
 	public DiasPrimerUltimoCommit()
 	{
-		descripcion = new Descripcion("Restricciones temporales", "DiasPrimerUltimoCommit", "Dias transcurridos entre el primer y el ultimo commit",
-				"¿Cuantos dias han pasado entre el primer y el ultimo commit?", "DPUC dias pasados", "DPUC >= 0 mejor valores altos",
+		descripcion = new Descripcion("Restricciones temporales", "DiasPrimerUltimoCommit", "Días transcurridos entre el primer y el ultimo commit",
+				"¿Cuantos días han pasado entre el primer y el último commit?", "DPUC días pasados", "DPUC >= 0 mejor valores altos",
 				"Absoluta", "DPUC contador", "Repositorio GitHub de un proyecto");
 	}
 	

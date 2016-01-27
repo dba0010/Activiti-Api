@@ -20,6 +20,6 @@
 				<helpaction image="ForwardIco">javax.help.ForwardAction</helpaction>
 				<helpaction image="PrintIco">javax.help.PrintAction</helpaction>
 				<helpaction image="PrintSetupIco">javax.help.PrintSetupAction</helpaction>
-			</toolbar>
+		</toolbar>
 	</presentation>
 </helpset>	

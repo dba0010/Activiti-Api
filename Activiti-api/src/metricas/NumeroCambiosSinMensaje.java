@@ -14,8 +14,8 @@ public class NumeroCambiosSinMensaje extends Metrica
 {
 	public NumeroCambiosSinMensaje()
 	{
-		descripcion = new Descripcion("Proceso de orientacion", "NumeroCambiosSinMensaje", "Numero de cambios realizados que no tienen mensaje.",
-				"¿Cuantos cambios se han realizado sin mensaje?", "NCSM numero de cambios sin mensaje", "NCSM >= 0 mejor valores bajos",
+		descripcion = new Descripcion("Proceso de orientación", "NumeroCambiosSinMensaje", "Número de cambios realizados que no tienen mensaje.",
+				"¿Cuántos cambios se han realizado sin mensaje?", "NCSM número de cambios sin mensaje", "NCSM >= 0 mejor valores bajos",
 				"Absoluta", "NCSM contador", "Repositorio GitHub de un proyecto");
 	}
 	

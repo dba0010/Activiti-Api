@@ -5,6 +5,8 @@
 	<mapID target="Conexion" url="html/conexion.html"/>
 	<mapID target="Repositorios" url="html/repositorios.html"/>
 	<mapID target="Resultados" url="html/resultados.html"/>
+	<mapID target="Comparar" url="html/comparar.html"/>
+	<mapID target="CompararResultados" url="html/compararResultados.html"/>
 	<mapID target="CambioPorAutor" url="html/cambioPorAutor.html"/>
 	<mapID target="CommitPorDia" url="html/commitPorDia.html"/>
 	<mapID target="CommitPorMes" url="html/commitPorMes.html"/>
@@ -16,9 +18,9 @@
 	<mapID target="MediaDiasCambio" url="html/mediaDiasCambio.html"/>
 	<mapID target="MediaDiasCierre" url="html/mediaDiasCierre.html"/>
 	<mapID target="NumeroCambiosSinMensaje" url="html/numeroCambiosSinMensaje.html"/>
+	<mapID target="NumeroFavoritos" url="html/numeroFavoritos.html"/>
 	<mapID target="NumeroIssues" url="html/numeroIssues.html"/>
 	<mapID target="NumeroIssuesCerradas" url="html/numeroIssuesCerradas.html"/>
-	<mapID target="NumeroWatchers" url="html/numeroWatchers.html"/>
 	<mapID target="PorcentajeIssuesCerradas" url="html/porcentajeIssuesCerradas.html"/>
 	<mapID target="RatioActividadCambio" url="html/ratioActividadCambio.html"/>
 	<mapID target="RelacionMesPico" url="html/relacionMesPico.html"/>

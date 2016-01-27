@@ -11,8 +11,8 @@ public class NumeroIssuesCerradas extends Metrica
 {
 	public NumeroIssuesCerradas()
 	{
-		descripcion = new Descripcion("Proceso de orientacion", "NumeroIssuesCerradas", "Numero de issues cerradas total en el repositorio",
-				"¿Cuantas issues se han cerrado en el repositorio?", "NIC numero de issues cerradas", "NIC >= 0 mejor valores altos",
+		descripcion = new Descripcion("Proceso de orientación", "NumeroIssuesCerradas", "Número de issues cerradas total en el repositorio",
+				"¿Cuántas issues se han cerrado en el repositorio?", "NIC número de issues cerradas", "NIC >= 0 mejor valores altos",
 				"Absoluta", "NIC contador", "Repositorio GitHub de un proyecto");
 	}
 	

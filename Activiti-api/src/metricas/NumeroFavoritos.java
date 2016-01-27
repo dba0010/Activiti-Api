@@ -12,8 +12,8 @@ public class NumeroFavoritos extends Metrica
 {
 	public NumeroFavoritos()
 	{
-		descripcion = new Descripcion("Proceso de orientacion", "NumeroFavoritos", "Muestra el numero de usuarios que han marcado al proyecto como favorito.",
-				"¿Cuantos usuarios han declarado como favorito el proyecto?", "NF Faoritos", "NW >= 0 mejor valores altos",
+		descripcion = new Descripcion("Proceso de orientación", "NumeroFavoritos", "Muestra el número de usuarios que han marcado al proyecto como favorito.",
+				"¿Cuántos usuarios han declarado como favorito el proyecto?", "NF Favoritos", "NW >= 0 mejor valores altos",
 				"Absoluta", "NW contador", "Repositorio GitHub de un proyecto");
 	}
 	

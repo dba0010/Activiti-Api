@@ -12,8 +12,8 @@ public class PorcentajeIssuesCerradas extends Metrica
 {
 	public PorcentajeIssuesCerradas()
 	{
-		descripcion = new Descripcion("Proceso de orientacion", "PorcentajeIssuesCerradas", "Porcentaje de las issues cerradas en el repositorio",
-				"¿Proporcion de issues cerradas en el repositorio en funcion de las creadas?", "PIC = NIC (Numero de issues cerradas) * 100 / NI (Numero de issues)", "0 <= N <= 100 mejor valores altos",
+		descripcion = new Descripcion("Proceso de orientación", "PorcentajeIssuesCerradas", "Porcentaje de las issues cerradas en el repositorio",
+				"¿Proporción de issues cerradas en el repositorio en función de las creadas?", "PIC = NIC (Número de issues cerradas) * 100 / NI (Número de issues)", "0 <= N <= 100 mejor valores altos",
 				"Ratio", "NIC contador, NI contador", "Repositorio GitHub de un proyecto");
 	}
 	

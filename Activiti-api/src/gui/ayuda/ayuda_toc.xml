@@ -4,6 +4,8 @@
     <tocitem text="Pantalla Conexion" target="Conexion"/>
     <tocitem text="Pantalla Repositorios" target="Repositorios"/>
     <tocitem text="Pantalla Resultados" target="Resultados"/>
+    <tocitem text="Pantalla Comparar" target="Comparar"/>
+    <tocitem text="Pantalla Comparar Resultados" target="CompararResultados"/>
     <tocitem text="Metricas">
     	<tocitem text="CambioPorAutor" target="CambioPorAutor"/>
     	<tocitem text="CommitPorDia" target="CommitPorDia"/>
@@ -16,9 +18,9 @@
     	<tocitem text="MediaDiasCambio" target="MediaDiasCambio"/>
     	<tocitem text="MediaDiasCierre" target="MediaDiasCierre"/>
     	<tocitem text="NumeroCambiosSinMensaje" target="NumeroCambiosSinMensaje"/>
+    	<tocitem text="NumeroFavoritos" target="NumeroFavoritos"/>
     	<tocitem text="NumeroIssues" target="NumeroIssues"/>
     	<tocitem text="NumeroIssuesCerradas" target="NumeroIssuesCerradas"/>
-    	<tocitem text="NumeroWatchers" target="NumeroWatchers"/>
     	<tocitem text="PorcentajeIssuesCerradas" target="PorcentajeIssuesCerradas"/>
     	<tocitem text="RatioActividadCambio" target="RatioActividadCambio"/>
     	<tocitem text="RelacionMesPico" target="RelacionMesPico"/>

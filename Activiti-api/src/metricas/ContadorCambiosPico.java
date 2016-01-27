@@ -13,7 +13,7 @@ public class ContadorCambiosPico extends Metrica
 {
 	public ContadorCambiosPico()
 	{
-		descripcion = new Descripcion("REstricciones temporales", "ContadorCambiosPico", "Muestra el número de cambios en el mes que mas se han realizado, normalizado sobre el número total de cambios.",
+		descripcion = new Descripcion("Restricciones temporales", "ContadorCambiosPico", "Muestra el número de cambios en el mes que mas se han realizado, normalizado sobre el número total de cambios.",
 				"¿Cuál es la proporción de trabajo realizado en el mes con mayor número de cambios?", "CCP = NCMP (Número de cambios en el Mes Pico) / NTC (Número total de cambios)", "0 <= CCP <= 1 Mejor valores intermedios.",
 				"Ratio", "NCMP contador, NTC contador", "Repositorio GitHub de un proyecto");
 	}

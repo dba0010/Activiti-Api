@@ -278,6 +278,13 @@ public class Principal
 				btnAtras.setVisible(false);
 				btnGuardar.setVisible(false);
 				frmFormulario.setTitle("Activiti-Api");
+				
+				//añadimos la ayuda a los botones
+				//Al pulsar sobre el boton del menu ayuda se muestra la ayuda
+				helpbroker.enableHelpOnButton(btnAyuda, "Inicio", helpset);
+				//Al presionar F1 sobre la ventana se muestra la ayuda
+				helpbroker.enableHelpKey(frmFormulario.getContentPane(), "Inicio", helpset);
+				
 				break;
 			case "gui.PanelConexion": 
 				btnAtras.setVisible(true);
@@ -323,24 +330,24 @@ public class Principal
 				btnGuardar.setVisible(false);
 				frmFormulario.setTitle("Comparar informes");
 				
-				/*//añadimos la ayuda a los botones
+				//añadimos la ayuda a los botones
 				//Al pulsar sobre el boton del menu ayuda se muestra la ayuda
-				helpbroker.enableHelpOnButton(btnAyuda, "Comparacion", helpset);
+				helpbroker.enableHelpOnButton(btnAyuda, "Comparar", helpset);
 				//Al presionar F1 sobre la ventana se muestra la ayuda
-				helpbroker.enableHelpKey(frmFormulario.getContentPane(), "Comparacion", helpset);*/
+				helpbroker.enableHelpKey(frmFormulario.getContentPane(), "Comparacion", helpset);
 				
 				anterior = pnlInicio;
 				break;
-			case "PanelResultadosComparacion":
+			case "gui.PanelResultadosComparacion":
 				btnAtras.setVisible(true);
 				btnGuardar.setVisible(false);
 				frmFormulario.setTitle("Resultados comparacion");
 				
-				/*//añadimos la ayuda a los botones
+				//añadimos la ayuda a los botones
 				//Al pulsar sobre el boton del menu ayuda se muestra la ayuda
-				helpbroker.enableHelpOnButton(btnAyuda, "ResultadosComparacion", helpset);
+				helpbroker.enableHelpOnButton(btnAyuda, "CompararResultados", helpset);
 				//Al presionar F1 sobre la ventana se muestra la ayuda
-				helpbroker.enableHelpKey(frmFormulario.getContentPane(), "ResultadosComparacion", helpset);*/
+				helpbroker.enableHelpKey(frmFormulario.getContentPane(), "CompararResultados", helpset);
 				
 				anterior = pnlComparacion;
 				break;

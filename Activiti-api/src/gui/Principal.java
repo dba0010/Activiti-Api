@@ -361,11 +361,9 @@ public class Principal
 
 	private void cargarAyuda() 
 	{
-		File archivo = new File("src/gui/ayuda/ayuda.hs");
-		URL hsURL;
 		try 
 		{
-			hsURL = archivo.toURI().toURL();
+			URL hsURL = getClass().getResource("/gui/ayuda/ayuda.hs"); 
 			//Leemos el HelpSet de COnfiguracion
 			helpset = new HelpSet(null,hsURL);
 			helpbroker = helpset.createHelpBroker();
@@ -436,6 +434,7 @@ public class Principal
 			fileChooser.setFileFilter(filtro);
 			int abrir = fileChooser.showDialog(frmFormulario, "Guardar");
 			File guarda = null;
+			int respuesta = 0;
 			if (abrir == JFileChooser.APPROVE_OPTION)
 			{
 				guarda = fileChooser.getSelectedFile();
@@ -444,21 +443,24 @@ public class Principal
 			{
 				if(guarda.exists())
 				{
-					int respuesta = JOptionPane.showConfirmDialog(frmFormulario, "¿Deseas Sobreescribir el informe?", "Confirmar guardado", JOptionPane.YES_NO_OPTION);
+					respuesta = JOptionPane.showConfirmDialog(frmFormulario, "¿Deseas Sobreescribir el informe?", "Confirmar guardado", JOptionPane.YES_NO_OPTION);
+				}
+				else
+				{
+					respuesta = JOptionPane.YES_OPTION;
+				}
+				if(respuesta == JOptionPane.YES_OPTION)
+				{
+					FileWriter save = new FileWriter(guarda);
+					save.write(conexion.generarArchivo());
+					save.close();
 					
-					if(respuesta == JOptionPane.YES_OPTION)
+					if(!(guarda.getAbsolutePath().endsWith(".txt")))
 					{
-						FileWriter save = new FileWriter(guarda);
-						save.write(conexion.generarArchivo());
-						save.close();
-						
-						if(!(guarda.getAbsolutePath().endsWith(".txt")))
-						{
-		                    File temp = new File(guarda.getAbsolutePath()+".txt");
-		                    guarda.renameTo(temp);
-		                }
-						JOptionPane.showMessageDialog(this.frmFormulario, "El informe se ha guardado Exitosamente", "Información",JOptionPane.INFORMATION_MESSAGE);
-					}
+	                    File temp = new File(guarda.getAbsolutePath()+".txt");
+	                    guarda.renameTo(temp);
+	                }
+					JOptionPane.showMessageDialog(this.frmFormulario, "El informe se ha guardado Exitosamente", "Información",JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		}

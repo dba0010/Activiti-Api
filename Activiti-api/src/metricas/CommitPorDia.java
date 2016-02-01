@@ -19,8 +19,8 @@ public class CommitPorDia extends Metrica
 	public CommitPorDia()
 	{
 		descripcion = new Descripcion("Restricciones temporales", "CommitPorDia", "Muestra el número de commits realizados cada día de la semana",
-				"¿Cuántos commits se han realizado cada día de la semana?", "C commits por día", "C >= 0 mejor valores altos",
-				"Absoluta", "C contador", "Repositorio GitHub de un proyecto");
+				"¿Cuántos commits se han realizado cada día de la semana?", "CPD commits por día", "CPD >= 0 mejor valores altos",
+				"Absoluta", "CPD contador", "Repositorio GitHub de un proyecto");
 	}
 	
 	public Valor run(List<?> lista) throws IOException

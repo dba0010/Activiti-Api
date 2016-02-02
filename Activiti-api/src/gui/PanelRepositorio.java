@@ -85,7 +85,6 @@ public class PanelRepositorio extends JPanel
 				catch (IOException e) 
 				{
 					cmbRepositorios.setEnabled(false);
-					cmbRepositorios = new JComboBox<String>();
 					btnMostrarMetricas.setEnabled(false);
 					JOptionPane.showMessageDialog(aplicacion.frmFormulario,"Debes introducir un nombre de ususario valido.\nSi no estas conectado igual has alcanzado el limite de peticiones.\nPeticiones restantes: " + aplicacion.conexion.getPeticionesRestantes());
 					aplicacion.frmFormulario.getContentPane().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));

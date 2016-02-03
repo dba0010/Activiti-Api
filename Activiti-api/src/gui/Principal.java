@@ -28,9 +28,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.swing.JMenuBar;
 
 public class Principal 
@@ -364,6 +361,10 @@ public class Principal
 		try 
 		{
 			URL hsURL = getClass().getResource("/gui/ayuda/ayuda.hs"); 
+			if(hsURL == null) 
+			{
+				JOptionPane.showMessageDialog(frmFormulario,"Error al cargar la ayuda", "Error", JOptionPane.WARNING_MESSAGE);
+		    }
 			//Leemos el HelpSet de COnfiguracion
 			helpset = new HelpSet(null,hsURL);
 			helpbroker = helpset.createHelpBroker();
@@ -376,7 +377,7 @@ public class Principal
 		}
 		catch (Exception ex) 
 		{
-			Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+			JOptionPane.showMessageDialog(frmFormulario,"Error al cargar la ayuda", "Error", JOptionPane.WARNING_MESSAGE);
 		}
 	}
 	

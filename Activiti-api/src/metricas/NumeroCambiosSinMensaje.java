@@ -10,8 +10,15 @@ import motorMetricas.Metrica;
 import motorMetricas.Valor;
 import motorMetricas.valores.Entero;
 
+/**
+ * Métrica NumeroCambiosSinMensaje.
+ * @author David Blanco Alonso
+ */
 public class NumeroCambiosSinMensaje extends Metrica
 {
+	/**
+	 * Constructor.
+	 */
 	public NumeroCambiosSinMensaje()
 	{
 		descripcion = new Descripcion("Proceso de orientación", "NumeroCambiosSinMensaje", "Número de cambios realizados que no tienen mensaje.",
@@ -19,6 +26,13 @@ public class NumeroCambiosSinMensaje extends Metrica
 				"Absoluta", "NCSM contador", "Repositorio GitHub de un proyecto");
 	}
 	
+	/**
+	 * Metodo que calcula la métrica y la guarda en el objeto ResultadoMetrica.
+	 * @param lista List<?> información necesaria para calcular la métrica.
+	 * @param metricResult ResultadoMetrica objeto donde guardar el resultado.
+	 * @return Valor valor obtenido en la métrica.
+	 * @throws IOException
+	 */
 	public Valor run(List<?> lista) throws IOException
 	{		
 		Entero entero = new Entero(0);

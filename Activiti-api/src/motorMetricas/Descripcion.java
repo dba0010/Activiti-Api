@@ -2,30 +2,67 @@ package motorMetricas;
 
 /**
  * Implementa todos los campos que componen la descripción detallada de una métrica.
- * @author Irene Barbero Tera
- * @author Estrella Resa Camarero
+ * @author David Blanco Alonso
  */
-
 public class Descripcion 
 {
+	/**
+	 * Categoria de la métrica.
+	 */
 	private String categoria;
 
-	private String nombre;
-
+	/**
+	 * Descripcion de la métrica.
+	 */
 	private String descripcion;
 
-	private String proposito;
-
+	/**
+	 * Formula de la métrica.
+	 */
 	private String formula;
 
-	private String interpretacion;
-
-	private String tipoEscala;
-
-	private String tipoMedida;
-
+	/**
+	 * Fuente de medición de la métrica.
+	 */
 	private String fuenteDeMedicion;
 
+	/**
+	 * Interpretación de la métrica.
+	 */
+	private String interpretacion;
+
+	/**
+	 * Nombre de la métrica.
+	 */
+	private String nombre;
+
+	/**
+	 * Proposito de la métrica.
+	 */
+	private String proposito;
+
+	/**
+	 * Tipo de escala de la métrica.
+	 */
+	private String tipoEscala;
+
+	/**
+	 * Tipo de medida de la métrica..
+	 */
+	private String tipoMedida;
+
+	/**
+	 * Constructor.
+	 * @param categoria
+	 * @param nombre
+	 * @param descripcion
+	 * @param proposito
+	 * @param formula
+	 * @param interpretacion
+	 * @param tipoEscala
+	 * @param tipoMedida
+	 * @param fuenteDeMedicion
+	 */
 	public Descripcion(String categoria, String nombre, String descripcion, String proposito, String formula,
 			String interpretacion, String tipoEscala, String tipoMedida, String fuenteDeMedicion)
 	{
@@ -40,93 +77,84 @@ public class Descripcion
 		this.fuenteDeMedicion = fuenteDeMedicion;
 	}
 	
+	/**
+	 * Devuelve la categoria de la métrica..
+	 * @return String categoria.
+	 */
 	public String getCategoria() 
 	{
 		return categoria;
 	}
 
-	public void setCategoria(String categoria) 
-	{
-		this.categoria = categoria;
-	}
-
-	public String getNombre() 
-	{
-		return nombre;
-	}
-
-	public void setNombre(String nombre) 
-	{
-		this.nombre = nombre;
-	}
-
+	/**
+	 * Devuelve la descripción de la métrica..
+	 * @return String descripción.
+	 */
 	public String getDescripcion() 
 	{
 		return descripcion;
 	}
 
-	public void setDescripcion(String descripcion) 
-	{
-		this.descripcion = descripcion;
-	}
-
-	public String getProposito() 
-	{
-		return proposito;
-	}
-
-	public void setProposito(String proposito)
-	{
-		this.proposito = proposito;
-	}
-
+	/**
+	 * Devuelve la formula de la métrica..
+	 * @return String formula.
+	 */
 	public String getFormula()
 	{
 		return formula;
 	}
-
-	public void setFormula(String formula) 
+	
+	/**
+	 * Devuelve la fuente de medición de la métrica..
+	 * @return String fuente de medición.
+	 */
+	public String getFuenteDeMedicion()
 	{
-		this.formula = formula;
+		return fuenteDeMedicion;
 	}
-
+	
+	/**
+	 * Devuelve la interpretación de la métrica..
+	 * @return String interpretación.
+	 */
 	public String getInterpretacion() 
 	{
 		return interpretacion;
 	}
 
-	public void setInterpretacion(String interpretacion) 
+	/**
+	 * Devuelve el nombre de la métrica..
+	 * @return String nombre.
+	 */
+	public String getNombre() 
 	{
-		this.interpretacion = interpretacion;
+		return nombre;
 	}
 
+	/**
+	 * Devuelve el proposito de la métrica..
+	 * @return String proposito.
+	 */
+	public String getProposito() 
+	{
+		return proposito;
+	}
+
+	/**
+	 * Devuelve el tipo de escala de la métrica..
+	 * @return String tipo de escala.
+	 */
 	public String getTipoEscala() 
 	{
 		return tipoEscala;
 	}
-
-	public void setTipoEscala(String tipoEscala) 
-	{
-		this.tipoEscala = tipoEscala;
-	}
-
+	
+	/**
+	 * Devuelve el tipo de medida de la métrica..
+	 * @return String tipo de medida.
+	 */
 	public String getTipoMedida() 
 	{
 		return tipoMedida;
-	}
-
-	public void setTipoMedida(String tipoMedida) 
-	{
-		this.tipoMedida = tipoMedida;
-	}
-
-	public String getFuenteDeMedicion()
-	{
-		return fuenteDeMedicion;
-	}
-
-	public void setFuenteDeMedicion(String fuenteDeMedicion) 
-	{
-		this.fuenteDeMedicion = fuenteDeMedicion;
 	}
 }

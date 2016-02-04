@@ -10,8 +10,15 @@ import motorMetricas.valores.Cadena;
 import motorMetricas.valores.Conjunto;
 import motorMetricas.valores.Largo;
 
+/**
+ * Métrica RelacionMesPico
+ * @author David Blanco Alonso
+ */
 public class RelacionMesPico extends Metrica
 {
+	/**
+	 * Constructor.
+	 */
 	public RelacionMesPico()
 	{
 		descripcion = new Descripcion("Restricciones temporales", "RelacionMesPico", "Muestra el mes en que más cambios se han realizado.",
@@ -19,6 +26,13 @@ public class RelacionMesPico extends Metrica
 				"Nominal", "RMP mes", "Repositorio GitHub de un proyecto");
 	}
 	
+	/**
+	 * Metodo que calcula la métrica y la guarda en el objeto ResultadoMetrica.
+	 * @param lista List<?> información necesaria para calcular la métrica.
+	 * @param metricResult ResultadoMetrica objeto donde guardar el resultado.
+	 * @return Valor valor obtenido en la métrica.
+	 * @throws IOException
+	 */
 	public Valor run(List<?> lista) throws IOException
 	{
 		Conjunto commits = obtenerCambiosXMesGitHub(lista);

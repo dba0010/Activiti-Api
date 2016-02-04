@@ -10,8 +10,15 @@ import motorMetricas.Metrica;
 import motorMetricas.Valor;
 import motorMetricas.valores.Largo;
 
+/**
+ * Métrica DiasPrimerUltimoCommit.
+ * @author David Blanco Alonso
+ */
 public class DiasPrimerUltimoCommit extends Metrica
 {
+	/**
+	 * Constructor.
+	 */
 	public DiasPrimerUltimoCommit()
 	{
 		descripcion = new Descripcion("Restricciones temporales", "DiasPrimerUltimoCommit", "Días transcurridos entre el primer y el ultimo commit",
@@ -19,6 +26,13 @@ public class DiasPrimerUltimoCommit extends Metrica
 				"Absoluta", "DPUC contador", "Repositorio GitHub de un proyecto");
 	}
 	
+	/**
+	 * Metodo que calcula la métrica y la guarda en el objeto ResultadoMetrica.
+	 * @param lista List<?> información necesaria para calcular la métrica.
+	 * @param metricResult ResultadoMetrica objeto donde guardar el resultado.
+	 * @return Valor valor obtenido en la métrica.
+	 * @throws IOException
+	 */
 	public Valor run(List<?> lista) throws IOException
 	{
 		double dias = 0;

@@ -7,6 +7,10 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import javax.swing.JScrollPane;
 
+/**
+ * Panel que muestra los resultados de comparar dos informes.
+ * @author David Blanco Alonso
+ */
 public class PanelResultadosComparacion extends JPanel 
 {
 	private static final long serialVersionUID = 1L;
@@ -22,7 +26,7 @@ public class PanelResultadosComparacion extends JPanel
 	private JEditorPane pnlTexto;
 	
 	/**
-	 * Create the panel.
+	 * Creamos el panel.
 	 */
 	public PanelResultadosComparacion(String texto) 
 	{

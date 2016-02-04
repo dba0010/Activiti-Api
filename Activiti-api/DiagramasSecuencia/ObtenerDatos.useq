@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.1.8" icons="true" automaticImage="JPEG">  
+  <object id="1" language="java" name="gui.PanelRepositorio" project="Activiti-api" 
+    file="/Activiti-api/src/gui/PanelRepositorio.java" binary="false" label="panelRepositorio" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="181" y="0"/>    
+    <execution id="2">      
+      <position height="220" width="120" x="5" y="99"/>    
+    </execution>  
+  </object>  
+  <object id="5" language="java" name="lector.FachadaConexionGitHub" project="Activiti-api" 
+    file="/Activiti-api/src/lector/FachadaConexionGitHub.java" binary="false" label="fachadaConexionGitHub" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="234" y="0"/>    
+    <execution id="4">      
+      <position height="178" width="161" x="129" y="120"/>    
+    </execution>    
+    <execution id="7">      
+      <position height="21" width="7" x="206" y="162"/>    
+    </execution>    
+    <execution id="9">      
+      <position height="21" width="7" x="206" y="190"/>    
+    </execution>    
+    <execution id="11">      
+      <position height="21" width="7" x="206" y="226"/>    
+    </execution>  
+  </object>  
+  <object id="14" language="java" name="lector.FachadaMetricasGitHub" project="Activiti-api" 
+    file="/Activiti-api/src/lector/FachadaMetricasGitHub.java" binary="false" label="fachadaMetricasGitHub" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="461" y="0"/>    
+    <execution id="13">      
+      <position height="21" width="158" x="294" y="256"/>    
+    </execution>  
+  </object>  
+  <message id="3" operation="obtenerMetricas(java.lang.String,java.lang.String):void">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="6" operation="obtenerRepositorio(java.lang.String,org.eclipse.egit.github.core.RepositoryId):void">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="7"/>  
+  </message>  
+  <message id="8" operation="obtenerIssues(org.eclipse.egit.github.core.RepositoryId):void">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="9"/>  
+  </message>  
+  <message id="10" operation="obtenerCommits(org.eclipse.egit.github.core.RepositoryId):void">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="11"/>  
+  </message>  
+  <message id="12" 
+    operation="FachadaMetricasGitHub(org.eclipse.egit.github.core.Repository,java.util.List&lt;org.eclipse.egit.github.core.Issue&gt;,java.util.List&lt;org.eclipse.egit.github.core.RepositoryCommit&gt;)">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="13"/>  
+  </message>
+</sequence-diagram>

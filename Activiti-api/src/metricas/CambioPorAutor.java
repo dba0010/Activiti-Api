@@ -11,8 +11,15 @@ import motorMetricas.Valor;
 import motorMetricas.valores.Conjunto;
 import motorMetricas.valores.Entero;
 
+/**
+ * Métrica CambioPorAutor.
+ * @author David Blanco Alonso
+ */
 public class CambioPorAutor extends Metrica
 {
+	/**
+	 * constructor
+	 */
 	public CambioPorAutor()
 	{
 		descripcion = new Descripcion("Equipo", "CambioPorAutor", "Muestra el número de commits realizados por cada usuario participante en el proyecto",
@@ -20,6 +27,13 @@ public class CambioPorAutor extends Metrica
 				"Absoluta", "CA contador", "Repositorio GitHub de un proyecto");
 	}
 	
+	/**
+	 * Metodo que calcula la métrica y la guarda en el objeto ResultadoMetrica.
+	 * @param lista List<?> información necesaria para calcular la métrica.
+	 * @param metricResult ResultadoMetrica objeto donde guardar el resultado.
+	 * @return Valor valor obtenido en la métrica.
+	 * @throws IOException
+	 */
 	public Valor run(List<?> lista) throws IOException
 	{
 		Conjunto valores = new Conjunto();

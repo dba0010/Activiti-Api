@@ -10,8 +10,15 @@ import motorMetricas.Metrica;
 import motorMetricas.Valor;
 import motorMetricas.valores.Largo;
 
+/**
+ * Métrica MediaDiasCambio.
+ * @author David Blanco Alonso
+ */
 public class MediaDiasCambio extends Metrica
 {
+	/**
+	 * Constructor.
+	 */
 	public MediaDiasCambio()
 	{
 		descripcion = new Descripcion("Restricciones temporales", "MediaDiasCambio", "Días de media para la realización de un cambio",
@@ -19,6 +26,13 @@ public class MediaDiasCambio extends Metrica
 				"Absoluta", "D contador, NTC contador", "Repositorio GitHub de un proyecto");
 	}
 	
+	/**
+	 * Metodo que calcula la métrica y la guarda en el objeto ResultadoMetrica.
+	 * @param lista List<?> información necesaria para calcular la métrica.
+	 * @param metricResult ResultadoMetrica objeto donde guardar el resultado.
+	 * @return Valor valor obtenido en la métrica.
+	 * @throws IOException
+	 */
 	public Valor run(List<?> lista) throws IOException
 	{
 		

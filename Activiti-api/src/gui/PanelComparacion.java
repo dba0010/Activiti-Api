@@ -18,6 +18,10 @@ import lector.FabricaConexion;
 import lector.FabricaConexionGitHub;
 import lector.FachadaConexion;
 
+/**
+ * Clase panel con componentes para seleccioanr dos informes y realizar su comparacion.
+ * @author David Blanco Alonso
+ */
 public class PanelComparacion extends JPanel 
 {
 	private static final long serialVersionUID = 1L;
@@ -83,7 +87,7 @@ public class PanelComparacion extends JPanel
 	private PanelResultadosComparacion pnlResultados;
 	
 	/**
-	 * Create the panel.
+	 * Creamos el panel.
 	 */
 	public PanelComparacion(final Principal aplicacion) 
 	{
@@ -142,6 +146,11 @@ public class PanelComparacion extends JPanel
 		add(btnComparar);
 	}
 	
+	/**
+	 * Metodo que permite seleccionar un fichero por medio de un JFileChooser.
+	 * @param aplicacion Principal ventana principal en la que se genera el panel.
+	 * @param txtDestino JTextField componente en el que mostrar la ruta del fichero seleccionado.
+	 */
 	private void seleccionarFichero(Principal aplicacion, JTextField txtDestino)
 	{
 		JFileChooser file = new JFileChooser();
@@ -154,6 +163,10 @@ public class PanelComparacion extends JPanel
 		}
 	}
 	
+	/**
+	 * Metodo que realiza la lectura de los ficheros seleccionados creando las conexiones y las metricas y generando el panel resultados.
+	 * @param aplicacion Principal en el que se genera la operación.
+	 */
 	private void leerFicheros(Principal aplicacion)
 	{
 		if(txtFichero1.getText().equals("") || txtFichero2.getText().equals(""))
@@ -205,6 +218,10 @@ public class PanelComparacion extends JPanel
 		}
 	}
 	
+	/**
+	 * Metodo que genera el texto en formato HTML con los resultados de la comparacion.
+	 * @return String con los resultados de la comparacion en formato HTML.
+	 */
 	private String compararInformes()
 	{	
 		String texto = "<html>\n<head></head>\n<body>\n";

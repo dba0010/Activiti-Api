@@ -7,6 +7,10 @@ import javax.swing.JTabbedPane;
 
 import org.jfree.chart.ChartPanel;
 
+/**
+ * Panel que muestra los resultados del cálculo de las metricas de un repositorio.
+ * @author David Blanco Alonso
+ */
 public class PanelResultados extends JPanel 
 {
 	private static final long serialVersionUID = 1L;
@@ -28,7 +32,7 @@ public class PanelResultados extends JPanel
 	
 	
 	/**
-	 * Create the panel.
+	 * Creamos el panel.
 	 */
 	public PanelResultados(final Principal aplicacion) 
 	{

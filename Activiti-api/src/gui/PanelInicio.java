@@ -8,6 +8,10 @@ import java.awt.event.ActionEvent;
 
 import lector.FabricaConexionGitHub;
 
+/**
+ * Panel que contiene los botones para seleccioanr la plataforma a utilizar.
+ * @author David Blanco Alonso
+ */
 public class PanelInicio extends JPanel 
 {
 	private static final long serialVersionUID = 1L;
@@ -18,7 +22,7 @@ public class PanelInicio extends JPanel
 	private JButton btnGithub;
 		
 	/**
-	 * Create the panel.
+	 * Creamos el panel.
 	 */
 	public PanelInicio(final Principal aplicacion) 
 	{

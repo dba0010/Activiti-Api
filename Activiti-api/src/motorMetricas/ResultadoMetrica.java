@@ -11,41 +11,68 @@ import motorMetricas.valores.Entero;
 import motorMetricas.valores.Largo;
 import motorMetricas.valores.Fecha;
 
-
+/**
+ * Objeto donde se guardan las medidas obtenidas.
+ * @author David Blanco Alonso
+ */
 public class ResultadoMetrica
 {
+	/**
+	 * fecha de creación.
+	 */
 	private static Date fecha;
 	
-	private Vector<Medida> coleccionMedidas;
+	/**
+	 * Devuelve la fecha de creación.
+	 * @return Date fecha de creación.
+	 */
+	public static Date getFecha() 
+	{
+		return fecha;
+	}
 	
-	private DecimalFormat formateador = new DecimalFormat("###0.00"); 
+	/**
+	 * Colección de medidas.
+	 */
+	private Vector<Medida> coleccionMedidas; 
 	
+	/**
+	 * Formato salida tipos Largo o double.
+	 */
+	private DecimalFormat formateador = new DecimalFormat("###0.00");
+	
+	/**
+	 * Constructor.
+	 */
 	public ResultadoMetrica()
 	{
 		fecha = new Date();
 		coleccionMedidas = new Vector<Medida>();
 	}
 	
+	/**
+	 * Añade una medida a la colección.
+	 * @param medida Medida objeto a añadir.
+	 */
 	public void addMeasure(Medida medida)
 	{
 		coleccionMedidas.add(medida);
 	}
 	
-	public static Date getFecha() 
-	{
-		return fecha;
-	}
-	
+	/**
+	 * Devuelve la medida en la psosición i.
+	 * @param i int psosición de la coleccion.
+	 * @return Medida medida encontrada en la psosición i.
+	 */
 	public Medida getMedida(int i) 
 	{
 		return coleccionMedidas.get(i);
 	}
 	
-	public int size()
-	{
-		return coleccionMedidas.size();
-	}
-	
+	/**
+	 * Devuleve los resultados de todas las medidas en modo texto.
+	 * @return String texto con los resultados.
+	 */
 	public String getMetricas()
 	{
 		String cadena = "";
@@ -75,5 +102,14 @@ public class ResultadoMetrica
 		}
 		
 		return cadena;
+	}
+	
+	/**
+	 * Tamaño de la coleccion.
+	 * @return int tamaño.
+	 */
+	public int size()
+	{
+		return coleccionMedidas.size();
 	}
 }

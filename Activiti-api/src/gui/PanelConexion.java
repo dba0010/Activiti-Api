@@ -12,6 +12,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
+/**
+ * Panel con los componentes para realizar la conexion o seleccionar el modo desconectado.
+ * @author David Blanco Alonso
+ */
 public class PanelConexion extends JPanel 
 {
 	private static final long serialVersionUID = 1L;

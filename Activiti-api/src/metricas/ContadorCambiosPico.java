@@ -9,8 +9,15 @@ import motorMetricas.Valor;
 import motorMetricas.valores.Conjunto;
 import motorMetricas.valores.Largo;
 
+/**
+ * Métrica ContadorCambiosPico.
+ * @author David Blanco Alonso
+ */
 public class ContadorCambiosPico extends Metrica
 {
+	/**
+	 * Constructor.
+	 */
 	public ContadorCambiosPico()
 	{
 		descripcion = new Descripcion("Restricciones temporales", "ContadorCambiosPico", "Muestra el número de cambios en el mes que mas se han realizado, normalizado sobre el número total de cambios.",
@@ -18,6 +25,13 @@ public class ContadorCambiosPico extends Metrica
 				"Ratio", "NCMP contador, NTC contador", "Repositorio GitHub de un proyecto");
 	}
 	
+	/**
+	 * Metodo que calcula la métrica y la guarda en el objeto ResultadoMetrica.
+	 * @param lista List<?> información necesaria para calcular la métrica.
+	 * @param metricResult ResultadoMetrica objeto donde guardar el resultado.
+	 * @return Valor valor obtenido en la métrica.
+	 * @throws IOException
+	 */
 	public Valor run(List<?> lista) throws IOException
 	{
 		Conjunto commits = obtenerCambiosXMesGitHub(lista);

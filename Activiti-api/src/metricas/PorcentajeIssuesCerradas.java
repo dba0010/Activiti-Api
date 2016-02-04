@@ -8,8 +8,15 @@ import motorMetricas.Metrica;
 import motorMetricas.Valor;
 import motorMetricas.valores.Largo;
 
+/**
+ * Métrica PorcentajeIssuesCerradas.
+ * @author David Blanco Alonso
+ */
 public class PorcentajeIssuesCerradas extends Metrica
 {
+	/**
+	 * Constructor.
+	 */
 	public PorcentajeIssuesCerradas()
 	{
 		descripcion = new Descripcion("Proceso de orientación", "PorcentajeIssuesCerradas", "Porcentaje de las issues cerradas en el repositorio",
@@ -17,6 +24,13 @@ public class PorcentajeIssuesCerradas extends Metrica
 				"Ratio", "NIC contador, NI contador", "Repositorio GitHub de un proyecto");
 	}
 	
+	/**
+	 * Metodo que calcula la métrica y la guarda en el objeto ResultadoMetrica.
+	 * @param lista List<?> información necesaria para calcular la métrica.
+	 * @param metricResult ResultadoMetrica objeto donde guardar el resultado.
+	 * @return Valor valor obtenido en la métrica.
+	 * @throws IOException
+	 */
 	public Valor run(List<?> lista) throws IOException
 	{
 		int cerradas = obternerIssuesCerradasGitHub(lista).getValor();

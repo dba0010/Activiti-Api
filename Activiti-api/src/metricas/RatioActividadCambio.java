@@ -12,8 +12,15 @@ import motorMetricas.Valor;
 import motorMetricas.valores.Largo;
 import motorMetricas.valores.Fecha;
 
+/**
+ * Métrica RatioActividadCambio.
+ * @author David Blanco Alonso
+ */
 public class RatioActividadCambio extends Metrica
 {
+	/**
+	 * Constructor.
+	 */
 	public RatioActividadCambio()
 	{
 		descripcion = new Descripcion("Restricciones temporales", "RatioActividadCambio", "Muestra el número de cambios relativos al número de meses.",
@@ -21,6 +28,13 @@ public class RatioActividadCambio extends Metrica
 				"Ratio", "NTC contador, NM contador", "Repositorio GitHub de un proyecto");
 	}
 	
+	/**
+	 * Metodo que calcula la métrica y la guarda en el objeto ResultadoMetrica.
+	 * @param lista List<?> información necesaria para calcular la métrica.
+	 * @param metricResult ResultadoMetrica objeto donde guardar el resultado.
+	 * @return Valor valor obtenido en la métrica.
+	 * @throws IOException
+	 */
 	public Valor run(List<?> lista) throws IOException
 	{
 		Fecha inicio =new Fecha(null);

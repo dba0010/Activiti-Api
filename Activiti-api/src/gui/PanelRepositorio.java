@@ -12,6 +12,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
+/**
+ * Panel con los componentes para realizar la busqueda y selección de un repositorio del que clacular las métricas.
+ * @author David Blanco Alonso
+ */
 public class PanelRepositorio extends JPanel 
 {
 	private static final long serialVersionUID = 1L;
@@ -42,7 +46,7 @@ public class PanelRepositorio extends JPanel
 	private JButton btnMostrarMetricas;
 	
 	/**
-	 * Create the panel.
+	 * Creamos el panel.
 	 */
 	public PanelRepositorio(final Principal aplicacion) 
 	{

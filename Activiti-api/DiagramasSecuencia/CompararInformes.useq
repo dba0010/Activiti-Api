@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.1.8" icons="true" automaticImage="JPEG">  
+  <object id="1" language="java" name="gui.PanelComparacion" project="Activiti-api" 
+    file="/Activiti-api/src/gui/PanelComparacion.java" binary="false" label="panelComparacion" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="107" y="0"/>    
+    <execution id="2">      
+      <position height="428" width="131" x="5" y="78"/>    
+    </execution>    
+    <execution id="4">      
+      <position height="365" width="131" x="5" y="120"/>    
+    </execution>  
+  </object>  
+  <object id="13" language="java" name="lector.FabricaConexionGitHub" project="Activiti-api" 
+    file="/Activiti-api/src/lector/FabricaConexionGitHub.java" binary="false" label="fabricaConexionGitHub" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="166" y="0"/>    
+    <execution id="6">      
+      <position height="105" width="155" x="140" y="141"/>    
+    </execution>    
+    <execution id="8">      
+      <position height="105" width="155" x="140" y="249"/>    
+    </execution>  
+  </object>  
+  <object id="18" language="java" name="lector.FachadaConexionGitHub" project="Activiti-api" 
+    file="/Activiti-api/src/lector/FachadaConexionGitHub.java" binary="false" label="fachadaConexionGitHub" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="367" y="0"/>    
+    <execution id="15">      
+      <position height="63" width="161" x="299" y="162"/>    
+    </execution>    
+    <execution id="17">      
+      <position height="63" width="161" x="299" y="270"/>    
+    </execution>    
+    <execution id="10">      
+      <position height="63" width="161" x="299" y="364"/>    
+    </execution>  
+  </object>  
+  <object id="25" language="java" name="lector.FachadaMetricasGitHub" project="Activiti-api" 
+    file="/Activiti-api/src/lector/FachadaMetricasGitHub.java" binary="false" label="fachadaMetricasGitHub" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="587" y="0"/>    
+    <execution id="20">      
+      <position height="21" width="158" x="464" y="183"/>    
+    </execution>    
+    <execution id="22">      
+      <position height="21" width="158" x="464" y="291"/>    
+    </execution>    
+    <execution id="24">      
+      <position height="21" width="158" x="464" y="385"/>    
+    </execution>  
+  </object>  
+  <object id="26" language="java" name="gui.PanelResultadosComparacion" project="Activiti-api" 
+    file="/Activiti-api/src/gui/PanelResultadosComparacion.java" binary="false" label="panelResultadosComparacion" 
+    type="class" autoSize="true">    
+    <position height="-1" width="-1" x="136" y="0"/>    
+    <execution id="12">      
+      <position height="21" width="195" x="626" y="443"/>    
+    </execution>  
+  </object>  
+  <message id="3" operation="leerFicheros(gui.Principal):void">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="5" operation="crearFachadaConexion():lector.FachadaConexion">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </message>  
+  <message id="7" operation="crearFachadaConexion():lector.FachadaConexion">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="9" operation="comparar(lector.FachadaConexion):java.lang.String">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="10"/>  
+  </message>  
+  <message id="11" operation="PanelResultadosComparacion(java.lang.String)">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="12"/>  
+  </message>  
+  <message id="14" operation="leerArchivo(java.io.BufferedReader):void">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="15"/>  
+  </message>  
+  <message id="16" operation="leerArchivo(java.io.BufferedReader):void">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="17"/>  
+  </message>  
+  <message id="19" operation="FachadaMetricasGitHub(java.io.BufferedReader)">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="20"/>  
+  </message>  
+  <message id="21" operation="FachadaMetricasGitHub(java.io.BufferedReader)">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="22"/>  
+  </message>  
+  <message id="23" operation="comparar(lector.FachadaConexion):java.lang.String">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="24"/>  
+  </message>
+</sequence-diagram>

@@ -12,10 +12,20 @@ import motorMetricas.Valor;
 import motorMetricas.valores.Conjunto;
 import motorMetricas.valores.Entero;
 
+/**
+ * Métrica CommitPorDia.
+ * @author David Blanco Alonso
+ */
 public class CommitPorDia extends Metrica
 {
+	/**
+	 * dias de la semana.
+	 */
 	private String[] dias = {"Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"};
 	
+	/**
+	 * Constructor.
+	 */
 	public CommitPorDia()
 	{
 		descripcion = new Descripcion("Restricciones temporales", "CommitPorDia", "Muestra el número de commits realizados cada día de la semana",
@@ -23,6 +33,13 @@ public class CommitPorDia extends Metrica
 				"Absoluta", "CPD contador", "Repositorio GitHub de un proyecto");
 	}
 	
+	/**
+	 * Metodo que calcula la métrica y la guarda en el objeto ResultadoMetrica.
+	 * @param lista List<?> información necesaria para calcular la métrica.
+	 * @param metricResult ResultadoMetrica objeto donde guardar el resultado.
+	 * @return Valor valor obtenido en la métrica.
+	 * @throws IOException
+	 */
 	public Valor run(List<?> lista) throws IOException
 	{
 		Conjunto valores = new Conjunto();

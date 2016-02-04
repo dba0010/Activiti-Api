@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.1.8" icons="true" automaticImage="JPEG">  
+  <object id="1" language="java" name="lector.FachadaMetricasGitHub" project="Activiti-api" 
+    file="/Activiti-api/src/lector/FachadaMetricasGitHub.java" binary="false" label="fachadaMetricasGitHub" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="129" y="0"/>    
+    <execution id="2">      
+      <position height="295" width="158" x="5" y="78"/>    
+    </execution>  
+  </object>  
+  <object id="9" language="java" name="metricas.NumeroFavoritos" project="Activiti-api" 
+    file="/Activiti-api/src/metricas/NumeroFavoritos.java" binary="false" label="numeroFavoritos" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="286" y="0"/>    
+    <execution id="8">      
+      <position height="190" width="120" x="167" y="162"/>    
+    </execution>    
+    <execution id="11">      
+      <position height="63" width="7" x="224" y="204"/>    
+    </execution>    
+    <execution id="6">      
+      <position height="21" width="120" x="167" y="121"/>    
+    </execution>  
+  </object>  
+  <object id="18" language="java" name="motorMetricas.valores.Entero" project="Activiti-api" 
+    file="/Activiti-api/src/motorMetricas/valores/Entero.java" binary="false" label="entero" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="288" y="0"/>    
+    <execution id="17">      
+      <position height="21" width="100" x="291" y="225"/>    
+    </execution>  
+  </object>  
+  <object id="19" language="java" name="motorMetricas.Medida" project="Activiti-api" 
+    file="/Activiti-api/src/motorMetricas/Medida.java" binary="false" label="medida" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="289" y="0"/>    
+    <execution id="13">      
+      <position height="21" width="66" x="395" y="280"/>    
+    </execution>  
+  </object>  
+  <object id="20" language="java" name="motorMetricas.ResultadoMetrica" project="Activiti-api" 
+    file="/Activiti-api/src/motorMetricas/ResultadoMetrica.java" binary="false" label="resultadoMetrica" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="446" y="0"/>    
+    <execution id="4">      
+      <position height="21" width="123" x="465" y="99"/>    
+    </execution>    
+    <execution id="15">      
+      <position height="21" width="123" x="465" y="310"/>    
+    </execution>  
+  </object>  
+  <message id="3" operation="ResultadoMetrica()">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="5" operation="NumeroFavoritos()">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
+  </message>  
+  <message id="7" 
+    operation="calculate(org.eclipse.egit.github.core.Repository,motorMetricas.ResultadoMetrica):motorMetricas.Valor">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="10" operation="run(org.eclipse.egit.github.core.Repository):motorMetricas.Valor">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="11"/>  
+  </message>  
+  <message id="12" operation="Medida(motorMetricas.Metrica,motorMetricas.Valor)">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="13"/>  
+  </message>  
+  <message id="14" operation="addMeasure(motorMetricas.Medida):void">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="15"/>  
+  </message>  
+  <message id="16" operation="Entero(int)">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="17"/>  
+  </message>
+</sequence-diagram>

@@ -7,8 +7,15 @@ import motorMetricas.Descripcion;
 import motorMetricas.Metrica;
 import motorMetricas.Valor;
 
+/**
+ * Métrica NumeroIssuesCerradas.
+ * @author David Blanco Alonso
+ */
 public class NumeroIssuesCerradas extends Metrica
 {
+	/**
+	 * Constructor.
+	 */
 	public NumeroIssuesCerradas()
 	{
 		descripcion = new Descripcion("Proceso de orientación", "NumeroIssuesCerradas", "Número de issues cerradas total en el repositorio",
@@ -16,6 +23,13 @@ public class NumeroIssuesCerradas extends Metrica
 				"Absoluta", "NIC contador", "Repositorio GitHub de un proyecto");
 	}
 	
+	/**
+	 * Metodo que calcula la métrica y la guarda en el objeto ResultadoMetrica.
+	 * @param lista List<?> información necesaria para calcular la métrica.
+	 * @param metricResult ResultadoMetrica objeto donde guardar el resultado.
+	 * @return Valor valor obtenido en la métrica.
+	 * @throws IOException
+	 */
 	public Valor run(List<?> lista) throws IOException
 	{
 		return obternerIssuesCerradasGitHub(lista);
